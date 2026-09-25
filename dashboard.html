@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BONYO ELECTRONICS | Admin Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#172033;
+}
+
+/* HEADER */
+header{
+    background:#07152d;
+    color:white;
+    padding:18px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#00d4ff;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.live{
+    background:#0f9d58;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* NEW ORDERS COUNTER */
+.new-counter{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:#ff9800;
+    color:white;
+    padding:8px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    box-shadow:0 0 0 rgba(255,152,0,0);
+}
+
+.new-counter.has-new{
+    animation:counterPulse 1s infinite alternate;
+}
+
+@keyframes counterPulse{
+    from{
+        box-shadow:0 0 0 rgba(255,152,0,0);
+    }
+    to{
+        box-shadow:0 0 18px rgba(255,152,0,.7);
+    }
+}
+
+.logout{
+    background:#dc3545;
+    color:white;
+    border:0;
+    padding:9px 15px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.container{
+    width:95%;
+    max-width:1500px;
+    margin:25px auto;
+}
+
+/* LOGIN */
+.login-box{
+    max-width:420px;
+    margin:80px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.login-box h2{
+    margin-bottom:20px;
+    text-align:center;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #d5dce8;
+    border-radius:8px;
+    margin-bottom:12px;
+    outline:none;
+}
+
+.login-btn{
+    width:100%;
+    padding:12px;
+    border:0;
+    border-radius:8px;
+    background:#075cff;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.error{
+    color:#d93025;
+    margin-top:12px;
+    text-align:center;
+}
+
+/* DASHBOARD */
+.dashboard{
+    display:none;
+}
+
+.title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.title-row h1{
+    font-size:27px;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.action-btn{
+    border:0;
+    padding:10px 14px;
+    border-radius:7px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.refresh{
+    background:#075cff;
+    color:white;
+}
+
+.export{
+    background:#198754;
+    color:white;
+}
+
+/* NEW ORDER ALERT */
+.new-order{
+    display:none;
+    background:#fff3cd;
+    border:2px solid #ffc107;
+    color:#664d03;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+    animation:pulse 1s infinite alternate;
+}
+
+@keyframes pulse{
+    from{
+        box-shadow:0 0 0 rgba(255,193,7,0);
+    }
+    to{
+        box-shadow:0 0 18px rgba(255,193,7,.5);
+    }
+}
+
+.new-order-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.new-order strong{
+    font-size:18px;
+}
+
+.dismiss{
+    background:#664d03;
+    color:white;
+    border:0;
+    padding:8px 12px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+/* SUMMARY */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:13px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.card small{
+    color:#667085;
+}
+
+.card h2{
+    margin-top:8px;
+    font-size:27px;
+}
+
+.verification h2{
+    color:#e67700;
+}
+
+.pending h2{
+    color:#075cff;
+}
+
+.completed h2{
+    color:#198754;
+}
+
+/* SEARCH */
+.search-area{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.search-row{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:10px;
+}
+
+.filters{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:10px;
+}
+
+.filter{
+    border:1px solid #ccd4e0;
+    background:white;
+    padding:8px 12px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.filter.active{
+    background:#075cff;
+    color:white;
+    border-color:#075cff;
+}
+
+/* TABLE */
+.table-box{
+    background:white;
+    border-radius:13px;
+    overflow:auto;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1200px;
+}
+
+th{
+    background:#07152d;
+    color:white;
+    padding:13px 10px;
+    text-align:left;
+    font-size:13px;
+}
+
+td{
+    padding:12px 10px;
+    border-bottom:1px solid #edf0f5;
+    font-size:13px;
+}
+
+.status{
+    padding:6px 9px;
+    border-radius:15px;
+    font-size:11px;
+    font-weight:bold;
+    display:inline-block;
+}
+
+.status.verification{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.status.verified{
+    background:#cff4fc;
+    color:#055160;
+}
+
+.status.processing{
+    background:#cfe2ff;
+    color:#084298;
+}
+
+.status.completed{
+    background:#d1e7dd;
+    color:#0f5132;
+}
+
+.status.failed{
+    background:#f8d7da;
+    color:#842029;
+}
+
+/* BUTTONS */
+.small-btn{
+    border:0;
+    padding:7px 9px;
+    border-radius:6px;
+    margin:2px;
+    font-size:11px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.view{
+    background:#6f42c1;
+    color:white;
+}
+
+.wa{
+    background:#25d366;
+    color:white;
+}
+
+.delete{
+    background:#dc3545;
+    color:white;
+}
+
+/* PAGINATION */
+.pagination{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    padding:18px;
+    flex-wrap:wrap;
+}
+
+.page-btn{
+    border:1px solid #ccd4e0;
+    background:white;
+    padding:8px 13px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.page-btn.active{
+    background:#075cff;
+    color:white;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:1000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:650px;
+    max-height:90vh;
+    overflow:auto;
+    border-radius:15px;
+    padding:25px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    background:#dc3545;
+    color:white;
+    border:0;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.detail{
+    padding:11px 0;
+    border-bottom:1px solid #edf0f5;
+}
+
+.detail b{
+    display:inline-block;
+    width:180px;
+}
+
+.modal-actions{
+    margin-top:20px;
+}
+
+/* MOBILE */
+@media(max-width:1100px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .search-row{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        width:94%;
+    }
+
+    .title-row h1{
+        font-size:22px;
+    }
+
+    .header-right{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        BONYO <span>ELECTRONICS</span>
+    </div>
+
+    <div class="header-right">
+
+        <div class="live">
+            ● LIVE SYSTEM
+        </div>
+
+        <div
+            id="newOrdersCounter"
+            class="new-counter">
+            🔔 NEW ORDERS: <span id="newOrdersCount">0</span>
+        </div>
+
+        <button
+            class="logout"
+            onclick="logout()">
+            LOGOUT
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- LOGIN -->
+
+<div
+    id="loginSection"
+    class="login-box">
+
+    <h2>🔐 ADMIN LOGIN</h2>
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Admin email">
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Password">
+
+    <button
+        class="login-btn"
+        onclick="login()">
+        LOGIN
+    </button>
+
+    <div
+        id="loginError"
+        class="error">
+    </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div
+    id="dashboardSection"
+    class="dashboard">
+
+<div class="container">
+
+    <div class="title-row">
+
+        <div>
+            <h1>ADMIN CONTROL CENTER</h1>
+            <p>Halotel Bundle Orders Management</p>
+        </div>
+
+        <div class="actions">
+
+            <button
+                class="action-btn refresh"
+                onclick="loadOrders()">
+                🔄 REFRESH
+            </button>
+
+            <button
+                class="action-btn export"
+                onclick="exportCSV()">
+                📥 EXPORT CSV
+            </button>
+
+            <button
+                class="action-btn"
+                style="background:#ff9800;color:white;"
+                onclick="clearNewOrderCounter()">
+                🔕 CLEAR NEW
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- NEW ORDER NOTIFICATION -->
+
+    <div
+        id="newOrderNotification"
+        class="new-order">
+
+        <div class="new-order-content">
+
+            <div>
+
+                🔔
+                <strong>
+                    NEW ORDER RECEIVED!
+                </strong>
+
+                <div id="newOrderText"></div>
+
+            </div>
+
+            <button
+                class="dismiss"
+                onclick="dismissNewOrder()">
+                OK
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="cards">
+
+        <div class="card">
+
+            <small>
+                TOTAL ORDERS
+            </small>
+
+            <h2 id="totalOrders">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="card">
+
+            <small>
+                COMPLETED SALES
+            </small>
+
+            <h2 id="completedSales">
+                TSh 0
+            </h2>
+
+        </div>
+
+
+        <div class="card verification">
+
+            <small>
+                PAYMENT VERIFICATION
+            </small>
+
+            <h2 id="verificationCount">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="card pending">
+
+            <small>
+                PENDING ORDERS
+            </small>
+
+            <h2 id="pendingCount">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="card completed">
+
+            <small>
+                COMPLETED ORDERS
+            </small>
+
+            <h2 id="completedCount">
+                0
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-area">
+
+        <div class="search-row">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔎 Search order, phone, bundle, payment name, status..."
+                oninput="applyFilters()">
+
+
+            <select
+                id="statusFilter"
+                onchange="applyFilters()">
+
+                <option value="ALL">
+                    ALL STATUS
+                </option>
+
+                <option value="PAYMENT VERIFICATION">
+                    PAYMENT VERIFICATION
+                </option>
+
+                <option value="PAYMENT VERIFIED">
+                    PAYMENT VERIFIED
+                </option>
+
+                <option value="PROCESSING">
+                    PROCESSING
+                </option>
+
+                <option value="COMPLETED">
+                    COMPLETED
+                </option>
+
+                <option value="FAILED">
+                    FAILED
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="filters">
+
+            <button
+                class="filter active"
+                onclick="quickFilter('ALL',this)">
+                ALL
+            </button>
+
+            <button
+                class="filter"
+                onclick="quickFilter('PAYMENT VERIFICATION',this)">
+                VERIFICATION
+            </button>
+
+            <button
+                class="filter"
+                onclick="quickFilter('PAYMENT VERIFIED',this)">
+                VERIFIED
+            </button>
+
+            <button
+                class="filter"
+                onclick="quickFilter('PROCESSING',this)">
+                PROCESSING
+            </button>
+
+            <button
+                class="filter"
+                onclick="quickFilter('COMPLETED',this)">
+                COMPLETED
+            </button>
+
+            <button
+                class="filter"
+                onclick="quickFilter('FAILED',this)">
+                FAILED
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        ORDER
+                    </th>
+
+                    <th>
+                        CUSTOMER NUMBER
+                    </th>
+
+                    <th>
+                        BUNDLE NUMBER
+                    </th>
+
+                    <th>
+                        BUNDLE
+                    </th>
+
+                    <th>
+                        AMOUNT
+                    </th>
+
+                    <th>
+                        PAYMENT NAME
+                    </th>
+
+                    <th>
+                        TIME
+                    </th>
+
+                    <th>
+                        STATUS
+                    </th>
+
+                    <th>
+                        ACTIONS
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody
+                id="ordersBody">
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <div
+        class="pagination"
+        id="pagination">
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- VIEW MODAL -->
+
+<div
+    id="viewModal"
+    class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+                📋 ORDER DETAILS
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+        <div
+            id="modalContent">
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =================================
+   SUPABASE CONFIG
+================================= */
+
+const SUPABASE_URL =
+    "https://bfqwetuhtldzlxcqzsrq.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_vs0-yAMJNwaMxEHiyn72ag_f7bdFo9c";
+
+const ADMIN_UID =
+    "3a9aa345-0ead-4c22-9273-e11d55b541ac";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* =================================
+   VARIABLES
+================================= */
+
+let allOrders = [];
+
+let filteredOrders = [];
+
+let currentPage = 1;
+
+const rowsPerPage = 10;
+
+let realtimeChannel = null;
+
+let newOrdersCount = 0;
+
+
+/* =================================
+   LOGIN
+================================= */
+
+async function login(){
+
+    const email =
+        document.getElementById("email")
+        .value
+        .trim();
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+    const errorBox =
+        document.getElementById("loginError");
+
+    errorBox.textContent = "";
+
+
+    if(!email || !password){
+
+        errorBox.textContent =
+            "Enter email and password.";
+
+        return;
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth
+        .signInWithPassword({
+
+            email,
+            password
+
+        });
+
+
+    if(error){
+
+        errorBox.textContent =
+            error.message;
+
+        return;
+    }
+
+
+    if(
+        !data.user ||
+        data.user.id !== ADMIN_UID
+    ){
+
+        await supabaseClient.auth.signOut();
+
+        errorBox.textContent =
+            "This account is not authorized as admin.";
+
+        return;
+    }
+
+
+    document.getElementById(
+        "loginSection"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "dashboardSection"
+    ).style.display = "block";
+
+
+    await loadOrders();
+
+    startRealtime();
+
+}
+
+
+/* =================================
+   LOAD ORDERS
+================================= */
+
+async function loadOrders(){
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from("orders")
+        .select("*")
+        .order(
+            "transaction_time",
+            {
+                ascending:false
+            }
+        );
+
+
+    if(error){
+
+        alert(
+            "Failed to load orders: " +
+            error.message
+        );
+
+        return;
+    }
+
+
+    allOrders =
+        data || [];
+
+
+    applyFilters();
+
+}
+
+
+/* =================================
+   FILTERS
+================================= */
+
+function applyFilters(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const status =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+
+    filteredOrders =
+        allOrders.filter(order => {
+
+            const searchable = [
+
+                order.order_number,
+
+                order.customer_phone,
+
+                order.bundle_phone,
+
+                order.bundle,
+
+                order.validity,
+
+                order.payment_name,
+
+                order.additional_notes,
+
+                order.amount,
+
+                order.status
+
+            ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+
+
+            const matchesSearch =
+                searchable.includes(search);
+
+
+            const matchesStatus =
+                status === "ALL" ||
+                order.status === status;
+
+
+            return (
+                matchesSearch &&
+                matchesStatus
+            );
+
+        });
+
+
+    currentPage = 1;
+
+    updateSummary();
+
+    renderTable();
+
+}
+
+
+/* =================================
+   QUICK FILTER
+================================= */
+
+function quickFilter(
+    status,
+    button
+){
+
+    document.getElementById(
+        "statusFilter"
+    ).value = status;
+
+
+    document
+        .querySelectorAll(".filter")
+        .forEach(btn =>
+            btn.classList.remove(
+                "active"
+            )
+        );
+
+
+    button.classList.add("active");
+
+    applyFilters();
+
+}
+
+
+/* =================================
+   SUMMARY
+================================= */
+
+function updateSummary(){
+
+    const total =
+        allOrders.length;
+
+
+    const verification =
+        allOrders.filter(
+            o =>
+                o.status ===
+                "PAYMENT VERIFICATION"
+        ).length;
+
+
+    const completed =
+        allOrders.filter(
+            o =>
+                o.status ===
+                "COMPLETED"
+        );
+
+
+    const completedSales =
+        completed.reduce(
+            (sum,o) =>
+                sum +
+                Number(o.amount || 0),
+            0
+        );
+
+
+    const pending =
+        allOrders.filter(
+            o =>
+                o.status !==
+                "COMPLETED" &&
+                o.status !==
+                "FAILED"
+        ).length;
+
+
+    document.getElementById(
+        "totalOrders"
+    ).textContent = total;
+
+
+    document.getElementById(
+        "verificationCount"
+    ).textContent =
+        verification;
+
+
+    document.getElementById(
+        "pendingCount"
+    ).textContent =
+        pending;
+
+
+    document.getElementById(
+        "completedCount"
+    ).textContent =
+        completed.length;
+
+
+    document.getElementById(
+        "completedSales"
+    ).textContent =
+        "TSh " +
+        completedSales.toLocaleString();
+
+}
+
+
+/* =================================
+   TABLE
+================================= */
+
+function renderTable(){
+
+    const tbody =
+        document.getElementById(
+            "ordersBody"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    const start =
+        (currentPage - 1) *
+        rowsPerPage;
+
+
+    const pageOrders =
+        filteredOrders.slice(
+            start,
+            start + rowsPerPage
+        );
+
+
+    if(pageOrders.length === 0){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="9"
+                    style="
+                    text-align:center;
+                    padding:30px;
+                    ">
+
+                    No orders found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        renderPagination();
+
+        return;
+    }
+
+
+    pageOrders.forEach(
+        order => {
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+                    <strong>
+                        ${safe(
+                            order.order_number
+                        )}
+                    </strong>
+                </td>
+
+
+                <td>
+                    ${safe(
+                        order.customer_phone
+                    )}
+                </td>
+
+
+                <td>
+                    ${safe(
+                        order.bundle_phone ||
+                        "-"
+                    )}
+                </td>
+
+
+                <td>
+
+                    ${safe(
+                        order.bundle
+                    )}
+
+                    <br>
+
+                    <small>
+                        ${safe(
+                            order.validity
+                        )}
+                    </small>
+
+                </td>
+
+
+                <td>
+
+                    TSh
+                    ${Number(
+                        order.amount || 0
+                    ).toLocaleString()}
+
+                </td>
+
+
+                <td>
+                    ${safe(
+                        order.payment_name
+                    )}
+                </td>
+
+
+                <td>
+                    ${formatDate(
+                        order.transaction_time
+                    )}
+                </td>
+
+
+                <td>
+                    ${statusBadge(
+                        order.status
+                    )}
+                </td>
+
+
+                <td>
+
+                    <button
+                        class="small-btn view"
+                        onclick="
+                        viewOrder('${order.id}')
+                        ">
+                        VIEW
+                    </button>
+
+
+                    <button
+                        class="small-btn wa"
+                        onclick="
+                        sendWhatsApp('${order.id}')
+                        ">
+                        WHATSAPP
+                    </button>
+
+
+                    <button
+                        class="small-btn delete"
+                        onclick="
+                        deleteOrder('${order.id}')
+                        ">
+                        DELETE
+                    </button>
+
+
+                    <select
+                        onchange="
+                        updateStatus(
+                            '${order.id}',
+                            this.value
+                        )
+                        ">
+
+                        <option value="">
+                            STATUS
+                        </option>
+
+
+                        <option
+                            value="PAYMENT VERIFICATION"
+                            ${
+                                order.status ===
+                                "PAYMENT VERIFICATION"
+                                ? "selected"
+                                : ""
+                            }>
+                            PAYMENT VERIFICATION
+                        </option>
+
+
+                        <option
+                            value="PAYMENT VERIFIED"
+                            ${
+                                order.status ===
+                                "PAYMENT VERIFIED"
+                                ? "selected"
+                                : ""
+                            }>
+                            PAYMENT VERIFIED
+                        </option>
+
+
+                        <option
+                            value="PROCESSING"
+                            ${
+                                order.status ===
+                                "PROCESSING"
+                                ? "selected"
+                                : ""
+                            }>
+                            PROCESSING
+                        </option>
+
+
+                        <option
+                            value="COMPLETED"
+                            ${
+                                order.status ===
+                                "COMPLETED"
+                                ? "selected"
+                                : ""
+                            }>
+                            COMPLETED
+                        </option>
+
+
+                        <option
+                            value="FAILED"
+                            ${
+                                order.status ===
+                                "FAILED"
+                                ? "selected"
+                                : ""
+                            }>
+                            FAILED
+                        </option>
+
+                    </select>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(tr);
+
+        }
+    );
+
+
+    renderPagination();
+
+}
+
+
+/* =================================
+   PAGINATION
+================================= */
+
+function renderPagination(){
+
+    const box =
+        document.getElementById(
+            "pagination"
+        );
+
+
+    box.innerHTML = "";
+
+
+    const pages =
+        Math.ceil(
+            filteredOrders.length /
+            rowsPerPage
+        );
+
+
+    if(pages <= 1)
+        return;
+
+
+    for(
+        let i = 1;
+        i <= pages;
+        i++
+    ){
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.className =
+            "page-btn" +
+            (
+                i === currentPage
+                ? " active"
+                : ""
+            );
+
+
+        button.textContent = i;
+
+
+        button.onclick = () => {
+
+            currentPage = i;
+
+            renderTable();
+
+        };
+
+
+        box.appendChild(button);
+
+    }
+
+}
+
+
+/* =================================
+   STATUS BADGE
+================================= */
+
+function statusBadge(status){
+
+    let cls =
+        "verification";
+
+
+    if(
+        status ===
+        "PAYMENT VERIFIED"
+    )
+        cls = "verified";
+
+
+    if(
+        status ===
+        "PROCESSING"
+    )
+        cls = "processing";
+
+
+    if(
+        status ===
+        "COMPLETED"
+    )
+        cls = "completed";
+
+
+    if(
+        status ===
+        "FAILED"
+    )
+        cls = "failed";
+
+
+    return `
+
+        <span
+            class="status ${cls}">
+
+            ${safe(status)}
+
+        </span>
+
+    `;
+
+}
+
+
+/* =================================
+   UPDATE STATUS
+================================= */
+
+async function updateStatus(
+    id,
+    newStatus
+){
+
+    if(!newStatus)
+        return;
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+        .from("orders")
+        .update({
+
+            status:newStatus
+
+        })
+        .eq(
+            "id",
+            id
+        );
+
+
+    if(error){
+
+        alert(
+            "Status update failed: " +
+            error.message
+        );
+
+        return;
+    }
+
+
+    await loadOrders();
+
+}
+
+
+/* =================================
+   VIEW ORDER
+================================= */
+
+function viewOrder(id){
+
+    const order =
+        allOrders.find(
+            o =>
+                o.id === id
+        );
+
+
+    if(!order)
+        return;
+
+
+    document.getElementById(
+        "modalContent"
+    ).innerHTML = `
+
+        <div class="detail">
+            <b>Order Number:</b>
+            ${safe(
+                order.order_number
+            )}
+        </div>
+
+
+        <div class="detail">
+            <b>Customer Number:</b>
+            ${safe(
+                order.customer_phone
+            )}
+        </div>
+
+
+        <div class="detail">
+            <b>Bundle Number:</b>
+            ${safe(
+                order.bundle_phone ||
+                "-"
+            )}
+        </div>
+
+
+        <div class="detail">
+            <b>Bundle:</b>
+            ${safe(
+                order.bundle
+            )}
+        </div>
+
+
+        <div class="detail">
+            <b>Validity:</b>
+            ${safe(
+                order.validity
+            )}
+        </div>
+
+
+        <div class="detail">
+            <b>Amount:</b>
+            TSh
+            ${Number(
+                order.amount || 0
+            ).toLocaleString()}
+        </div>
+
+
+        <div class="detail">
+            <b>Payment Name:</b>
+            ${safe(
+                order.payment_name
+            )}
+        </div>
+
+
+        <div class="detail">
+            <b>Additional Notes:</b>
+            ${safe(
+                order.additional_notes ||
+                "-"
+            )}
+        </div>
+
+
+        <div class="detail">
+            <b>Transaction Time:</b>
+            ${formatDate(
+                order.transaction_time
+            )}
+        </div>
+
+
+        <div class="detail">
+            <b>Status:</b>
+            ${statusBadge(
+                order.status
+            )}
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="action-btn export"
+                onclick="
+                sendWhatsApp('${order.id}')
+                ">
+                📱 WHATSAPP
+            </button>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "viewModal"
+    ).style.display =
+        "flex";
+
+}
+
+
+/* =================================
+   CLOSE MODAL
+================================= */
+
+function closeModal(){
+
+    document.getElementById(
+        "viewModal"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =================================
+   WHATSAPP
+================================= */
+
+function sendWhatsApp(id){
+
+    const order =
+        allOrders.find(
+            o =>
+                o.id === id
+        );
+
+
+    if(!order)
+        return;
+
+
+    const message = `BONYO ELECTRONICS ORDER
+
+Order Number: ${order.order_number}
+Customer Number: ${order.customer_phone}
+Bundle Number: ${order.bundle_phone || "-"}
+Bundle: ${order.bundle}
+Validity: ${order.validity}
+Amount: TSh ${Number(order.amount || 0).toLocaleString()}
+Payment Name: ${order.payment_name}
+Additional Notes: ${order.additional_notes || "-"}
+Transaction Time: ${formatDate(order.transaction_time)}
+Status: ${order.status}`;
+
+
+    const url =
+        "https://wa.me/255637269368?text=" +
+        encodeURIComponent(
+            message
+        );
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =================================
+   DELETE
+================================= */
+
+async function deleteOrder(id){
+
+    const order =
+        allOrders.find(
+            o =>
+                o.id === id
+        );
+
+
+    if(!order)
+        return;
+
+
+    const yes =
+        confirm(
+            "Delete order " +
+            order.order_number +
+            "?"
+        );
+
+
+    if(!yes)
+        return;
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+        .from("orders")
+        .delete()
+        .eq(
+            "id",
+            id
+        );
+
+
+    if(error){
+
+        alert(
+            "Delete failed: " +
+            error.message
+        );
+
+        return;
+    }
+
+
+    await loadOrders();
+
+}
+
+
+/* =================================
+   REALTIME
+================================= */
+
+function startRealtime(){
+
+    if(realtimeChannel){
+
+        supabaseClient
+            .removeChannel(
+                realtimeChannel
+            );
+
+    }
+
+
+    realtimeChannel =
+        supabaseClient
+        .channel(
+            "bonyo-orders-live"
+        )
+
+
+        /* NEW ORDER */
+
+        .on(
+            "postgres_changes",
+            {
+                event:"INSERT",
+                schema:"public",
+                table:"orders"
+            },
+
+            payload => {
+
+                const newOrder =
+                    payload.new;
+
+
+                console.log(
+                    "NEW ORDER:",
+                    newOrder
+                );
+
+
+                handleNewOrder(
+                    newOrder
+                );
+
+            }
+        )
+
+
+        /* UPDATE */
+
+        .on(
+            "postgres_changes",
+            {
+                event:"UPDATE",
+                schema:"public",
+                table:"orders"
+            },
+
+            payload => {
+
+                console.log(
+                    "ORDER UPDATED:",
+                    payload.new
+                );
+
+
+                const updated =
+                    payload.new;
+
+
+                allOrders =
+                    allOrders.map(
+                        order =>
+                            order.id ===
+                            updated.id
+                            ? updated
+                            : order
+                    );
+
+
+                applyFilters();
+
+            }
+        )
+
+
+        /* DELETE */
+
+        .on(
+            "postgres_changes",
+            {
+                event:"DELETE",
+                schema:"public",
+                table:"orders"
+            },
+
+            payload => {
+
+                console.log(
+                    "ORDER DELETED:",
+                    payload.old
+                );
+
+
+                allOrders =
+                    allOrders.filter(
+                        order =>
+                            order.id !==
+                            payload.old.id
+                    );
+
+
+                applyFilters();
+
+            }
+        )
+
+
+        .subscribe(
+            status => {
+
+                console.log(
+                    "Realtime status:",
+                    status
+                );
+
+            }
+        );
+
+}
+
+
+/* =================================
+   HANDLE NEW ORDER
+================================= */
+
+function handleNewOrder(
+    order
+){
+
+    const exists =
+        allOrders.some(
+            o =>
+                o.id ===
+                order.id
+        );
+
+
+    if(!exists){
+
+        allOrders.unshift(
+            order
+        );
+
+    }
+
+
+    /* INCREASE COUNTER */
+
+    newOrdersCount++;
+
+
+    updateNewOrderCounter();
+
+
+    /* SHOW ORDER */
+
+    applyFilters();
+
+
+    showNewOrder(
+        order
+    );
+
+
+    /* SOUND */
+
+    playNotificationSound();
+
+}
+
+
+/* =================================
+   COUNTER
+================================= */
+
+function updateNewOrderCounter(){
+
+    const count =
+        document.getElementById(
+            "newOrdersCount"
+        );
+
+
+    const counter =
+        document.getElementById(
+            "newOrdersCounter"
+        );
+
+
+    count.textContent =
+        newOrdersCount;
+
+
+    if(newOrdersCount > 0){
+
+        counter.classList.add(
+            "has-new"
+        );
+
+    }else{
+
+        counter.classList.remove(
+            "has-new"
+        );
+
+    }
+
+}
+
+
+/* =================================
+   CLEAR COUNTER
+================================= */
+
+function clearNewOrderCounter(){
+
+    newOrdersCount = 0;
+
+    updateNewOrderCounter();
+
+    dismissNewOrder();
+
+}
+
+
+/* =================================
+   NEW ORDER BOX
+================================= */
+
+function showNewOrder(
+    order
+){
+
+    const box =
+        document.getElementById(
+            "newOrderNotification"
+        );
+
+
+    const text =
+        document.getElementById(
+            "newOrderText"
+        );
+
+
+    text.innerHTML = `
+
+        Order:
+        <strong>
+            ${safe(
+                order.order_number
+            )}
+        </strong>
+
+        &nbsp; | &nbsp;
+
+        ${safe(
+            order.bundle
+        )}
+
+        &nbsp; | &nbsp;
+
+        TSh
+        ${Number(
+            order.amount || 0
+        ).toLocaleString()}
+
+    `;
+
+
+    box.style.display =
+        "block";
+
+}
+
+
+/* =================================
+   DISMISS
+================================= */
+
+function dismissNewOrder(){
+
+    document.getElementById(
+        "newOrderNotification"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =================================
+   SOUND
+================================= */
+
+function playNotificationSound(){
+
+    try{
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+
+        if(!AudioContext)
+            return;
+
+
+        const audio =
+            new AudioContext();
+
+
+        const oscillator =
+            audio.createOscillator();
+
+
+        const gain =
+            audio.createGain();
+
+
+        oscillator.connect(
+            gain
+        );
+
+
+        gain.connect(
+            audio.destination
+        );
+
+
+        oscillator.frequency.value =
+            880;
+
+
+        gain.gain.setValueAtTime(
+            0.001,
+            audio.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.25,
+            audio.currentTime + 0.03
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            audio.currentTime + 0.5
+        );
+
+
+        oscillator.start();
+
+
+        oscillator.stop(
+            audio.currentTime + 0.5
+        );
+
+    }catch(error){
+
+        console.log(
+            "Notification sound unavailable"
+        );
+
+    }
+
+}
+
+
+/* =================================
+   CSV
+================================= */
+
+function exportCSV(){
+
+    if(
+        filteredOrders.length === 0
+    ){
+
+        alert(
+            "No orders to export."
+        );
+
+        return;
+    }
+
+
+    const headers = [
+
+        "Order Number",
+        "Customer Number",
+        "Bundle Number",
+        "Bundle",
+        "Validity",
+        "Amount",
+        "Payment Name",
+        "Additional Notes",
+        "Transaction Time",
+        "Status"
+
+    ];
+
+
+    const rows =
+        filteredOrders.map(
+            order => [
+
+                order.order_number,
+
+                order.customer_phone,
+
+                order.bundle_phone ||
+                "",
+
+                order.bundle,
+
+                order.validity,
+
+                order.amount,
+
+                order.payment_name,
+
+                order.additional_notes ||
+                "",
+
+                formatDate(
+                    order.transaction_time
+                ),
+
+                order.status
+
+            ]
+        );
+
+
+    const csv = [
+
+        headers,
+        ...rows
+
+    ]
+    .map(
+        row =>
+            row.map(
+                value =>
+                    `"${String(
+                        value ?? ""
+                    ).replace(
+                        /"/g,
+                        '""'
+                    )}"`
+            ).join(",")
+    )
+    .join("\n");
+
+
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type:
+                "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href = url;
+
+
+    link.download =
+        "BONYO_ELECTRONICS_ORDERS.csv";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* =================================
+   LOGOUT
+================================= */
+
+async function logout(){
+
+    if(realtimeChannel){
+
+        await supabaseClient
+            .removeChannel(
+                realtimeChannel
+            );
+
+        realtimeChannel =
+            null;
+
+    }
+
+
+    await supabaseClient
+        .auth
+        .signOut();
+
+
+    location.reload();
+
+}
+
+
+/* =================================
+   DATE
+================================= */
+
+function formatDate(
+    date
+){
+
+    if(!date)
+        return "-";
+
+
+    return new Intl.DateTimeFormat(
+        "en-GB",
+        {
+            timeZone:
+                "Africa/Dar_es_Salaam",
+
+            year:
+                "numeric",
+
+            month:
+                "2-digit",
+
+            day:
+                "2-digit",
+
+            hour:
+                "2-digit",
+
+            minute:
+                "2-digit",
+
+            second:
+                "2-digit",
+
+            hour12:
+                false
+        }
+    ).format(
+        new Date(date)
+    );
+
+}
+
+
+/* =================================
+   SECURITY
+================================= */
+
+function safe(
+    value
+){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =================================
+   ENTER LOGIN
+================================= */
+
+document.getElementById(
+    "password"
+)
+.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter"
+        ){
+
+            login();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

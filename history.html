@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Order History | BONYO ELECTRONICS</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #071b3a, #0b4ea2);
+      color: white;
+      padding: 16px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .nav-btn:hover {
+      background: white;
+      color: #0b4ea2;
+    }
+
+    /* HERO */
+    .hero {
+      background:
+        linear-gradient(rgba(5,25,55,0.75), rgba(5,25,55,0.75)),
+        linear-gradient(135deg, #0b4ea2, #00a8e8);
+      color: white;
+      text-align: center;
+      padding: 55px 20px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.95;
+    }
+
+    /* CONTAINER */
+    .container {
+      width: 92%;
+      max-width: 1100px;
+      margin: 35px auto;
+    }
+
+    /* CARDS */
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      color: #0b4ea2;
+      margin-bottom: 8px;
+    }
+
+    .card-subtitle {
+      color: #667085;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* FORMS */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccd4df;
+      border-radius: 9px;
+      font-size: 16px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus {
+      border-color: #0b4ea2;
+      box-shadow: 0 0 0 3px rgba(11,78,162,0.1);
+    }
+
+    .btn {
+      border: none;
+      border-radius: 9px;
+      padding: 13px 20px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: #0b4ea2;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #073b7d;
+    }
+
+    .btn-success {
+      background: #16a34a;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #12823b;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* STATUS SEARCH */
+    .status-search {
+      background: linear-gradient(135deg, #eef6ff, #ffffff);
+      border: 1px solid #cfe3ff;
+    }
+
+    .security-note {
+      background: #fff8e6;
+      border-left: 5px solid #f59e0b;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      color: #684b00;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    #statusResult {
+      margin-top: 20px;
+    }
+
+    .status-result-card {
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #dbe3ed;
+      background: #f8fafc;
+    }
+
+    .order-number-display {
+      font-size: 21px;
+      font-weight: 900;
+      color: #0b4ea2;
+      margin-bottom: 15px;
+    }
+
+    /* STATUS BADGES */
+    .status-badge {
+      display: inline-block;
+      padding: 8px 13px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .status-payment {
+      background: #fff3cd;
+      color: #8a6100;
+    }
+
+    .status-verified {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .status-processing {
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+
+    .status-completed {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .status-failed {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .not-found {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      color: #9f1239;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .success-message {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #047857;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .error-message {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      color: #be123c;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    /* HISTORY */
+    #historyResult {
+      margin-top: 20px;
+    }
+
+    .history-card {
+      background: white;
+      border: 1px solid #e1e7ef;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .history-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .history-order {
+      font-size: 19px;
+      font-weight: 900;
+      color: #0b4ea2;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .detail {
+      background: #f7f9fc;
+      padding: 12px;
+      border-radius: 9px;
+    }
+
+    .detail-label {
+      color: #6b7280;
+      font-size: 12px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .detail-value {
+      font-weight: bold;
+      color: #172033;
+      word-break: break-word;
+    }
+
+    /* TIMELINE */
+    .timeline-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #0b4ea2;
+      margin-bottom: 15px;
+    }
+
+    .timeline {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      position: relative;
+      margin-top: 15px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 17px;
+      left: 8%;
+      right: 8%;
+      height: 4px;
+      background: #dbe2ea;
+      z-index: 0;
+    }
+
+    .timeline-step {
+      position: relative;
+      z-index: 1;
+      width: 24%;
+      text-align: center;
+    }
+
+    .timeline-circle {
+      width: 35px;
+      height: 35px;
+      margin: 0 auto 9px;
+      border-radius: 50%;
+      background: #dbe2ea;
+      color: #667085;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      border: 3px solid white;
+      box-shadow: 0 0 0 1px #dbe2ea;
+    }
+
+    .timeline-step.done .timeline-circle {
+      background: #16a34a;
+      color: white;
+      box-shadow: 0 0 0 1px #16a34a;
+    }
+
+    .timeline-step.current .timeline-circle {
+      background: #0b4ea2;
+      color: white;
+      box-shadow: 0 0 0 3px rgba(11,78,162,0.15);
+    }
+
+    .timeline-label {
+      font-size: 11px;
+      font-weight: bold;
+      color: #667085;
+      line-height: 1.3;
+    }
+
+    .timeline-step.done .timeline-label,
+    .timeline-step.current .timeline-label {
+      color: #172033;
+    }
+
+    .failed-box {
+      margin-top: 18px;
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      color: #be123c;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    /* LOADING */
+    .loading {
+      text-align: center;
+      padding: 25px;
+      color: #667085;
+      font-weight: bold;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border: 3px solid #dbe3ed;
+      border-top-color: #0b4ea2;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .refresh-info {
+      color: #667085;
+      font-size: 13px;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* EMPTY */
+    .empty {
+      text-align: center;
+      padding: 30px 15px;
+      color: #667085;
+    }
+
+    .empty-icon {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 50px;
+      background: #071b3a;
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    footer h3 {
+      margin-bottom: 8px;
+    }
+
+    footer p {
+      margin: 5px 0;
+      opacity: 0.9;
+    }
+
+    .whatsapp {
+      display: inline-block;
+      margin-top: 12px;
+      background: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 11px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    /* MOBILE */
+    @media (max-width: 700px) {
+
+      header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+
+      .nav-buttons {
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .container {
+        width: 94%;
+        margin: 22px auto;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-label {
+        font-size: 9px;
+      }
+
+      .timeline-circle {
+        width: 31px;
+        height: 31px;
+        font-size: 12px;
+      }
+
+      .timeline::before {
+        top: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+
+    <div class="logo">
+      BONYO ELECTRONICS
+    </div>
+
+    <div class="nav-buttons">
+      <a href="halotel.html" class="nav-btn">
+        📱 BUY HALOTEL BUNDLE
+      </a>
+
+      <a href="index.html" class="nav-btn">
+        🏠 HOME
+      </a>
+    </div>
+
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <h1>📋 Order History</h1>
+
+    <p>
+      Check your order status and previous Halotel bundle orders.
+    </p>
+
+  </section>
+
+
+  <main class="container">
+
+
+    <!-- CHECK STATUS -->
+    <section class="card status-search">
+
+      <h2>🔐 Check Order Status</h2>
+
+      <p class="card-subtitle">
+        Enter your Order Number and the Customer Phone used when placing the order.
+      </p>
+
+      <div class="security-note">
+        🔒 <strong>Security:</strong>
+        Both Order Number and Customer Phone are required to view the current order status.
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="statusOrderNumber">
+          Order Number
+        </label>
+
+        <input
+          type="text"
+          id="statusOrderNumber"
+          placeholder="Example: BONYO-4827"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="statusCustomerPhone">
+          Customer Phone
+        </label>
+
+        <input
+          type="tel"
+          id="statusCustomerPhone"
+          placeholder="Example: 0637269368"
+          autocomplete="tel"
+        >
+
+      </div>
+
+
+      <button
+        class="btn btn-primary"
+        id="checkStatusBtn"
+        onclick="checkOrderStatus()"
+      >
+        🔎 CHECK STATUS
+      </button>
+
+
+      <div id="statusResult"></div>
+
+    </section>
+
+
+
+    <!-- ORDER HISTORY -->
+    <section class="card">
+
+      <h2>📋 Your Order History</h2>
+
+      <p class="card-subtitle">
+        Enter your customer phone number to view your previous orders.
+      </p>
+
+
+      <div class="form-group">
+
+        <label for="historyPhone">
+          Customer Phone
+        </label>
+
+        <input
+          type="tel"
+          id="historyPhone"
+          placeholder="Example: 0637269368"
+          autocomplete="tel"
+        >
+
+      </div>
+
+
+      <button
+        class="btn btn-success"
+        id="historyBtn"
+        onclick="loadHistory()"
+      >
+        📋 VIEW ORDER HISTORY
+      </button>
+
+
+      <div id="historyResult"></div>
+
+      <div class="refresh-info" id="refreshInfo"></div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <h3>BONYO ELECTRONICS</h3>
+
+    <p>📍 Dar es Salaam, Tanzania</p>
+
+    <p>📞 0637269368</p>
+
+    <p>📧 c21326961@gmail.com</p>
+
+    <a
+      class="whatsapp"
+      href="https://wa.me/255637269368"
+      target="_blank"
+    >
+      💬 WhatsApp
+    </a>
+
+    <p style="margin-top:18px;font-size:13px;">
+      © 2026 BONYO ELECTRONICS. All Rights Reserved.
+    </p>
+
+  </footer>
+
+
+
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+
+    /* =========================================
+       SUPABASE CONFIGURATION
+    ========================================= */
+
+    const SUPABASE_URL =
+      "https://bfqwetuhtldzlxcqzsrq.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_vs0-yAMJNwaMxEHiyn72ag_f7bdFo9c";
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+
+    /* =========================================
+       GLOBAL VARIABLES
+    ========================================= */
+
+    let currentPhone = "";
+
+    let historyRefreshTimer = null;
+
+
+    /* =========================================
+       CLEAN PHONE NUMBER
+    ========================================= */
+
+    function cleanPhone(phone) {
+
+      return String(phone || "")
+        .replace(/\D/g, "");
+
+    }
+
+
+    /* =========================================
+       FORMAT TANZANIA TIME
+    ========================================= */
+
+    function formatTanzaniaTime(dateValue) {
+
+      if (!dateValue) {
+        return "-";
+      }
+
+      const date = new Date(dateValue);
+
+      return new Intl.DateTimeFormat(
+        "en-GB",
+        {
+          timeZone: "Africa/Dar_es_Salaam",
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false
+        }
+      ).format(date);
+
+    }
+
+
+    /* =========================================
+       STATUS CLASS
+    ========================================= */
+
+    function getStatusClass(status) {
+
+      const s =
+        String(status || "")
+          .toUpperCase()
+          .trim();
+
+      if (s === "PAYMENT VERIFICATION") {
+        return "status-payment";
+      }
+
+      if (s === "PAYMENT VERIFIED") {
+        return "status-verified";
+      }
+
+      if (s === "PROCESSING") {
+        return "status-processing";
+      }
+
+      if (s === "COMPLETED") {
+        return "status-completed";
+      }
+
+      if (s === "FAILED") {
+        return "status-failed";
+      }
+
+      return "status-payment";
+
+    }
+
+
+    /* =========================================
+       TIMELINE
+    ========================================= */
+
+    function createTimeline(status) {
+
+      const currentStatus =
+        String(status || "")
+          .toUpperCase()
+          .trim();
+
+
+      const steps = [
+        "PAYMENT VERIFICATION",
+        "PAYMENT VERIFIED",
+        "PROCESSING",
+        "COMPLETED"
+      ];
+
+
+      let currentIndex = 0;
+
+
+      if (currentStatus === "PAYMENT VERIFIED") {
+        currentIndex = 1;
+      }
+
+      else if (currentStatus === "PROCESSING") {
+        currentIndex = 2;
+      }
+
+      else if (currentStatus === "COMPLETED") {
+        currentIndex = 3;
+      }
+
+      else if (currentStatus === "FAILED") {
+        currentIndex = 2;
+      }
+
+
+      let html = `
+        <div class="timeline-title">
+          📊 Order Progress
+        </div>
+
+        <div class="timeline">
+      `;
+
+
+      steps.forEach((step, index) => {
+
+        let className = "";
+
+
+        if (
+          currentStatus === "FAILED"
+        ) {
+
+          if (index < currentIndex) {
+            className = "done";
+          }
+
+          else if (index === currentIndex) {
+            className = "current";
+          }
+
+        }
+
+        else {
+
+          if (index < currentIndex) {
+            className = "done";
+          }
+
+          else if (index === currentIndex) {
+            className = "current";
+          }
+
+        }
+
+
+        let circleText =
+          index < currentIndex
+            ? "✓"
+            : index + 1;
+
+
+        html += `
+
+          <div class="timeline-step ${className}">
+
+            <div class="timeline-circle">
+              ${circleText}
+            </div>
+
+            <div class="timeline-label">
+              ${step}
+            </div>
+
+          </div>
+
+        `;
+
+      });
+
+
+      html += `
+        </div>
+      `;
+
+
+      if (currentStatus === "FAILED") {
+
+        html += `
+
+          <div class="failed-box">
+            ❌ This order has been marked as FAILED.
+          </div>
+
+        `;
+
+      }
+
+
+      return html;
+
+    }
+
+
+
+    /* =========================================
+       CHECK ORDER STATUS
+       ORDER NUMBER + CUSTOMER PHONE
+    ========================================= */
+
+    async function checkOrderStatus() {
+
+      const orderNumber =
+        document
+          .getElementById("statusOrderNumber")
+          .value
+          .trim();
+
+
+      const customerPhone =
+        cleanPhone(
+          document
+            .getElementById("statusCustomerPhone")
+            .value
+        );
+
+
+      const resultBox =
+        document.getElementById("statusResult");
+
+
+      const button =
+        document.getElementById("checkStatusBtn");
+
+
+      if (!orderNumber) {
+
+        resultBox.innerHTML = `
+
+          <div class="error-message">
+            ⚠️ Please enter your Order Number.
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      if (!customerPhone) {
+
+        resultBox.innerHTML = `
+
+          <div class="error-message">
+            ⚠️ Please enter your Customer Phone.
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      button.disabled = true;
+
+      button.innerHTML =
+        "⏳ CHECKING...";
+
+
+      resultBox.innerHTML = `
+
+        <div class="loading">
+
+          <span class="spinner"></span>
+
+          Checking order status...
+
+        </div>
+
+      `;
+
+
+      try {
+
+        const {
+          data,
+          error
+        } = await supabaseClient.rpc(
+          "check_order_status",
+          {
+            p_order_number: orderNumber,
+            p_customer_phone: customerPhone
+          }
+        );
+
+
+        if (error) {
+
+          console.error(
+            "Status error:",
+            error
+          );
+
+          resultBox.innerHTML = `
+
+            <div class="error-message">
+
+              ❌ Unable to check order status.
+
+              <br><br>
+
+              Please check your Order Number and Customer Phone.
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        if (
+          !data ||
+          data.length === 0
+        ) {
+
+          resultBox.innerHTML = `
+
+            <div class="not-found">
+
+              ❌ <strong>Order not found.</strong>
+
+              <br><br>
+
+              Make sure the Order Number and Customer Phone
+              are exactly the same as those used when ordering.
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        const order = data[0];
+
+        const status =
+          String(order.status || "")
+            .toUpperCase()
+            .trim();
+
+
+        resultBox.innerHTML = `
+
+          <div class="status-result-card">
+
+            <div class="order-number-display">
+              ${escapeHtml(order.order_number)}
+            </div>
+
+            <p style="margin-bottom:10px;">
+              Current Status:
+            </p>
+
+            <span class="status-badge ${getStatusClass(status)}">
+              ${escapeHtml(status)}
+            </span>
+
+            <div style="margin-top:25px;">
+              ${createTimeline(status)}
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        resultBox.innerHTML = `
+
+          <div class="error-message">
+
+            ❌ Something went wrong while checking the order.
+
+          </div>
+
+        `;
+
+      }
+
+      finally {
+
+        button.disabled = false;
+
+        button.innerHTML =
+          "🔎 CHECK STATUS";
+
+      }
+
+    }
+
+
+
+    /* =========================================
+       LOAD CUSTOMER HISTORY
+    ========================================= */
+
+    async function loadHistory(
+      silent = false
+    ) {
+
+      const phoneInput =
+        document.getElementById(
+          "historyPhone"
+        );
+
+
+      const phone =
+        cleanPhone(
+          phoneInput.value
+        );
+
+
+      const resultBox =
+        document.getElementById(
+          "historyResult"
+        );
+
+
+      const button =
+        document.getElementById(
+          "historyBtn"
+        );
+
+
+      if (!phone) {
+
+        if (!silent) {
+
+          resultBox.innerHTML = `
+
+            <div class="error-message">
+
+              ⚠️ Please enter your Customer Phone.
+
+            </div>
+
+          `;
+
+        }
+
+        return;
+
+      }
+
+
+      currentPhone = phone;
+
+
+      if (!silent) {
+
+        button.disabled = true;
+
+        button.innerHTML =
+          "⏳ LOADING...";
+
+
+        resultBox.innerHTML = `
+
+          <div class="loading">
+
+            <span class="spinner"></span>
+
+            Loading your order history...
+
+          </div>
+
+        `;
+
+      }
+
+
+      try {
+
+        const {
+          data,
+          error
+        } = await supabaseClient.rpc(
+          "get_customer_order_history",
+          {
+            p_customer_phone: phone
+          }
+        );
+
+
+        if (error) {
+
+          console.error(
+            "History error:",
+            error
+          );
+
+
+          if (!silent) {
+
+            resultBox.innerHTML = `
+
+              <div class="error-message">
+
+                ❌ Unable to load order history.
+
+              </div>
+
+            `;
+
+          }
+
+          return;
+
+        }
+
+
+        if (
+          !data ||
+          data.length === 0
+        ) {
+
+          resultBox.innerHTML = `
+
+            <div class="empty">
+
+              <div class="empty-icon">
+                📭
+              </div>
+
+              <strong>No orders found.</strong>
+
+              <p style="margin-top:8px;">
+                No orders were found for this phone number.
+              </p>
+
+            </div>
+
+          `;
+
+          updateRefreshInfo();
+
+          return;
+
+        }
+
+
+        let html = "";
+
+
+        data.forEach(order => {
+
+          const status =
+            String(order.status || "")
+              .toUpperCase()
+              .trim();
+
+
+          html += `
+
+            <div class="history-card">
+
+              <div class="history-top">
+
+                <div class="history-order">
+                  ${escapeHtml(order.order_number)}
+                </div>
+
+                <span class="status-badge ${getStatusClass(status)}">
+                  ${escapeHtml(status)}
+                </span>
+
+              </div>
+
+
+              <div class="details-grid">
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    BUNDLE
+                  </div>
+
+                  <div class="detail-value">
+                    ${escapeHtml(order.bundle)}
+                  </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    AMOUNT
+                  </div>
+
+                  <div class="detail-value">
+                    TSh ${Number(order.amount || 0).toLocaleString()}
+                  </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    BUNDLE PHONE
+                  </div>
+
+                  <div class="detail-value">
+                    ${escapeHtml(order.bundle_phone || "-")}
+                  </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    VALIDITY
+                  </div>
+
+                  <div class="detail-value">
+                    ${escapeHtml(order.validity || "-")}
+                  </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    TRANSACTION TIME
+                  </div>
+
+                  <div class="detail-value">
+                    ${formatTanzaniaTime(order.transaction_time)}
+                  </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    STATUS
+                  </div>
+
+                  <div class="detail-value">
+                    ${escapeHtml(status)}
+                  </div>
+
+                </div>
+
+
+              </div>
+
+
+              ${createTimeline(status)}
+
+            </div>
+
+          `;
+
+        });
+
+
+        resultBox.innerHTML = html;
+
+        updateRefreshInfo();
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        if (!silent) {
+
+          resultBox.innerHTML = `
+
+            <div class="error-message">
+
+              ❌ Something went wrong while loading history.
+
+            </div>
+
+          `;
+
+        }
+
+      }
+
+      finally {
+
+        if (!silent) {
+
+          button.disabled = false;
+
+          button.innerHTML =
+            "📋 VIEW ORDER HISTORY";
+
+        }
+
+      }
+
+    }
+
+
+
+    /* =========================================
+       SILENT AUTO REFRESH
+    ========================================= */
+
+    async function refreshHistorySilently() {
+
+      if (!currentPhone) {
+        return;
+      }
+
+
+      try {
+
+        const {
+          data,
+          error
+        } = await supabaseClient.rpc(
+          "get_customer_order_history",
+          {
+            p_customer_phone: currentPhone
+          }
+        );
+
+
+        if (error) {
+          return;
+        }
+
+
+        if (!data) {
+          return;
+        }
+
+
+        let html = "";
+
+
+        data.forEach(order => {
+
+          const status =
+            String(order.status || "")
+              .toUpperCase()
+              .trim();
+
+
+          html += `
+
+            <div class="history-card">
+
+              <div class="history-top">
+
+                <div class="history-order">
+                  ${escapeHtml(order.order_number)}
+                </div>
+
+                <span class="status-badge ${getStatusClass(status)}">
+                  ${escapeHtml(status)}
+                </span>
+
+              </div>
+
+
+              <div class="details-grid">
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    BUNDLE
+                  </div>
+
+                  <div class="detail-value">
+                    ${escapeHtml(order.bundle)}
+                  </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    AMOUNT
+                  </div>
+
+                  <div class="detail-value">
+                    TSh ${Number(order.amount || 0).toLocaleString()}
+                  </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    BUNDLE PHONE
+                  </div>
+
+                  <div class="detail-value">
+                    ${escapeHtml(order.bundle_phone || "-")}
+                  </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    VALIDITY
+                  </div>
+
+                  <div class="detail-value">
+                    ${escapeHtml(order.validity || "-")}
+                  </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    TRANSACTION TIME
+                  </div>
+
+                  <div class="detail-value">
+                    ${formatTanzaniaTime(order.transaction_time)}
+                  </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <div class="detail-label">
+                    STATUS
+                  </div>
+
+                  <div class="detail-value">
+                    ${escapeHtml(status)}
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              ${createTimeline(status)}
+
+            </div>
+
+          `;
+
+        });
+
+
+        document.getElementById(
+          "historyResult"
+        ).innerHTML = html;
+
+
+        updateRefreshInfo();
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Silent refresh error:",
+          error
+        );
+
+      }
+
+    }
+
+
+
+    /* =========================================
+       REFRESH INFORMATION
+    ========================================= */
+
+    function updateRefreshInfo() {
+
+      const info =
+        document.getElementById(
+          "refreshInfo"
+        );
+
+
+      if (!currentPhone) {
+
+        info.innerHTML = "";
+
+        return;
+
+      }
+
+
+      const now =
+        new Intl.DateTimeFormat(
+          "en-GB",
+          {
+            timeZone: "Africa/Dar_es_Salaam",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false
+          }
+        ).format(new Date());
+
+
+      info.innerHTML =
+        `🔄 Last updated at ${now} Tanzania time • Automatically refreshes every 15 seconds`;
+
+    }
+
+
+
+    /* =========================================
+       ESCAPE HTML
+    ========================================= */
+
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+
+    /* =========================================
+       AUTO REFRESH EVERY 15 SECONDS
+    ========================================= */
+
+    historyRefreshTimer =
+      setInterval(
+        refreshHistorySilently,
+        15000
+      );
+
+
+    /* =========================================
+       ENTER KEY
+    ========================================= */
+
+    document
+      .getElementById("statusOrderNumber")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (event.key === "Enter") {
+            checkOrderStatus();
+          }
+
+        }
+      );
+
+
+    document
+      .getElementById("statusCustomerPhone")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (event.key === "Enter") {
+            checkOrderStatus();
+          }
+
+        }
+      );
+
+
+    document
+      .getElementById("historyPhone")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (event.key === "Enter") {
+            loadHistory();
+          }
+
+        }
+      );
+
+  </script>
+
+</body>
+</html>
