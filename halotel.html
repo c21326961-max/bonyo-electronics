@@ -328,6 +328,11 @@ button{
     transition:.2s;
 }
 
+.main-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
 .continue-btn{
     background:#0072ce;
     color:white;
@@ -467,6 +472,7 @@ footer{
 }
 
 @media(max-width:650px){
+
     .hero h1{
         font-size:28px;
     }
@@ -493,73 +499,128 @@ footer{
 <body>
 
 <header>
-    <div class="logo">BONYO ELECTRONICS</div>
+
+    <div class="logo">
+        BONYO ELECTRONICS
+    </div>
 
     <nav>
         <a href="index.html">HOME</a>
         <a href="history.html">HISTORIA YA ORDER</a>
     </nav>
+
 </header>
 
+
 <section class="hero">
+
     <h1>HALOTEL BUNDLES</h1>
-    <p>Agiza bando lako kwa urahisi, haraka na salama.</p>
+
+    <p>
+        Agiza bando lako kwa urahisi, haraka na salama.
+    </p>
+
 </section>
+
 
 <div class="container">
 
+
     <!-- STEP BAR -->
+
     <div class="step-bar">
-        <div class="step active" id="step1Indicator">1. TAARIFA</div>
-        <div class="step" id="step2Indicator">2. BANDO</div>
-        <div class="step" id="step3Indicator">3. MALIPO</div>
-        <div class="step" id="step4Indicator">4. CONFIRM</div>
+
+        <div class="step active" id="step1Indicator">
+            1. TAARIFA
+        </div>
+
+        <div class="step" id="step2Indicator">
+            2. BANDO
+        </div>
+
+        <div class="step" id="step3Indicator">
+            3. MALIPO
+        </div>
+
+        <div class="step" id="step4Indicator">
+            4. CONFIRM
+        </div>
+
     </div>
 
 
-    <!-- STEP 1 -->
+    <!-- =========================
+         STEP 1
+    ========================== -->
+
     <section class="card blue" id="customerSection">
 
         <h2>👤 Taarifa za Mteja</h2>
 
         <div class="instruction">
+
             <strong>Maelekezo:</strong>
-            Tafadhali jaza taarifa zako kwa usahihi. Sehemu zilizo na
-            alama ya <strong>*</strong> ni lazima kujaza.
+
+            Tafadhali jaza taarifa zako kwa usahihi.
+            Sehemu zilizo na alama ya
+            <strong>*</strong>
+            ni lazima kujaza.
+
         </div>
 
+
         <label for="customerPhone">
+
             Namba yako ya simu *
+
         </label>
 
         <input
             type="tel"
             id="customerPhone"
-            placeholder="Andika namba yako ya simu"
+            placeholder="Mfano: 0712345678"
+            inputmode="numeric"
+            maxlength="10"
         >
 
-        <div id="customerPhoneError" class="error-message">
-            Tafadhali jaza namba yako ya simu.
+        <div
+            id="customerPhoneError"
+            class="error-message"
+        >
+            Tafadhali weka namba sahihi ya simu yenye tarakimu 10.
         </div>
 
 
         <label for="bundlePhone">
+
             Namba ya kupokea bando *
+
         </label>
 
         <input
             type="tel"
             id="bundlePhone"
-            placeholder="Andika namba itakayopokea bando"
+            placeholder="Mfano: 0612345678"
+            inputmode="numeric"
+            maxlength="10"
         >
 
-        <div id="bundlePhoneError" class="error-message">
-            Tafadhali weka namba itakayopokea bando.
+        <div
+            id="bundlePhoneError"
+            class="error-message"
+        >
+            Tafadhali weka namba sahihi ya Halotel.
+            Tumia 061xxxxxxx, 062xxxxxxx au 063xxxxxxx.
         </div>
 
 
         <label for="additionalNotes">
-            Maelezo ya ziada <span style="color:#777;">(si lazima)</span>
+
+            Maelezo ya ziada
+            <span style="color:#777;">
+                (si lazima)
+            </span>
+
         </label>
 
         <textarea
@@ -579,18 +640,31 @@ footer{
     </section>
 
 
-    <!-- STEP 2 -->
-    <section class="card" id="bundleSection">
+    <!-- =========================
+         STEP 2
+    ========================== -->
+
+    <section
+        class="card"
+        id="bundleSection"
+        class="hidden"
+    >
 
         <h2>📦 Chagua Bando</h2>
 
         <div class="instruction">
+
             <strong>Maelekezo:</strong>
-            Chagua bando unalotaka kununua. Bando ulilochagua litaonekana
+
+            Chagua bando unalotaka kununua.
+            Bando ulilochagua litaonekana
             kwenye muhtasari hapa chini.
+
         </div>
 
+
         <div class="bundle-filters">
+
             <button
                 class="filter-btn active"
                 onclick="filterBundles('all',this)"
@@ -611,111 +685,174 @@ footer{
             >
                 MWEZI 1
             </button>
+
         </div>
 
 
-        <div class="bundle-grid" id="bundleGrid">
+        <div
+            class="bundle-grid"
+            id="bundleGrid"
+        >
 
-            <div class="bundle" data-period="week"
-                 onclick="selectBundle(this,'2GB','2,500','Wiki 2')">
+            <div
+                class="bundle"
+                data-period="week"
+                onclick="selectBundle(this,'2GB','2,500','Wiki 2')"
+            >
                 <h3>2GB</h3>
                 <div class="price">TSh 2,500</div>
                 <div class="validity">Wiki 2</div>
             </div>
 
-            <div class="bundle" data-period="week"
-                 onclick="selectBundle(this,'3GB','3,500','Wiki 2')">
+
+            <div
+                class="bundle"
+                data-period="week"
+                onclick="selectBundle(this,'3GB','3,500','Wiki 2')"
+            >
                 <h3>3GB</h3>
                 <div class="price">TSh 3,500</div>
                 <div class="validity">Wiki 2</div>
             </div>
 
-            <div class="bundle" data-period="week"
-                 onclick="selectBundle(this,'4GB','4,500','Wiki 2')">
+
+            <div
+                class="bundle"
+                data-period="week"
+                onclick="selectBundle(this,'4GB','4,500','Wiki 2')"
+            >
                 <h3>4GB</h3>
                 <div class="price">TSh 4,500</div>
                 <div class="validity">Wiki 2</div>
             </div>
 
-            <div class="bundle" data-period="week"
-                 onclick="selectBundle(this,'5GB','5,000','Wiki 2')">
+
+            <div
+                class="bundle"
+                data-period="week"
+                onclick="selectBundle(this,'5GB','5,000','Wiki 2')"
+            >
                 <h3>5GB</h3>
                 <div class="price">TSh 5,000</div>
                 <div class="validity">Wiki 2</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'6GB','6,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'6GB','6,000','Mwezi 1')"
+            >
                 <h3>6GB</h3>
                 <div class="price">TSh 6,000</div>
                 <div class="validity">Mwezi 1</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'7GB','7,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'7GB','7,000','Mwezi 1')"
+            >
                 <h3>7GB</h3>
                 <div class="price">TSh 7,000</div>
                 <div class="validity">Mwezi 1</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'8GB','8,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'8GB','8,000','Mwezi 1')"
+            >
                 <h3>8GB</h3>
                 <div class="price">TSh 8,000</div>
                 <div class="validity">Mwezi 1</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'9GB','9,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'9GB','9,000','Mwezi 1')"
+            >
                 <h3>9GB</h3>
                 <div class="price">TSh 9,000</div>
                 <div class="validity">Mwezi 1</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'10GB','10,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'10GB','10,000','Mwezi 1')"
+            >
                 <h3>10GB</h3>
                 <div class="price">TSh 10,000</div>
                 <div class="validity">Mwezi 1</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'12GB','12,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'12GB','12,000','Mwezi 1')"
+            >
                 <h3>12GB</h3>
                 <div class="price">TSh 12,000</div>
                 <div class="validity">Mwezi 1</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'13GB','13,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'13GB','13,000','Mwezi 1')"
+            >
                 <h3>13GB</h3>
                 <div class="price">TSh 13,000</div>
                 <div class="validity">Mwezi 1</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'15GB','15,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'15GB','15,000','Mwezi 1')"
+            >
                 <h3>15GB</h3>
                 <div class="price">TSh 15,000</div>
                 <div class="validity">Mwezi 1</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'20GB','18,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'20GB','18,000','Mwezi 1')"
+            >
                 <h3>20GB</h3>
                 <div class="price">TSh 18,000</div>
                 <div class="validity">Mwezi 1</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'25GB','23,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'25GB','23,000','Mwezi 1')"
+            >
                 <h3>25GB</h3>
                 <div class="price">TSh 23,000</div>
                 <div class="validity">Mwezi 1</div>
             </div>
 
-            <div class="bundle" data-period="month"
-                 onclick="selectBundle(this,'30GB','27,000','Mwezi 1')">
+
+            <div
+                class="bundle"
+                data-period="month"
+                onclick="selectBundle(this,'30GB','27,000','Mwezi 1')"
+            >
                 <h3>30GB</h3>
                 <div class="price">TSh 27,000</div>
                 <div class="validity">Mwezi 1</div>
@@ -724,44 +861,99 @@ footer{
         </div>
 
 
-        <div id="bundleError" class="error-box">
+        <div
+            id="bundleError"
+            class="error-box"
+        >
             Tafadhali chagua bando unalotaka.
         </div>
 
 
-        <div class="selected-info" id="selectedInfo">
-            <strong>Bando ulilochagua:</strong>
+        <div
+            class="selected-info"
+            id="selectedInfo"
+        >
+
+            <strong>
+                Bando ulilochagua:
+            </strong>
+
             <span id="selectedBundleText"></span>
+
         </div>
 
 
         <div class="summary">
-            <h3>📋 Muhtasari wa Order</h3>
+
+            <h3>
+                📋 Muhtasari wa Order
+            </h3>
+
 
             <div class="summary-row">
-                <span>Namba yako</span>
-                <strong id="summaryCustomer">-</strong>
+
+                <span>
+                    Namba yako
+                </span>
+
+                <strong id="summaryCustomer">
+                    -
+                </strong>
+
             </div>
 
-            <div class="summary-row">
-                <span>Namba ya kupokea</span>
-                <strong id="summaryBundlePhone">-</strong>
-            </div>
 
             <div class="summary-row">
-                <span>Bando</span>
-                <strong id="summaryBundle">-</strong>
+
+                <span>
+                    Namba ya kupokea
+                </span>
+
+                <strong id="summaryBundlePhone">
+                    -
+                </strong>
+
             </div>
 
-            <div class="summary-row">
-                <span>Muda</span>
-                <strong id="summaryValidity">-</strong>
-            </div>
 
             <div class="summary-row">
-                <span>Kiasi</span>
-                <strong id="summaryAmount">-</strong>
+
+                <span>
+                    Bando
+                </span>
+
+                <strong id="summaryBundle">
+                    -
+                </strong>
+
             </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Muda
+                </span>
+
+                <strong id="summaryValidity">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Kiasi
+                </span>
+
+                <strong id="summaryAmount">
+                    -
+                </strong>
+
+            </div>
+
         </div>
 
 
@@ -771,6 +963,7 @@ footer{
         >
             ← RUDI KWENYE TAARIFA
         </button>
+
 
         <button
             class="main-btn continue-btn"
@@ -782,25 +975,38 @@ footer{
     </section>
 
 
-    <!-- STEP 3 -->
-    <section class="card yellow" id="paymentSection">
+    <!-- =========================
+         STEP 3
+    ========================== -->
+
+    <section
+        class="card yellow hidden"
+        id="paymentSection"
+    >
 
         <h2>💳 Taarifa za Malipo</h2>
 
+
         <div class="instruction">
+
             <strong>Maelekezo:</strong>
-            Fanya malipo kwa namba iliyo hapa chini, kisha andika
-            jina lililotumika kufanya malipo.
+
+            Fanya malipo kwa namba iliyo hapa chini,
+            kisha andika jina lililotumika kufanya malipo.
+
         </div>
 
 
         <div class="payment-box">
 
-            <p>Namba ya kufanya malipo:</p>
+            <p>
+                Namba ya kufanya malipo:
+            </p>
 
             <div class="payment-number">
                 0637269368
             </div>
+
 
             <p style="margin-top:10px;">
                 Jina la malipo:
@@ -814,8 +1020,11 @@ footer{
 
 
         <label for="paymentName">
+
             Jina la aliyelipa *
+
         </label>
+
 
         <input
             type="text"
@@ -823,7 +1032,11 @@ footer{
             placeholder="Andika jina lililotumika kufanya malipo"
         >
 
-        <div id="paymentNameError" class="error-message">
+
+        <div
+            id="paymentNameError"
+            class="error-message"
+        >
             Tafadhali andika jina la aliyelipa.
         </div>
 
@@ -835,20 +1048,35 @@ footer{
                 id="paymentConfirmed"
             >
 
+
             <label for="paymentConfirmed">
-                Nimefanya malipo na taarifa nilizoingiza ni sahihi. *
+
+                Nimefanya malipo na taarifa nilizoingiza
+                ni sahihi. *
+
             </label>
 
         </div>
 
-        <div id="paymentConfirmedError" class="error-message">
+
+        <div
+            id="paymentConfirmedError"
+            class="error-message"
+        >
             Tafadhali thibitisha kuwa umefanya malipo.
         </div>
 
 
-        <div id="submitError" class="error-box"></div>
+        <div
+            id="submitError"
+            class="error-box"
+        ></div>
 
-        <div id="submitInfo" class="info-message"></div>
+
+        <div
+            id="submitInfo"
+            class="info-message"
+        ></div>
 
 
         <button
@@ -857,6 +1085,7 @@ footer{
         >
             ← RUDI KWENYE BANDO
         </button>
+
 
         <button
             class="main-btn payment-btn"
@@ -869,18 +1098,32 @@ footer{
     </section>
 
 
-    <!-- STEP 4 -->
-    <section class="card confirmation green hidden" id="confirmationSection">
+    <!-- =========================
+         STEP 4
+    ========================== -->
+
+    <section
+        class="card confirmation green hidden"
+        id="confirmationSection"
+    >
 
         <div class="success">
 
-            <h2>🎉 ORDER IMEPOKELEWA</h2>
+            <h2>
+                🎉 ORDER IMEPOKELEWA
+            </h2>
+
 
             <p>
-                Maombi yako yamepokelewa na yanafanyiwa uhakiki wa malipo.
+                Maombi yako yamepokelewa na yanafanyiwa
+                uhakiki wa malipo.
             </p>
 
-            <div class="order-number" id="confirmationOrderNumber">
+
+            <div
+                class="order-number"
+                id="confirmationOrderNumber"
+            >
                 -
             </div>
 
@@ -890,28 +1133,67 @@ footer{
         <div class="summary">
 
             <div class="summary-row">
-                <span>Namba yako</span>
-                <strong id="confirmationCustomer">-</strong>
+
+                <span>
+                    Namba yako
+                </span>
+
+                <strong id="confirmationCustomer">
+                    -
+                </strong>
+
             </div>
 
-            <div class="summary-row">
-                <span>Bando</span>
-                <strong id="confirmationBundle">-</strong>
-            </div>
 
             <div class="summary-row">
-                <span>Namba ya kupokea</span>
-                <strong id="confirmationBundlePhone">-</strong>
+
+                <span>
+                    Bando
+                </span>
+
+                <strong id="confirmationBundle">
+                    -
+                </strong>
+
             </div>
 
-            <div class="summary-row">
-                <span>Kiasi</span>
-                <strong id="confirmationAmount">-</strong>
-            </div>
 
             <div class="summary-row">
-                <span>Muda wa order</span>
-                <strong id="confirmationTime">-</strong>
+
+                <span>
+                    Namba ya kupokea
+                </span>
+
+                <strong id="confirmationBundlePhone">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Kiasi
+                </span>
+
+                <strong id="confirmationAmount">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Muda wa order
+                </span>
+
+                <strong id="confirmationTime">
+                    -
+                </strong>
+
             </div>
 
         </div>
@@ -919,7 +1201,10 @@ footer{
 
         <div class="status-box">
 
-            <strong>Hali ya Order:</strong>
+            <strong>
+                Hali ya Order:
+            </strong>
+
 
             <div id="currentStatus">
                 PAYMENT VERIFICATION
@@ -930,46 +1215,110 @@ footer{
 
         <div class="timeline">
 
-            <div class="timeline-item active" id="timeline1">
+            <div
+                class="timeline-item active"
+                id="timeline1"
+            >
+
                 <div class="timeline-dot"></div>
+
                 <div>
-                    <strong>PAYMENT VERIFICATION</strong>
-                    <p>Malipo yanahakikiwa.</p>
+
+                    <strong>
+                        PAYMENT VERIFICATION
+                    </strong>
+
+                    <p>
+                        Malipo yanahakikiwa.
+                    </p>
+
                 </div>
+
             </div>
 
-            <div class="timeline-item" id="timeline2">
+
+            <div
+                class="timeline-item"
+                id="timeline2"
+            >
+
                 <div class="timeline-dot"></div>
+
                 <div>
-                    <strong>PAYMENT VERIFIED</strong>
-                    <p>Malipo yamethibitishwa.</p>
+
+                    <strong>
+                        PAYMENT VERIFIED
+                    </strong>
+
+                    <p>
+                        Malipo yamethibitishwa.
+                    </p>
+
                 </div>
+
             </div>
 
-            <div class="timeline-item" id="timeline3">
+
+            <div
+                class="timeline-item"
+                id="timeline3"
+            >
+
                 <div class="timeline-dot"></div>
+
                 <div>
-                    <strong>PROCESSING</strong>
-                    <p>Bando linaandaliwa.</p>
+
+                    <strong>
+                        PROCESSING
+                    </strong>
+
+                    <p>
+                        Bando linaandaliwa.
+                    </p>
+
                 </div>
+
             </div>
 
-            <div class="timeline-item" id="timeline4">
+
+            <div
+                class="timeline-item"
+                id="timeline4"
+            >
+
                 <div class="timeline-dot"></div>
+
                 <div>
-                    <strong>COMPLETED</strong>
-                    <p>Bando limekamilika.</p>
+
+                    <strong>
+                        COMPLETED
+                    </strong>
+
+                    <p>
+                        Bando limekamilika.
+                    </p>
+
                 </div>
+
             </div>
 
         </div>
 
 
-        <div class="failed-box" id="failedBox">
-            <strong>ORDER IMESHINDWA</strong>
+        <div
+            class="failed-box"
+            id="failedBox"
+        >
+
+            <strong>
+                ORDER IMESHINDWA
+            </strong>
+
             <p>
-                Tafadhali wasiliana na BONYO ELECTRONICS kwa msaada.
+                Tafadhali wasiliana na BONYO ELECTRONICS
+                kwa msaada.
             </p>
+
         </div>
 
 
@@ -981,6 +1330,7 @@ footer{
             >
                 💬 WHATSAPP
             </button>
+
 
             <button
                 class="main-btn history-btn"
@@ -1006,15 +1356,27 @@ footer{
 
 
 <footer>
-    <strong>BONYO ELECTRONICS</strong>
+
+    <strong>
+        BONYO ELECTRONICS
+    </strong>
+
     <br>
+
     Halotel Bundles Tanzania
+
     <br>
+
     WhatsApp: 0637269368
+
 </footer>
 
 
 <script>
+
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
     "https://bfqwetuhtldzlxcqzsrq.supabase.co";
@@ -1028,6 +1390,10 @@ const supabaseClient =
         SUPABASE_PUBLISHABLE_KEY
     );
 
+
+/* =========================
+   VARIABLES
+========================= */
 
 let selectedBundle = null;
 
@@ -1043,6 +1409,8 @@ let statusInterval = null;
 
 let orderSubmitting = false;
 
+let whatsappWindow = null;
+
 
 /* =========================
    HELPERS
@@ -1056,19 +1424,63 @@ function cleanPhone(phone){
 }
 
 
+function normalizeTanzaniaPhone(phone){
+
+    let number = cleanPhone(phone);
+
+
+    if(
+        number.startsWith("255") &&
+        number.length === 12
+    ){
+
+        number =
+            "0" +
+            number.substring(3);
+
+    }
+
+
+    return number;
+
+}
+
+
+/*
+   HALOTEL VALIDATION
+
+   061xxxxxxx
+   062xxxxxxx
+   063xxxxxxx
+*/
+
+function isValidHalotelNumber(phone){
+
+    const number =
+        normalizeTanzaniaPhone(phone);
+
+
+    return /^0(61|62|63)[0-9]{7}$/.test(number);
+
+}
+
+
 function formatMoney(amount){
 
     return "TSh " +
-        Number(amount || 0).toLocaleString("en-TZ");
+        Number(amount || 0)
+            .toLocaleString("en-TZ");
 
 }
 
 
 function escapeHtml(text){
 
-    const div = document.createElement("div");
+    const div =
+        document.createElement("div");
 
-    div.textContent = text ?? "";
+    div.textContent =
+        text ?? "";
 
     return div.innerHTML;
 
@@ -1077,20 +1489,33 @@ function escapeHtml(text){
 
 function formatTanzaniaTime(value){
 
-    if(!value) return "-";
+    if(!value){
 
-    return new Date(value).toLocaleString(
-        "en-GB",
-        {
-            timeZone:"Africa/Dar_es_Salaam",
-            day:"2-digit",
-            month:"2-digit",
-            year:"numeric",
-            hour:"2-digit",
-            minute:"2-digit",
-            second:"2-digit"
-        }
-    );
+        return "-";
+
+    }
+
+
+    return new Date(value)
+        .toLocaleString(
+            "en-GB",
+            {
+                timeZone:
+                    "Africa/Dar_es_Salaam",
+
+                day:"2-digit",
+
+                month:"2-digit",
+
+                year:"numeric",
+
+                hour:"2-digit",
+
+                minute:"2-digit",
+
+                second:"2-digit"
+            }
+        );
 
 }
 
@@ -1101,20 +1526,32 @@ function formatTanzaniaTime(value){
 
 function setStep(step){
 
-    for(let i=1;i<=4;i++){
+    for(
+        let i = 1;
+        i <= 4;
+        i++
+    ){
 
         const el =
             document.getElementById(
-                "step"+i+"Indicator"
+                "step" +
+                i +
+                "Indicator"
             );
 
-        el.classList.remove("active","done");
+
+        el.classList.remove(
+            "active",
+            "done"
+        );
+
 
         if(i < step){
 
             el.classList.add("done");
 
         }
+
 
         if(i === step){
 
@@ -1131,63 +1568,105 @@ function setStep(step){
    VALIDATION
 ========================= */
 
-function clearError(inputId,errorId){
+function clearError(
+    inputId,
+    errorId
+){
 
     const input =
-        document.getElementById(inputId);
+        document.getElementById(
+            inputId
+        );
 
     const error =
-        document.getElementById(errorId);
+        document.getElementById(
+            errorId
+        );
+
 
     if(input){
 
-        input.classList.remove("error-input");
+        input.classList.remove(
+            "error-input"
+        );
 
     }
 
+
     if(error){
 
-        error.classList.remove("show-error");
+        error.classList.remove(
+            "show-error"
+        );
 
     }
 
 }
 
 
-function showFieldError(inputId,errorId){
+function showFieldError(
+    inputId,
+    errorId
+){
 
     const input =
-        document.getElementById(inputId);
+        document.getElementById(
+            inputId
+        );
 
     const error =
-        document.getElementById(errorId);
+        document.getElementById(
+            errorId
+        );
+
 
     if(input){
 
-        input.classList.add("error-input");
+        input.classList.add(
+            "error-input"
+        );
 
         input.focus();
 
     }
 
+
     if(error){
 
-        error.classList.add("show-error");
+        error.classList.add(
+            "show-error"
+        );
 
     }
 
 }
 
 
+/* =========================
+   CUSTOMER VALIDATION
+========================= */
+
 function validateCustomer(){
 
     let valid = true;
 
+
     const customerPhone =
-        document.getElementById("customerPhone").value.trim();
+        document
+            .getElementById(
+                "customerPhone"
+            )
+            .value
+            .trim();
+
 
     const bundlePhone =
-        document.getElementById("bundlePhone").value.trim();
+        document
+            .getElementById(
+                "bundlePhone"
+            )
+            .value
+            .trim();
 
 
     clearError(
@@ -1195,44 +1674,93 @@ function validateCustomer(){
         "customerPhoneError"
     );
 
+
     clearError(
         "bundlePhone",
         "bundlePhoneError"
     );
 
 
-    if(cleanPhone(customerPhone).length < 9){
+    /*
+       CUSTOMER PHONE
+       Any Tanzania number
+       with 10 digits.
+    */
+
+    const customerNumber =
+        normalizeTanzaniaPhone(
+            customerPhone
+        );
+
+
+    if(
+        !/^0[0-9]{9}$/.test(
+            customerNumber
+        )
+    ){
 
         showFieldError(
             "customerPhone",
             "customerPhoneError"
         );
 
+
+        document
+            .getElementById(
+                "customerPhoneError"
+            )
+            .textContent =
+            "Tafadhali weka namba sahihi ya simu yenye tarakimu 10.";
+
+
         valid = false;
 
     }
 
 
-    if(cleanPhone(bundlePhone).length < 9){
+    /*
+       BUNDLE PHONE
+       HALOTEL ONLY
+    */
 
-        if(valid){
+    if(
+        !isValidHalotelNumber(
+            bundlePhone
+        )
+    ){
 
-            showFieldError(
-                "bundlePhone",
+        const input =
+            document.getElementById(
+                "bundlePhone"
+            );
+
+
+        const error =
+            document.getElementById(
                 "bundlePhoneError"
             );
 
-        }else{
 
-            document
-                .getElementById("bundlePhone")
-                .classList.add("error-input");
+        input.classList.add(
+            "error-input"
+        );
 
-            document
-                .getElementById("bundlePhoneError")
-                .classList.add("show-error");
+
+        error.classList.add(
+            "show-error"
+        );
+
+
+        error.textContent =
+            "Namba hii si ya Halotel. Tumia 061xxxxxxx, 062xxxxxxx au 063xxxxxxx.";
+
+
+        if(valid){
+
+            input.focus();
 
         }
+
 
         valid = false;
 
@@ -1250,7 +1778,9 @@ function validateCustomer(){
 
 function continueToBundles(){
 
-    if(!validateCustomer()){
+    if(
+        !validateCustomer()
+    ){
 
         return;
 
@@ -1261,20 +1791,30 @@ function continueToBundles(){
 
 
     document
-        .getElementById("customerSection")
-        .classList.add("hidden");
+        .getElementById(
+            "customerSection"
+        )
+        .classList.add(
+            "hidden"
+        );
 
 
     document
-        .getElementById("bundleSection")
-        .classList.remove("hidden");
+        .getElementById(
+            "bundleSection"
+        )
+        .classList.remove(
+            "hidden"
+        );
 
 
     setStep(2);
 
 
     document
-        .getElementById("bundleSection")
+        .getElementById(
+            "bundleSection"
+        )
         .scrollIntoView({
             behavior:"smooth",
             block:"start"
@@ -1295,45 +1835,68 @@ function selectBundle(
 ){
 
     document
-        .querySelectorAll(".bundle")
-        .forEach(item =>
-            item.classList.remove("selected")
+        .querySelectorAll(
+            ".bundle"
+        )
+        .forEach(
+            item =>
+                item.classList.remove(
+                    "selected"
+                )
         );
 
 
-    element.classList.add("selected");
+    element.classList.add(
+        "selected"
+    );
 
 
     selectedBundle = {
 
-        bundle:bundle,
+        bundle:
+            bundle,
 
-        amount:Number(
-            String(amount)
-                .replace(/,/g,"")
-        ),
+        amount:
+            Number(
+                String(amount)
+                    .replace(
+                        /,/g,
+                        ""
+                    )
+            ),
 
-        validity:validity
+        validity:
+            validity
 
     };
 
 
     document
-        .getElementById("bundleError")
-        .style.display = "none";
+        .getElementById(
+            "bundleError"
+        )
+        .style.display =
+        "none";
 
 
     document
-        .getElementById("selectedInfo")
-        .style.display = "block";
+        .getElementById(
+            "selectedInfo"
+        )
+        .style.display =
+        "block";
 
 
     document
-        .getElementById("selectedBundleText")
+        .getElementById(
+            "selectedBundleText"
+        )
         .textContent =
             bundle +
             " — " +
-            formatMoney(selectedBundle.amount) +
+            formatMoney(
+                selectedBundle.amount
+            ) +
             " — " +
             validity;
 
@@ -1343,38 +1906,60 @@ function selectBundle(
 }
 
 
+/* =========================
+   SUMMARY
+========================= */
+
 function updateSummary(){
 
     document
-        .getElementById("summaryCustomer")
+        .getElementById(
+            "summaryCustomer"
+        )
         .textContent =
             document
-                .getElementById("customerPhone")
-                .value || "-";
+                .getElementById(
+                    "customerPhone"
+                )
+                .value ||
+            "-";
 
 
     document
-        .getElementById("summaryBundlePhone")
+        .getElementById(
+            "summaryBundlePhone"
+        )
         .textContent =
             document
-                .getElementById("bundlePhone")
-                .value || "-";
+                .getElementById(
+                    "bundlePhone"
+                )
+                .value ||
+            "-";
 
 
     if(selectedBundle){
 
         document
-            .getElementById("summaryBundle")
+            .getElementById(
+                "summaryBundle"
+            )
             .textContent =
                 selectedBundle.bundle;
 
+
         document
-            .getElementById("summaryValidity")
+            .getElementById(
+                "summaryValidity"
+            )
             .textContent =
                 selectedBundle.validity;
 
+
         document
-            .getElementById("summaryAmount")
+            .getElementById(
+                "summaryAmount"
+            )
             .textContent =
                 formatMoney(
                     selectedBundle.amount
@@ -1383,16 +1968,27 @@ function updateSummary(){
     }else{
 
         document
-            .getElementById("summaryBundle")
-            .textContent = "-";
+            .getElementById(
+                "summaryBundle"
+            )
+            .textContent =
+            "-";
+
 
         document
-            .getElementById("summaryValidity")
-            .textContent = "-";
+            .getElementById(
+                "summaryValidity"
+            )
+            .textContent =
+            "-";
+
 
         document
-            .getElementById("summaryAmount")
-            .textContent = "-";
+            .getElementById(
+                "summaryAmount"
+            )
+            .textContent =
+            "-";
 
     }
 
@@ -1403,35 +1999,53 @@ function updateSummary(){
    FILTER
 ========================= */
 
-function filterBundles(period,button){
+function filterBundles(
+    period,
+    button
+){
 
     document
-        .querySelectorAll(".filter-btn")
-        .forEach(btn =>
-            btn.classList.remove("active")
+        .querySelectorAll(
+            ".filter-btn"
+        )
+        .forEach(
+            btn =>
+                btn.classList.remove(
+                    "active"
+                )
         );
 
-    button.classList.add("active");
+
+    button.classList.add(
+        "active"
+    );
 
 
     document
-        .querySelectorAll(".bundle")
-        .forEach(bundle => {
+        .querySelectorAll(
+            ".bundle"
+        )
+        .forEach(
+            bundle => {
 
-            if(
-                period === "all" ||
-                bundle.dataset.period === period
-            ){
+                if(
+                    period === "all" ||
+                    bundle.dataset.period ===
+                    period
+                ){
 
-                bundle.style.display = "block";
+                    bundle.style.display =
+                        "block";
 
-            }else{
+                }else{
 
-                bundle.style.display = "none";
+                    bundle.style.display =
+                        "none";
+
+                }
 
             }
-
-        });
+        );
 
 }
 
@@ -1445,14 +2059,20 @@ function continueToPayment(){
     if(!selectedBundle){
 
         const error =
-            document.getElementById("bundleError");
+            document.getElementById(
+                "bundleError"
+            );
 
-        error.style.display = "block";
+
+        error.style.display =
+            "block";
+
 
         error.scrollIntoView({
             behavior:"smooth",
             block:"center"
         });
+
 
         return;
 
@@ -1463,20 +2083,30 @@ function continueToPayment(){
 
 
     document
-        .getElementById("bundleSection")
-        .classList.add("hidden");
+        .getElementById(
+            "bundleSection"
+        )
+        .classList.add(
+            "hidden"
+        );
 
 
     document
-        .getElementById("paymentSection")
-        .classList.remove("hidden");
+        .getElementById(
+            "paymentSection"
+        )
+        .classList.remove(
+            "hidden"
+        );
 
 
     setStep(3);
 
 
     document
-        .getElementById("paymentSection")
+        .getElementById(
+            "paymentSection"
+        )
         .scrollIntoView({
             behavior:"smooth",
             block:"start"
@@ -1492,20 +2122,30 @@ function continueToPayment(){
 function backToCustomer(){
 
     document
-        .getElementById("bundleSection")
-        .classList.add("hidden");
+        .getElementById(
+            "bundleSection"
+        )
+        .classList.add(
+            "hidden"
+        );
 
 
     document
-        .getElementById("customerSection")
-        .classList.remove("hidden");
+        .getElementById(
+            "customerSection"
+        )
+        .classList.remove(
+            "hidden"
+        );
 
 
     setStep(1);
 
 
     document
-        .getElementById("customerSection")
+        .getElementById(
+            "customerSection"
+        )
         .scrollIntoView({
             behavior:"smooth",
             block:"start"
@@ -1517,20 +2157,30 @@ function backToCustomer(){
 function backToBundles(){
 
     document
-        .getElementById("paymentSection")
-        .classList.add("hidden");
+        .getElementById(
+            "paymentSection"
+        )
+        .classList.add(
+            "hidden"
+        );
 
 
     document
-        .getElementById("bundleSection")
-        .classList.remove("hidden");
+        .getElementById(
+            "bundleSection"
+        )
+        .classList.remove(
+            "hidden"
+        );
 
 
     setStep(2);
 
 
     document
-        .getElementById("bundleSection")
+        .getElementById(
+            "bundleSection"
+        )
         .scrollIntoView({
             behavior:"smooth",
             block:"start"
@@ -1540,74 +2190,124 @@ function backToBundles(){
 
 
 /* =========================
-   INPUT LIVE VALIDATION
+   LIVE VALIDATION
 ========================= */
 
 document
-    .getElementById("customerPhone")
-    .addEventListener("input",function(){
+    .getElementById(
+        "customerPhone"
+    )
+    .addEventListener(
+        "input",
+        function(){
 
-        if(cleanPhone(this.value).length >= 9){
+            const number =
+                normalizeTanzaniaPhone(
+                    this.value
+                );
 
-            clearError(
-                "customerPhone",
-                "customerPhoneError"
-            );
+
+            if(
+                /^0[0-9]{9}$/.test(
+                    number
+                )
+            ){
+
+                clearError(
+                    "customerPhone",
+                    "customerPhoneError"
+                );
+
+            }
+
+
+            updateSummary();
 
         }
-
-        updateSummary();
-
-    });
+    );
 
 
 document
-    .getElementById("bundlePhone")
-    .addEventListener("input",function(){
+    .getElementById(
+        "bundlePhone"
+    )
+    .addEventListener(
+        "input",
+        function(){
 
-        if(cleanPhone(this.value).length >= 9){
+            const number =
+                normalizeTanzaniaPhone(
+                    this.value
+                );
 
-            clearError(
-                "bundlePhone",
-                "bundlePhoneError"
-            );
+
+            if(
+                isValidHalotelNumber(
+                    number
+                )
+            ){
+
+                clearError(
+                    "bundlePhone",
+                    "bundlePhoneError"
+                );
+
+            }
+
+
+            updateSummary();
 
         }
-
-        updateSummary();
-
-    });
+    );
 
 
 document
-    .getElementById("paymentName")
-    .addEventListener("input",function(){
+    .getElementById(
+        "paymentName"
+    )
+    .addEventListener(
+        "input",
+        function(){
 
-        if(this.value.trim().length > 0){
+            if(
+                this.value
+                    .trim()
+                    .length > 0
+            ){
 
-            clearError(
-                "paymentName",
-                "paymentNameError"
-            );
+                clearError(
+                    "paymentName",
+                    "paymentNameError"
+                );
+
+            }
 
         }
-
-    });
+    );
 
 
 document
-    .getElementById("paymentConfirmed")
-    .addEventListener("change",function(){
+    .getElementById(
+        "paymentConfirmed"
+    )
+    .addEventListener(
+        "change",
+        function(){
 
-        if(this.checked){
+            if(this.checked){
 
-            document
-                .getElementById("paymentConfirmedError")
-                .classList.remove("show-error");
+                document
+                    .getElementById(
+                        "paymentConfirmedError"
+                    )
+                    .classList.remove(
+                        "show-error"
+                    );
+
+            }
 
         }
-
-    });
+    );
 
 
 /* =========================
@@ -1628,35 +2328,45 @@ async function submitOrder(){
 
     const customerPhone =
         document
-            .getElementById("customerPhone")
+            .getElementById(
+                "customerPhone"
+            )
             .value
             .trim();
 
 
     const bundlePhone =
         document
-            .getElementById("bundlePhone")
+            .getElementById(
+                "bundlePhone"
+            )
             .value
             .trim();
 
 
     const additionalNotes =
         document
-            .getElementById("additionalNotes")
+            .getElementById(
+                "additionalNotes"
+            )
             .value
             .trim();
 
 
     const paymentName =
         document
-            .getElementById("paymentName")
+            .getElementById(
+                "paymentName"
+            )
             .value
             .trim();
 
 
     const paymentConfirmed =
         document
-            .getElementById("paymentConfirmed")
+            .getElementById(
+                "paymentConfirmed"
+            )
             .checked;
 
 
@@ -1667,14 +2377,25 @@ async function submitOrder(){
 
 
     document
-        .getElementById("paymentConfirmedError")
-        .classList.remove("show-error");
+        .getElementById(
+            "paymentConfirmedError"
+        )
+        .classList.remove(
+            "show-error"
+        );
 
 
     document
-        .getElementById("submitError")
-        .style.display = "none";
+        .getElementById(
+            "submitError"
+        )
+        .style.display =
+        "none";
 
+
+    /*
+       BUNDLE
+    */
 
     if(!selectedBundle){
 
@@ -1682,31 +2403,87 @@ async function submitOrder(){
             "Tafadhali chagua bando unalotaka."
         );
 
-        valid = false;
-
-    }
-
-
-    if(paymentName === ""){
-
-        document
-            .getElementById("paymentName")
-            .classList.add("error-input");
-
-        document
-            .getElementById("paymentNameError")
-            .classList.add("show-error");
 
         valid = false;
 
     }
 
+
+    /*
+       HALOTEL PHONE
+       EXTRA SECURITY CHECK
+    */
+
+    if(
+        !isValidHalotelNumber(
+            bundlePhone
+        )
+    ){
+
+        showFieldError(
+            "bundlePhone",
+            "bundlePhoneError"
+        );
+
+
+        document
+            .getElementById(
+                "bundlePhoneError"
+            )
+            .textContent =
+            "Namba hii si ya Halotel. Tumia 061xxxxxxx, 062xxxxxxx au 063xxxxxxx.";
+
+
+        valid = false;
+
+    }
+
+
+    /*
+       PAYMENT NAME
+    */
+
+    if(
+        paymentName === ""
+    ){
+
+        document
+            .getElementById(
+                "paymentName"
+            )
+            .classList.add(
+                "error-input"
+            );
+
+
+        document
+            .getElementById(
+                "paymentNameError"
+            )
+            .classList.add(
+                "show-error"
+            );
+
+
+        valid = false;
+
+    }
+
+
+    /*
+       PAYMENT CONFIRMATION
+    */
 
     if(!paymentConfirmed){
 
         document
-            .getElementById("paymentConfirmedError")
-            .classList.add("show-error");
+            .getElementById(
+                "paymentConfirmedError"
+            )
+            .classList.add(
+                "show-error"
+            );
+
 
         valid = false;
 
@@ -1724,40 +2501,67 @@ async function submitOrder(){
 
 
     const button =
-        document.getElementById("submitButton");
+        document.getElementById(
+            "submitButton"
+        );
 
 
     const originalText =
         button.textContent;
 
 
-    button.disabled = true;
+    button.disabled =
+        true;
+
 
     button.textContent =
         "⏳ INATUMA ORDER...";
 
 
+    /*
+       Open a blank tab first.
+       This helps browsers allow
+       WhatsApp after Supabase.
+    */
+
+    whatsappWindow =
+        window.open(
+            "about:blank",
+            "_blank"
+        );
+
+
     try{
 
         currentCustomerPhone =
-            cleanPhone(customerPhone);
+            normalizeTanzaniaPhone(
+                customerPhone
+            );
+
 
         currentBundlePhone =
-            cleanPhone(bundlePhone);
+            normalizeTanzaniaPhone(
+                bundlePhone
+            );
 
 
         const orderNumber =
             "BONYO-" +
             Math.floor(
                 1000 +
-                Math.random() * 9000
+                Math.random() *
+                9000
             );
 
 
-        const {data,error} =
+        const {
+            data,
+            error
+        } =
             await supabaseClient.rpc(
                 "create_halotel_order",
                 {
+
                     p_order_number:
                         orderNumber,
 
@@ -1780,7 +2584,9 @@ async function submitOrder(){
                         currentBundlePhone,
 
                     p_additional_notes:
-                        additionalNotes || null
+                        additionalNotes ||
+                        null
+
                 }
             );
 
@@ -1789,6 +2595,7 @@ async function submitOrder(){
 
             console.error(error);
 
+
             throw new Error(
                 "Kumetokea tatizo wakati wa kutuma order."
             );
@@ -1796,7 +2603,10 @@ async function submitOrder(){
         }
 
 
-        if(!data || !data.length){
+        if(
+            !data ||
+            !data.length
+        ){
 
             throw new Error(
                 "Mfumo haukupokea majibu ya order."
@@ -1805,7 +2615,8 @@ async function submitOrder(){
         }
 
 
-        const result = data[0];
+        const result =
+            data[0];
 
 
         currentOrderNumber =
@@ -1852,9 +2663,42 @@ async function submitOrder(){
         );
 
 
+        /*
+           WhatsApp opens automatically
+           after successful order.
+        */
+
+        setTimeout(
+            function(){
+
+                openWhatsApp();
+
+            },
+            500
+        );
+
+
     }catch(error){
 
         console.error(error);
+
+
+        /*
+           Close blank WhatsApp tab
+           if order failed.
+        */
+
+        if(
+            whatsappWindow &&
+            !whatsappWindow.closed
+        ){
+
+            whatsappWindow.close();
+
+            whatsappWindow = null;
+
+        }
+
 
         showError(
             error.message ||
@@ -1866,9 +2710,13 @@ async function submitOrder(){
 
         orderSubmitting = false;
 
-        button.disabled = false;
 
-        button.textContent = originalText;
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            originalText;
 
     }
 
@@ -1879,47 +2727,67 @@ async function submitOrder(){
    CONFIRMATION
 ========================= */
 
-function showConfirmation(transactionTime){
+function showConfirmation(
+    transactionTime
+){
 
     document
-        .getElementById("paymentSection")
-        .classList.add("hidden");
+        .getElementById(
+            "paymentSection"
+        )
+        .classList.add(
+            "hidden"
+        );
 
 
     document
-        .getElementById("confirmationSection")
-        .classList.remove("hidden");
+        .getElementById(
+            "confirmationSection"
+        )
+        .classList.remove(
+            "hidden"
+        );
 
 
     setStep(4);
 
 
     document
-        .getElementById("confirmationOrderNumber")
+        .getElementById(
+            "confirmationOrderNumber"
+        )
         .textContent =
             currentOrderData.order_number;
 
 
     document
-        .getElementById("confirmationCustomer")
+        .getElementById(
+            "confirmationCustomer"
+        )
         .textContent =
             currentCustomerPhone;
 
 
     document
-        .getElementById("confirmationBundle")
+        .getElementById(
+            "confirmationBundle"
+        )
         .textContent =
             selectedBundle.bundle;
 
 
     document
-        .getElementById("confirmationBundlePhone")
+        .getElementById(
+            "confirmationBundlePhone"
+        )
         .textContent =
             currentBundlePhone;
 
 
     document
-        .getElementById("confirmationAmount")
+        .getElementById(
+            "confirmationAmount"
+        )
         .textContent =
             formatMoney(
                 selectedBundle.amount
@@ -1927,7 +2795,9 @@ function showConfirmation(transactionTime){
 
 
     document
-        .getElementById("confirmationTime")
+        .getElementById(
+            "confirmationTime"
+        )
         .textContent =
             formatTanzaniaTime(
                 transactionTime
@@ -1940,7 +2810,9 @@ function showConfirmation(transactionTime){
 
 
     document
-        .getElementById("confirmationSection")
+        .getElementById(
+            "confirmationSection"
+        )
         .scrollIntoView({
             behavior:"smooth",
             block:"start"
@@ -1959,10 +2831,14 @@ function showConfirmation(transactionTime){
 function showError(message){
 
     const box =
-        document.getElementById("submitError");
+        document.getElementById(
+            "submitError"
+        );
+
 
     box.textContent =
         message;
+
 
     box.style.display =
         "block";
@@ -1979,10 +2855,14 @@ function showError(message){
 function showInfo(message){
 
     const box =
-        document.getElementById("submitInfo");
+        document.getElementById(
+            "submitInfo"
+        );
+
 
     box.textContent =
         message;
+
 
     box.style.display =
         "block";
@@ -1991,35 +2871,144 @@ function showInfo(message){
 
 
 /* =========================
-   WHATSAPP
+   WHATSAPP MESSAGE
 ========================= */
 
-function openWhatsApp(){
+function getWhatsAppMessage(){
 
-    const message =
+    const customer =
+        currentCustomerPhone ||
+        "";
+
+
+    const bundlePhone =
+        currentBundlePhone ||
+        "";
+
+
+    const bundle =
+        selectedBundle
+            ? selectedBundle.bundle
+            : "";
+
+
+    const validity =
+        selectedBundle
+            ? selectedBundle.validity
+            : "";
+
+
+    const amount =
+        selectedBundle
+            ? formatMoney(
+                selectedBundle.amount
+            )
+            : "";
+
+
+    const paymentName =
+        currentOrderData
+            ? currentOrderData.payment_name
+            : "";
+
+
+    return (
+
         "Habari BONYO ELECTRONICS,%0A%0A" +
-        "Nimefanya order ya Halotel Bundle.%0A" +
-        "Order Number: " +
+
+        "📦 *ODA MPYA YA HALOTEL*%0A%0A" +
+
+        "🔢 Order Number: " +
         encodeURIComponent(
             currentOrderNumber
         ) +
         "%0A" +
-        "Bando: " +
+
+        "📱 Namba ya mteja: " +
         encodeURIComponent(
-            selectedBundle
-                ? selectedBundle.bundle
-                : ""
+            customer
         ) +
         "%0A" +
-        "Namba ya kupokea: " +
-        encodeURIComponent(
-            currentBundlePhone
-        );
 
+        "📲 Namba ya kupokea bando: " +
+        encodeURIComponent(
+            bundlePhone
+        ) +
+        "%0A" +
+
+        "📦 Bando: " +
+        encodeURIComponent(
+            bundle
+        ) +
+        "%0A" +
+
+        "⏳ Muda: " +
+        encodeURIComponent(
+            validity
+        ) +
+        "%0A" +
+
+        "💰 Kiasi: " +
+        encodeURIComponent(
+            amount
+        ) +
+        "%0A" +
+
+        "👤 Jina la aliyelipa: " +
+        encodeURIComponent(
+            paymentName
+        ) +
+        "%0A%0A" +
+
+        "Nimefanya malipo na naomba order yangu ichakatwe. Asante."
+    );
+
+}
+
+
+/* =========================
+   OPEN WHATSAPP
+========================= */
+
+function openWhatsApp(){
+
+    const url =
+        "https://wa.me/255637269368?text=" +
+        getWhatsAppMessage();
+
+
+    /*
+       If blank tab was already opened,
+       use it.
+    */
+
+    if(
+        whatsappWindow &&
+        !whatsappWindow.closed
+    ){
+
+        whatsappWindow.location.href =
+            url;
+
+
+        whatsappWindow.focus();
+
+
+        whatsappWindow =
+            null;
+
+
+        return;
+
+    }
+
+
+    /*
+       Manual WhatsApp button
+    */
 
     window.open(
-        "https://wa.me/255637269368?text=" +
-        message,
+        url,
         "_blank"
     );
 
@@ -2042,15 +3031,20 @@ async function checkOrderStatus(){
     }
 
 
-    const {data,error} =
+    const {
+        data,
+        error
+    } =
         await supabaseClient.rpc(
             "check_order_status",
             {
+
                 p_order_number:
                     currentOrderNumber,
 
                 p_customer_phone:
                     currentCustomerPhone
+
             }
         );
 
@@ -2064,7 +3058,10 @@ async function checkOrderStatus(){
     }
 
 
-    if(data && data.length){
+    if(
+        data &&
+        data.length
+    ){
 
         updateStatusUI(
             data[0].status
@@ -2088,7 +3085,9 @@ function updateStatusUI(status){
 
 
     document
-        .getElementById("currentStatus")
+        .getElementById(
+            "currentStatus"
+        )
         .textContent =
             normalized;
 
@@ -2107,7 +3106,10 @@ function updateStatusUI(status){
 
 
     statuses.forEach(
-        (item,index) => {
+        (
+            item,
+            index
+        ) => {
 
             const timeline =
                 document.getElementById(
@@ -2117,15 +3119,20 @@ function updateStatusUI(status){
 
 
             if(
-                statuses.indexOf(normalized)
-                >= index
+                statuses.indexOf(
+                    normalized
+                ) >= index
             ){
 
-                timeline.classList.add("active");
+                timeline.classList.add(
+                    "active"
+                );
 
             }else{
 
-                timeline.classList.remove("active");
+                timeline.classList.remove(
+                    "active"
+                );
 
             }
 
@@ -2133,19 +3140,26 @@ function updateStatusUI(status){
     );
 
 
-    if(normalized === "FAILED"){
+    if(
+        normalized ===
+        "FAILED"
+    ){
 
         document
-            .getElementById("failedBox")
+            .getElementById(
+                "failedBox"
+            )
             .style.display =
-                "block";
+            "block";
 
     }else{
 
         document
-            .getElementById("failedBox")
+            .getElementById(
+                "failedBox"
+            )
             .style.display =
-                "none";
+            "none";
 
     }
 
@@ -2181,7 +3195,9 @@ function stopAutoStatusChecking(){
             statusInterval
         );
 
-        statusInterval = null;
+
+        statusInterval =
+            null;
 
     }
 
@@ -2209,80 +3225,132 @@ function makeAnotherOrder(){
     stopAutoStatusChecking();
 
 
-    selectedBundle = null;
-
-    currentOrderNumber = "";
-
-    currentCustomerPhone = "";
-
-    currentBundlePhone = "";
-
-    currentOrderData = null;
-
-    orderSubmitting = false;
+    selectedBundle =
+        null;
 
 
-    document
-        .getElementById("customerPhone")
-        .value = "";
+    currentOrderNumber =
+        "";
 
 
-    document
-        .getElementById("bundlePhone")
-        .value = "";
+    currentCustomerPhone =
+        "";
 
 
-    document
-        .getElementById("additionalNotes")
-        .value = "";
+    currentBundlePhone =
+        "";
+
+
+    currentOrderData =
+        null;
+
+
+    orderSubmitting =
+        false;
 
 
     document
-        .getElementById("paymentName")
-        .value = "";
+        .getElementById(
+            "customerPhone"
+        )
+        .value =
+        "";
 
 
     document
-        .getElementById("paymentConfirmed")
-        .checked = false;
+        .getElementById(
+            "bundlePhone"
+        )
+        .value =
+        "";
 
 
     document
-        .querySelectorAll(".bundle")
+        .getElementById(
+            "additionalNotes"
+        )
+        .value =
+        "";
+
+
+    document
+        .getElementById(
+            "paymentName"
+        )
+        .value =
+        "";
+
+
+    document
+        .getElementById(
+            "paymentConfirmed"
+        )
+        .checked =
+        false;
+
+
+    document
+        .querySelectorAll(
+            ".bundle"
+        )
         .forEach(
             item =>
-                item.classList.remove("selected")
+                item.classList.remove(
+                    "selected"
+                )
         );
 
 
     document
-        .getElementById("selectedInfo")
-        .style.display = "none";
+        .getElementById(
+            "selectedInfo"
+        )
+        .style.display =
+        "none";
 
 
     document
-        .getElementById("bundleError")
-        .style.display = "none";
+        .getElementById(
+            "bundleError"
+        )
+        .style.display =
+        "none";
 
 
     document
-        .getElementById("confirmationSection")
-        .classList.add("hidden");
+        .getElementById(
+            "confirmationSection"
+        )
+        .classList.add(
+            "hidden"
+        );
 
 
     document
-        .getElementById("bundleSection")
-        .classList.add("hidden");
+        .getElementById(
+            "bundleSection"
+        )
+        .classList.add(
+            "hidden"
+        );
 
 
     document
-        .getElementById("paymentSection")
-        .classList.add("hidden");
+        .getElementById(
+            "paymentSection"
+        )
+        .classList.add(
+            "hidden"
+        );
 
 
     document
-        .getElementById("customerSection")
-        .classList.remove("hidden");
+        .getElementById(
+            "customerSection"
+        )
+        .classList.remove(
+            "hidden"
+        );
 
 
     setStep(1);
