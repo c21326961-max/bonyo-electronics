@@ -68,7 +68,6 @@ header{
     border-radius:20px;
     font-size:12px;
     font-weight:bold;
-    box-shadow:0 0 0 rgba(255,152,0,0);
 }
 
 .new-counter.has-new{
@@ -228,7 +227,7 @@ select{
 /* SUMMARY */
 .cards{
     display:grid;
-    grid-template-columns:repeat(5,1fr);
+    grid-template-columns:repeat(6,1fr);
     gap:15px;
     margin-bottom:20px;
 }
@@ -246,18 +245,22 @@ select{
 
 .card h2{
     margin-top:8px;
-    font-size:27px;
+    font-size:25px;
 }
 
-.verification h2{
-    color:#e67700;
-}
-
-.pending h2{
+.pending-card h2{
     color:#075cff;
 }
 
-.completed h2{
+.completed-card h2{
+    color:#198754;
+}
+
+.cancelled-card h2{
+    color:#dc3545;
+}
+
+.sales-card h2{
     color:#198754;
 }
 
@@ -307,7 +310,7 @@ select{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:1200px;
+    min-width:1450px;
 }
 
 th{
@@ -332,17 +335,7 @@ td{
     display:inline-block;
 }
 
-.status.verification{
-    background:#fff3cd;
-    color:#856404;
-}
-
-.status.verified{
-    background:#cff4fc;
-    color:#055160;
-}
-
-.status.processing{
+.status.pending{
     background:#cfe2ff;
     color:#084298;
 }
@@ -352,9 +345,19 @@ td{
     color:#0f5132;
 }
 
-.status.failed{
+.status.cancelled{
     background:#f8d7da;
     color:#842029;
+}
+
+/* WHATSAPP INDICATORS */
+.wa-sent{
+    color:#198754;
+    font-weight:bold;
+}
+
+.wa-not-sent{
+    color:#999;
 }
 
 /* BUTTONS */
@@ -381,6 +384,14 @@ td{
 .delete{
     background:#dc3545;
     color:white;
+}
+
+.status-select{
+    width:auto;
+    min-width:115px;
+    padding:7px;
+    margin:2px;
+    font-size:11px;
 }
 
 /* PAGINATION */
@@ -420,7 +431,7 @@ td{
 .modal-box{
     background:white;
     width:100%;
-    max-width:650px;
+    max-width:700px;
     max-height:90vh;
     overflow:auto;
     border-radius:15px;
@@ -442,6 +453,7 @@ td{
     height:35px;
     border-radius:50%;
     cursor:pointer;
+    font-size:20px;
 }
 
 .detail{
@@ -451,15 +463,25 @@ td{
 
 .detail b{
     display:inline-block;
-    width:180px;
+    width:190px;
 }
 
 .modal-actions{
     margin-top:20px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
 /* MOBILE */
-@media(max-width:1100px){
+@media(max-width:1250px){
+
+    .cards{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:800px){
 
     .cards{
         grid-template-columns:repeat(2,1fr);
@@ -487,6 +509,12 @@ td{
     .header-right{
         width:100%;
     }
+
+    .detail b{
+        display:block;
+        width:auto;
+        margin-bottom:4px;
+    }
 }
 </style>
 </head>
@@ -508,13 +536,18 @@ td{
         <div
             id="newOrdersCounter"
             class="new-counter">
-            🔔 NEW ORDERS: <span id="newOrdersCount">0</span>
+
+            🔔 NEW ORDERS:
+            <span id="newOrdersCount">0</span>
+
         </div>
 
         <button
             class="logout"
             onclick="logout()">
+
             LOGOUT
+
         </button>
 
     </div>
@@ -543,7 +576,9 @@ td{
     <button
         class="login-btn"
         onclick="login()">
+
         LOGIN
+
     </button>
 
     <div
@@ -565,8 +600,15 @@ td{
     <div class="title-row">
 
         <div>
-            <h1>ADMIN CONTROL CENTER</h1>
-            <p>Halotel Bundle Orders Management</p>
+
+            <h1>
+                ADMIN CONTROL CENTER
+            </h1>
+
+            <p>
+                Halotel Bundle Orders Management
+            </p>
+
         </div>
 
         <div class="actions">
@@ -574,20 +616,26 @@ td{
             <button
                 class="action-btn refresh"
                 onclick="loadOrders()">
+
                 🔄 REFRESH
+
             </button>
 
             <button
                 class="action-btn export"
                 onclick="exportCSV()">
+
                 📥 EXPORT CSV
+
             </button>
 
             <button
                 class="action-btn"
                 style="background:#ff9800;color:white;"
                 onclick="clearNewOrderCounter()">
+
                 🔕 CLEAR NEW
+
             </button>
 
         </div>
@@ -617,7 +665,9 @@ td{
             <button
                 class="dismiss"
                 onclick="dismissNewOrder()">
+
                 OK
+
             </button>
 
         </div>
@@ -642,7 +692,7 @@ td{
         </div>
 
 
-        <div class="card">
+        <div class="card sales-card">
 
             <small>
                 COMPLETED SALES
@@ -655,20 +705,7 @@ td{
         </div>
 
 
-        <div class="card verification">
-
-            <small>
-                PAYMENT VERIFICATION
-            </small>
-
-            <h2 id="verificationCount">
-                0
-            </h2>
-
-        </div>
-
-
-        <div class="card pending">
+        <div class="card pending-card">
 
             <small>
                 PENDING ORDERS
@@ -681,13 +718,39 @@ td{
         </div>
 
 
-        <div class="card completed">
+        <div class="card completed-card">
 
             <small>
                 COMPLETED ORDERS
             </small>
 
             <h2 id="completedCount">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="card cancelled-card">
+
+            <small>
+                CANCELLED ORDERS
+            </small>
+
+            <h2 id="cancelledCount">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="card">
+
+            <small>
+                NEW ORDERS
+            </small>
+
+            <h2 id="newOrdersSummary">
                 0
             </h2>
 
@@ -705,7 +768,7 @@ td{
             <input
                 type="text"
                 id="searchInput"
-                placeholder="🔎 Search order, phone, bundle, payment name, status..."
+                placeholder="🔎 Search order, phone, bundle, payment name, payment reference..."
                 oninput="applyFilters()">
 
 
@@ -717,24 +780,16 @@ td{
                     ALL STATUS
                 </option>
 
-                <option value="PAYMENT VERIFICATION">
-                    PAYMENT VERIFICATION
+                <option value="pending">
+                    PENDING
                 </option>
 
-                <option value="PAYMENT VERIFIED">
-                    PAYMENT VERIFIED
-                </option>
-
-                <option value="PROCESSING">
-                    PROCESSING
-                </option>
-
-                <option value="COMPLETED">
+                <option value="completed">
                     COMPLETED
                 </option>
 
-                <option value="FAILED">
-                    FAILED
+                <option value="cancelled">
+                    CANCELLED
                 </option>
 
             </select>
@@ -747,37 +802,36 @@ td{
             <button
                 class="filter active"
                 onclick="quickFilter('ALL',this)">
+
                 ALL
+
             </button>
+
 
             <button
                 class="filter"
-                onclick="quickFilter('PAYMENT VERIFICATION',this)">
-                VERIFICATION
+                onclick="quickFilter('pending',this)">
+
+                PENDING
+
             </button>
+
 
             <button
                 class="filter"
-                onclick="quickFilter('PAYMENT VERIFIED',this)">
-                VERIFIED
-            </button>
+                onclick="quickFilter('completed',this)">
 
-            <button
-                class="filter"
-                onclick="quickFilter('PROCESSING',this)">
-                PROCESSING
-            </button>
-
-            <button
-                class="filter"
-                onclick="quickFilter('COMPLETED',this)">
                 COMPLETED
+
             </button>
+
 
             <button
                 class="filter"
-                onclick="quickFilter('FAILED',this)">
-                FAILED
+                onclick="quickFilter('cancelled',this)">
+
+                CANCELLED
+
             </button>
 
         </div>
@@ -820,6 +874,10 @@ td{
                     </th>
 
                     <th>
+                        PAYMENT REF
+                    </th>
+
+                    <th>
                         TIME
                     </th>
 
@@ -835,8 +893,7 @@ td{
 
             </thead>
 
-            <tbody
-                id="ordersBody">
+            <tbody id="ordersBody">
             </tbody>
 
         </table>
@@ -871,13 +928,14 @@ td{
             <button
                 class="close"
                 onclick="closeModal()">
+
                 ×
+
             </button>
 
         </div>
 
-        <div
-            id="modalContent">
+        <div id="modalContent">
         </div>
 
     </div>
@@ -926,6 +984,46 @@ let newOrdersCount = 0;
 
 
 /* =================================
+   STATUS NORMALIZATION
+================================= */
+
+function normalizeStatus(status){
+
+    const s =
+        String(status || "")
+        .toLowerCase()
+        .trim();
+
+
+    if(s === "completed"){
+        return "completed";
+    }
+
+
+    if(
+        s === "cancelled" ||
+        s === "canceled" ||
+        s === "failed"
+    ){
+        return "cancelled";
+    }
+
+
+    if(
+        s === "pending" ||
+        s === "payment verification" ||
+        s === "payment verified" ||
+        s === "processing"
+    ){
+        return "pending";
+    }
+
+
+    return "pending";
+}
+
+
+/* =================================
    LOGIN
 ================================= */
 
@@ -942,6 +1040,7 @@ async function login(){
 
     const errorBox =
         document.getElementById("loginError");
+
 
     errorBox.textContent = "";
 
@@ -1087,11 +1186,15 @@ function applyFilters(){
 
                 order.payment_name,
 
+                order.aditional_note,
+
                 order.additional_notes,
 
                 order.amount,
 
-                order.status
+                order.status,
+
+                order.blmpay_payment_id
 
             ]
             .filter(Boolean)
@@ -1103,9 +1206,15 @@ function applyFilters(){
                 searchable.includes(search);
 
 
+            const normalized =
+                normalizeStatus(
+                    order.status
+                );
+
+
             const matchesStatus =
                 status === "ALL" ||
-                order.status === status;
+                normalized === status;
 
 
             return (
@@ -1165,20 +1274,31 @@ function updateSummary(){
         allOrders.length;
 
 
-    const verification =
+    const pending =
         allOrders.filter(
             o =>
-                o.status ===
-                "PAYMENT VERIFICATION"
+                normalizeStatus(
+                    o.status
+                ) === "pending"
         ).length;
 
 
     const completed =
         allOrders.filter(
             o =>
-                o.status ===
-                "COMPLETED"
+                normalizeStatus(
+                    o.status
+                ) === "completed"
         );
+
+
+    const cancelled =
+        allOrders.filter(
+            o =>
+                normalizeStatus(
+                    o.status
+                ) === "cancelled"
+        ).length;
 
 
     const completedSales =
@@ -1190,25 +1310,10 @@ function updateSummary(){
         );
 
 
-    const pending =
-        allOrders.filter(
-            o =>
-                o.status !==
-                "COMPLETED" &&
-                o.status !==
-                "FAILED"
-        ).length;
-
-
     document.getElementById(
         "totalOrders"
-    ).textContent = total;
-
-
-    document.getElementById(
-        "verificationCount"
     ).textContent =
-        verification;
+        total;
 
 
     document.getElementById(
@@ -1224,10 +1329,22 @@ function updateSummary(){
 
 
     document.getElementById(
+        "cancelledCount"
+    ).textContent =
+        cancelled;
+
+
+    document.getElementById(
         "completedSales"
     ).textContent =
         "TSh " +
         completedSales.toLocaleString();
+
+
+    document.getElementById(
+        "newOrdersSummary"
+    ).textContent =
+        newOrdersCount;
 
 }
 
@@ -1266,7 +1383,7 @@ function renderTable(){
             <tr>
 
                 <td
-                    colspan="9"
+                    colspan="10"
                     style="
                     text-align:center;
                     padding:30px;
@@ -1296,14 +1413,27 @@ function renderTable(){
                 );
 
 
+            const status =
+                normalizeStatus(
+                    order.status
+                );
+
+
+            const paymentRef =
+                order.blmpay_payment_id ||
+                "-";
+
+
             tr.innerHTML = `
 
                 <td>
+
                     <strong>
                         ${safe(
                             order.order_number
                         )}
                     </strong>
+
                 </td>
 
 
@@ -1357,6 +1487,15 @@ function renderTable(){
 
 
                 <td>
+                    <small>
+                        ${safe(
+                            paymentRef
+                        )}
+                    </small>
+                </td>
+
+
+                <td>
                     ${formatDate(
                         order.transaction_time
                     )}
@@ -1374,38 +1513,34 @@ function renderTable(){
 
                     <button
                         class="small-btn view"
-                        onclick="
-                        viewOrder('${order.id}')
-                        ">
+                        onclick="viewOrder('${order.id}')">
+
                         VIEW
+
                     </button>
 
 
                     <button
                         class="small-btn wa"
-                        onclick="
-                        sendWhatsApp('${order.id}')
-                        ">
+                        onclick="sendWhatsApp('${order.id}')">
+
                         WHATSAPP
+
                     </button>
 
 
                     <button
                         class="small-btn delete"
-                        onclick="
-                        deleteOrder('${order.id}')
-                        ">
+                        onclick="deleteOrder('${order.id}')">
+
                         DELETE
+
                     </button>
 
 
                     <select
-                        onchange="
-                        updateStatus(
-                            '${order.id}',
-                            this.value
-                        )
-                        ">
+                        class="status-select"
+                        onchange="updateStatus('${order.id}',this.value)">
 
                         <option value="">
                             STATUS
@@ -1413,62 +1548,29 @@ function renderTable(){
 
 
                         <option
-                            value="PAYMENT VERIFICATION"
-                            ${
-                                order.status ===
-                                "PAYMENT VERIFICATION"
-                                ? "selected"
-                                : ""
-                            }>
-                            PAYMENT VERIFICATION
+                            value="pending"
+                            ${status === "pending" ? "selected" : ""}>
+
+                            PENDING
+
                         </option>
 
 
                         <option
-                            value="PAYMENT VERIFIED"
-                            ${
-                                order.status ===
-                                "PAYMENT VERIFIED"
-                                ? "selected"
-                                : ""
-                            }>
-                            PAYMENT VERIFIED
-                        </option>
+                            value="completed"
+                            ${status === "completed" ? "selected" : ""}>
 
-
-                        <option
-                            value="PROCESSING"
-                            ${
-                                order.status ===
-                                "PROCESSING"
-                                ? "selected"
-                                : ""
-                            }>
-                            PROCESSING
-                        </option>
-
-
-                        <option
-                            value="COMPLETED"
-                            ${
-                                order.status ===
-                                "COMPLETED"
-                                ? "selected"
-                                : ""
-                            }>
                             COMPLETED
+
                         </option>
 
 
                         <option
-                            value="FAILED"
-                            ${
-                                order.status ===
-                                "FAILED"
-                                ? "selected"
-                                : ""
-                            }>
-                            FAILED
+                            value="cancelled"
+                            ${status === "cancelled" ? "selected" : ""}>
+
+                            CANCELLED
+
                         </option>
 
                     </select>
@@ -1561,44 +1663,29 @@ function renderPagination(){
 
 function statusBadge(status){
 
-    let cls =
-        "verification";
+    const normalized =
+        normalizeStatus(status);
 
 
-    if(
-        status ===
-        "PAYMENT VERIFIED"
-    )
-        cls = "verified";
+    let label =
+        "PENDING";
 
 
-    if(
-        status ===
-        "PROCESSING"
-    )
-        cls = "processing";
+    if(normalized === "completed"){
+        label = "COMPLETED";
+    }
 
 
-    if(
-        status ===
-        "COMPLETED"
-    )
-        cls = "completed";
-
-
-    if(
-        status ===
-        "FAILED"
-    )
-        cls = "failed";
+    if(normalized === "cancelled"){
+        label = "CANCELLED";
+    }
 
 
     return `
 
-        <span
-            class="status ${cls}">
+        <span class="status ${normalized}">
 
-            ${safe(status)}
+            ${label}
 
         </span>
 
@@ -1618,6 +1705,51 @@ async function updateStatus(
 
     if(!newStatus)
         return;
+
+
+    if(
+        ![
+            "pending",
+            "completed",
+            "cancelled"
+        ].includes(newStatus)
+    ){
+
+        alert(
+            "Invalid status."
+        );
+
+        return;
+    }
+
+
+    const order =
+        allOrders.find(
+            o =>
+                o.id === id
+        );
+
+
+    if(!order)
+        return;
+
+
+    const yes =
+        confirm(
+            "Change order " +
+            order.order_number +
+            " status to " +
+            newStatus.toUpperCase() +
+            "?"
+        );
+
+
+    if(!yes){
+
+        renderTable();
+
+        return;
+    }
 
 
     const {
@@ -1669,90 +1801,182 @@ function viewOrder(id){
         return;
 
 
+    const additionalNote =
+        order.aditional_note ||
+        order.additional_notes ||
+        "-";
+
+
+    const paymentReference =
+        order.blmpay_payment_id ||
+        "-";
+
+
+    const adminWhatsApp =
+        order.whatsapp_sent_at
+        ? `<span class="wa-sent">✅ SENT</span>`
+        : `<span class="wa-not-sent">NOT SENT</span>`;
+
+
+    const customerWhatsApp =
+        order.customer_whatsapp_sent_at
+        ? `<span class="wa-sent">✅ SENT</span>`
+        : `<span class="wa-not-sent">NOT SENT</span>`;
+
+
     document.getElementById(
         "modalContent"
     ).innerHTML = `
 
         <div class="detail">
+
             <b>Order Number:</b>
+
             ${safe(
                 order.order_number
             )}
+
         </div>
 
 
         <div class="detail">
+
             <b>Customer Number:</b>
+
             ${safe(
                 order.customer_phone
             )}
+
         </div>
 
 
         <div class="detail">
+
             <b>Bundle Number:</b>
+
             ${safe(
                 order.bundle_phone ||
                 "-"
             )}
+
         </div>
 
 
         <div class="detail">
+
             <b>Bundle:</b>
+
             ${safe(
                 order.bundle
             )}
+
         </div>
 
 
         <div class="detail">
+
             <b>Validity:</b>
+
             ${safe(
                 order.validity
             )}
+
         </div>
 
 
         <div class="detail">
+
             <b>Amount:</b>
+
             TSh
             ${Number(
                 order.amount || 0
             ).toLocaleString()}
+
         </div>
 
 
         <div class="detail">
+
             <b>Payment Name:</b>
+
             ${safe(
                 order.payment_name
             )}
+
         </div>
 
 
         <div class="detail">
-            <b>Additional Notes:</b>
+
+            <b>Payment Reference:</b>
+
             ${safe(
-                order.additional_notes ||
-                "-"
+                paymentReference
             )}
+
         </div>
 
 
         <div class="detail">
+
+            <b>Additional Notes:</b>
+
+            ${safe(
+                additionalNote
+            )}
+
+        </div>
+
+
+        <div class="detail">
+
             <b>Transaction Time:</b>
+
             ${formatDate(
                 order.transaction_time
             )}
+
         </div>
 
 
         <div class="detail">
+
             <b>Status:</b>
+
             ${statusBadge(
                 order.status
             )}
+
+        </div>
+
+
+        <div class="detail">
+
+            <b>Admin WhatsApp:</b>
+
+            ${adminWhatsApp}
+
+        </div>
+
+
+        <div class="detail">
+
+            <b>Customer WhatsApp:</b>
+
+            ${customerWhatsApp}
+
+        </div>
+
+
+        <div class="detail">
+
+            <b>Created At:</b>
+
+            ${formatDate(
+                order.created_at
+            )}
+
         </div>
 
 
@@ -1760,10 +1984,10 @@ function viewOrder(id){
 
             <button
                 class="action-btn export"
-                onclick="
-                sendWhatsApp('${order.id}')
-                ">
+                onclick="sendWhatsApp('${order.id}')">
+
                 📱 WHATSAPP
+
             </button>
 
         </div>
@@ -1810,6 +2034,18 @@ function sendWhatsApp(id){
         return;
 
 
+    const additionalNote =
+        order.aditional_note ||
+        order.additional_notes ||
+        "-";
+
+
+    const status =
+        normalizeStatus(
+            order.status
+        );
+
+
     const message = `BONYO ELECTRONICS ORDER
 
 Order Number: ${order.order_number}
@@ -1819,10 +2055,18 @@ Bundle: ${order.bundle}
 Validity: ${order.validity}
 Amount: TSh ${Number(order.amount || 0).toLocaleString()}
 Payment Name: ${order.payment_name}
-Additional Notes: ${order.additional_notes || "-"}
+Payment Reference: ${order.blmpay_payment_id || "-"}
+Additional Notes: ${additionalNote}
 Transaction Time: ${formatDate(order.transaction_time)}
-Status: ${order.status}`;
+Status: ${status.toUpperCase()}`;
 
+
+    /*
+       MANUAL ADMIN WHATSAPP
+       This remains 0637269368.
+       Automatic Wavia notifications use
+       255749809425 from the Edge Function.
+    */
 
     const url =
         "https://wa.me/255637269368?text=" +
@@ -2058,15 +2302,11 @@ function handleNewOrder(
     }
 
 
-    /* INCREASE COUNTER */
-
     newOrdersCount++;
 
 
     updateNewOrderCounter();
 
-
-    /* SHOW ORDER */
 
     applyFilters();
 
@@ -2075,8 +2315,6 @@ function handleNewOrder(
         order
     );
 
-
-    /* SOUND */
 
     playNotificationSound();
 
@@ -2102,6 +2340,12 @@ function updateNewOrderCounter(){
 
 
     count.textContent =
+        newOrdersCount;
+
+
+    document.getElementById(
+        "newOrdersSummary"
+    ).textContent =
         newOrdersCount;
 
 
@@ -2308,9 +2552,13 @@ function exportCSV(){
         "Validity",
         "Amount",
         "Payment Name",
+        "Payment Reference",
         "Additional Notes",
         "Transaction Time",
-        "Status"
+        "Status",
+        "Admin WhatsApp Sent",
+        "Customer WhatsApp Sent",
+        "Created At"
 
     ];
 
@@ -2334,6 +2582,10 @@ function exportCSV(){
 
                 order.payment_name,
 
+                order.blmpay_payment_id ||
+                "",
+
+                order.aditional_note ||
                 order.additional_notes ||
                 "",
 
@@ -2341,7 +2593,21 @@ function exportCSV(){
                     order.transaction_time
                 ),
 
-                order.status
+                normalizeStatus(
+                    order.status
+                ),
+
+                order.whatsapp_sent_at
+                    ? "YES"
+                    : "NO",
+
+                order.customer_whatsapp_sent_at
+                    ? "YES"
+                    : "NO",
+
+                formatDate(
+                    order.created_at
+                )
 
             ]
         );
@@ -2390,14 +2656,25 @@ function exportCSV(){
         );
 
 
-    link.href = url;
+    link.href =
+        url;
 
 
     link.download =
         "BONYO_ELECTRONICS_ORDERS.csv";
 
 
+    document.body.appendChild(
+        link
+    );
+
+
     link.click();
+
+
+    document.body.removeChild(
+        link
+    );
 
 
     URL.revokeObjectURL(
@@ -2448,6 +2725,21 @@ function formatDate(
         return "-";
 
 
+    const parsed =
+        new Date(date);
+
+
+    if(
+        Number.isNaN(
+            parsed.getTime()
+        )
+    ){
+
+        return "-";
+
+    }
+
+
     return new Intl.DateTimeFormat(
         "en-GB",
         {
@@ -2476,7 +2768,7 @@ function formatDate(
                 false
         }
     ).format(
-        new Date(date)
+        parsed
     );
 
 }
@@ -2528,6 +2820,29 @@ function safe(
         );
 
 }
+
+
+/* =================================
+   CLOSE MODAL WHEN CLICK OUTSIDE
+================================= */
+
+document.getElementById(
+    "viewModal"
+)
+.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target === this
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
 
 
 /* =================================
