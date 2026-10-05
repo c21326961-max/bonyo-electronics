@@ -1,1903 +1,2192 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>BONYO ELECTRONICS | Halotel Bundles</title>
+<title>Nunua Halotel Bundle | BONYO ELECTRONICS</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta name="description"
+      content="Nunua Halotel Internet Bundles kupitia BONYO ELECTRONICS. Lipa kwa urahisi na fuatilia order yako.">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+:root{
+    --orange:#f58220;
+    --orange-dark:#dc6f0d;
+    --blue:#0066a1;
+    --blue-dark:#004b78;
+    --light:#f5f7fa;
+    --dark:#17212b;
+    --green:#1b9e59;
+    --red:#d93025;
+    --white:#ffffff;
+    --border:#dfe5eb;
+    --shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--light);
+    color:var(--dark);
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+}
+
+.topbar{
+    background:var(--blue-dark);
+    color:white;
+    padding:9px 20px;
+    font-size:14px;
+}
+
+.topbar-inner{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.navbar{
+    background:white;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.nav-inner{
+    max-width:1100px;
+    margin:auto;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    color:var(--blue);
+}
+
+.logo span{
+    color:var(--orange);
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    color:#333;
+    font-weight:700;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:var(--orange);
+}
+
+.hero{
+    background:linear-gradient(135deg,var(--orange),var(--orange-dark));
+    color:white;
+    padding:55px 20px;
+    text-align:center;
+}
+
+.hero-inner{
+    max-width:900px;
+    margin:auto;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    font-size:18px;
+    max-width:700px;
+    margin:0 auto 25px;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    border:none;
+    cursor:pointer;
+    border-radius:10px;
+    padding:13px 20px;
+    font-size:15px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.btn-primary{
+    background:var(--blue);
+    color:white;
+}
+
+.btn-primary:hover{
+    background:var(--blue-dark);
+}
+
+.btn-white{
+    background:white;
+    color:var(--orange-dark);
+}
+
+.btn-white:hover{
+    transform:translateY(-2px);
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:35px 20px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:28px;
+    margin-bottom:25px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.section-title h2{
+    color:var(--blue-dark);
+    font-size:28px;
+}
+
+.section-title p{
+    color:#666;
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.step{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    box-shadow:var(--shadow);
+}
+
+.step-number{
+    width:40px;
+    height:40px;
+    background:var(--orange);
+    color:white;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 10px;
+    font-weight:900;
+}
+
+.form-section{
+    display:none;
+}
+
+.form-section.active{
+    display:block;
+}
+
+.form-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.form-header h2{
+    color:var(--blue-dark);
+}
+
+.step-badge{
+    background:#fff2e6;
+    color:var(--orange-dark);
+    padding:7px 12px;
+    border-radius:20px;
+    font-weight:800;
+    font-size:13px;
+}
+
+label{
+    display:block;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+    background:white;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--orange);
+    box-shadow:0 0 0 3px rgba(245,130,32,.12);
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.help-text{
+    display:block;
+    color:#777;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.checkbox-box{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    background:#f7f9fb;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:13px;
+    margin-bottom:18px;
+}
+
+.checkbox-box input{
+    width:auto;
+    margin-top:4px;
+    transform:scale(1.15);
+}
+
+.checkbox-box label{
+    margin:0;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
+}
+
+.bundle-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.bundle-card{
+    border:2px solid #e5e8eb;
+    border-radius:15px;
+    padding:18px;
+    cursor:pointer;
+    transition:.2s;
+    background:white;
+}
+
+.bundle-card:hover{
+    border-color:var(--orange);
+    transform:translateY(-2px);
+}
+
+.bundle-card.selected{
+    border-color:var(--orange);
+    background:#fff8f1;
+}
+
+.bundle-card h3{
+    color:var(--blue-dark);
+    font-size:24px;
+}
+
+.bundle-card .amount{
+    color:var(--orange-dark);
+    font-size:20px;
+    font-weight:900;
+    margin:5px 0;
+}
+
+.bundle-card .validity{
+    color:#666;
+    font-size:14px;
+}
+
+.bundle-card button{
+    width:100%;
+    margin-top:12px;
+    border:none;
+    background:var(--orange);
+    color:white;
+    padding:10px;
+    border-radius:8px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.summary{
+    background:#f7f9fb;
+    border-radius:12px;
+    padding:18px;
+    margin-bottom:20px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:9px 0;
+    border-bottom:1px solid #e5e8eb;
+}
+
+.summary-row:last-child{
+    border-bottom:none;
+}
+
+.summary-row span:first-child{
+    color:#666;
+}
+
+.summary-row span:last-child{
+    font-weight:800;
+    text-align:right;
+}
+
+.payment-box{
+    background:#fff8f1;
+    border:2px solid #ffd7b0;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:20px;
+}
+
+.payment-box h3{
+    color:var(--orange-dark);
+    margin-bottom:8px;
+}
+
+.payment-box p{
+    margin:5px 0;
+}
+
+.notice{
+    background:#eef7ff;
+    border-left:5px solid var(--blue);
+    padding:14px;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
+.alert{
+    display:none;
+    padding:13px 15px;
+    border-radius:10px;
+    margin-bottom:18px;
+    font-weight:700;
+}
+
+.alert.show{
+    display:block;
+}
+
+.alert.error{
+    background:#ffecec;
+    color:var(--red);
+    border:1px solid #ffc7c7;
+}
+
+.alert.success{
+    background:#eaf8f0;
+    color:var(--green);
+    border:1px solid #bfe8cf;
+}
+
+.alert.info{
+    background:#eef7ff;
+    color:var(--blue-dark);
+    border:1px solid #c8e3f5;
+}
+
+.loading{
+    display:none;
+    text-align:center;
+    padding:15px;
+    font-weight:800;
+    color:var(--blue);
+}
+
+.loading.show{
+    display:block;
+}
+
+.payment-status{
+    text-align:center;
+    padding:25px 15px;
+}
+
+.status-icon{
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+.payment-status h2{
+    margin-bottom:8px;
+}
+
+.status-pending h2{
+    color:var(--orange-dark);
+}
+
+.status-completed h2{
+    color:var(--green);
+}
+
+.status-cancelled h2{
+    color:var(--red);
+}
+
+.order-number{
+    display:inline-block;
+    margin-top:12px;
+    padding:10px 15px;
+    background:#f1f4f7;
+    border-radius:8px;
+    font-weight:900;
+}
+
+.action-buttons{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.footer{
+    background:var(--blue-dark);
+    color:white;
+    text-align:center;
+    padding:25px 20px;
+    margin-top:30px;
+}
+
+.footer a{
+    color:white;
+}
+
+.whatsapp-float{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:58px;
+    height:58px;
+    background:#25D366;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    box-shadow:0 5px 20px rgba(0,0,0,.25);
+    z-index:2000;
+}
+
+@media(max-width:800px){
+    .steps{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f7fb;
-      color: #172033;
-      line-height: 1.5;
+    .bundle-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    header {
-      background: linear-gradient(135deg, #0757c9, #06377f);
-      color: white;
-      padding: 15px 5%;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    .hero h1{
+        font-size:34px;
+    }
+}
+
+@media(max-width:550px){
+    .nav-inner{
+        flex-direction:column;
     }
 
-    .nav {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
+    .nav-links{
+        justify-content:center;
+        gap:10px;
     }
 
-    .logo {
-      font-size: 22px;
-      font-weight: 900;
+    .steps,
+    .bundle-grid{
+        grid-template-columns:1fr;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
+    .card{
+        padding:20px;
     }
 
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      padding: 8px 11px;
-      border-radius: 8px;
-      font-size: 13px;
+    .hero{
+        padding:40px 15px;
     }
 
-    .nav-links a:hover {
-      background: rgba(255,255,255,.15);
+    .hero h1{
+        font-size:29px;
     }
 
-    .hero {
-      background: linear-gradient(135deg, #06377f, #0877e8);
-      color: white;
-      text-align: center;
-      padding: 55px 20px 70px;
+    .summary-row{
+        flex-direction:column;
+        gap:3px;
     }
 
-    .hero h1 {
-      font-size: clamp(30px, 6vw, 50px);
-      margin-bottom: 8px;
+    .summary-row span:last-child{
+        text-align:left;
     }
-
-    .hero p {
-      max-width: 650px;
-      margin: auto;
-      font-size: 17px;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: -35px auto 50px;
-      padding: 0 15px;
-      position: relative;
-    }
-
-    .stepper {
-      background: white;
-      border-radius: 16px;
-      padding: 18px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.08);
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .step {
-      text-align: center;
-      padding: 10px 5px;
-      border-radius: 10px;
-      color: #7a8496;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .step.active {
-      background: #e8f1ff;
-      color: #0757c9;
-    }
-
-    .step-number {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: #dfe5ed;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 5px;
-      font-weight: bold;
-    }
-
-    .step.active .step-number {
-      background: #0757c9;
-      color: white;
-    }
-
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 25px;
-      box-shadow: 0 5px 22px rgba(0,0,0,.08);
-      margin-bottom: 20px;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .card h2 {
-      color: #06377f;
-      margin-bottom: 7px;
-    }
-
-    .subtitle {
-      color: #667085;
-      margin-bottom: 22px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: 700;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      border: 1px solid #d6dce5;
-      border-radius: 10px;
-      padding: 13px 14px;
-      font-size: 16px;
-      outline: none;
-      margin-bottom: 18px;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: #0757c9;
-      box-shadow: 0 0 0 3px rgba(7,87,201,.1);
-    }
-
-    .checkbox-box {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: #f6f9fd;
-      padding: 13px;
-      border-radius: 10px;
-      margin-bottom: 18px;
-    }
-
-    .checkbox-box input {
-      width: auto;
-      margin: 4px 0 0;
-    }
-
-    .checkbox-box label {
-      margin: 0;
-      font-weight: 600;
-    }
-
-    .bundles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 14px;
-    }
-
-    .bundle {
-      border: 2px solid #e1e6ee;
-      border-radius: 15px;
-      padding: 18px 12px;
-      text-align: center;
-      cursor: pointer;
-      transition: .2s;
-      background: white;
-    }
-
-    .bundle:hover {
-      border-color: #0757c9;
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(7,87,201,.12);
-    }
-
-    .bundle .gb {
-      font-size: 27px;
-      font-weight: 900;
-      color: #0757c9;
-    }
-
-    .bundle .price {
-      font-size: 18px;
-      font-weight: 800;
-      margin-top: 5px;
-    }
-
-    .bundle .validity {
-      color: #667085;
-      font-size: 13px;
-      margin-top: 4px;
-    }
-
-    .summary {
-      background: #f5f8fc;
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 20px;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 9px 0;
-      border-bottom: 1px solid #e2e7ef;
-    }
-
-    .summary-row:last-child {
-      border-bottom: none;
-    }
-
-    .summary-row strong {
-      text-align: right;
-    }
-
-    .payment-action {
-      border: 2px solid #0757c9;
-      background: linear-gradient(135deg, #f3f8ff, #e8f1ff);
-      border-radius: 18px;
-      padding: 25px 20px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .payment-icon {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      background: #0757c9;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 12px;
-      font-size: 30px;
-    }
-
-    .payment-action h3 {
-      color: #06377f;
-      margin-bottom: 8px;
-      font-size: 21px;
-    }
-
-    .pay-amount {
-      font-size: 32px;
-      font-weight: 900;
-      color: #0757c9;
-      margin: 12px 0;
-    }
-
-    .notice {
-      background: #fff8e6;
-      border-left: 4px solid #f0ad00;
-      padding: 13px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      font-size: 14px;
-    }
-
-    .error {
-      background: #ffecec;
-      color: #b42318;
-      padding: 13px;
-      border-radius: 9px;
-      margin-bottom: 15px;
-      display: none;
-    }
-
-    .success {
-      text-align: center;
-    }
-
-    .success-icon {
-      width: 70px;
-      height: 70px;
-      background: #e5f8ed;
-      color: #159447;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 15px;
-      font-size: 35px;
-      font-weight: bold;
-    }
-
-    .order-number {
-      background: #eef4ff;
-      color: #06377f;
-      padding: 12px;
-      border-radius: 10px;
-      margin: 15px 0;
-      font-size: 20px;
-      font-weight: 900;
-    }
-
-    .pending,
-    .confirmed,
-    .failed {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-weight: 800;
-      font-size: 13px;
-    }
-
-    .pending {
-      background: #fff3cd;
-      color: #8a6500;
-    }
-
-    .confirmed {
-      background: #e5f8ed;
-      color: #159447;
-    }
-
-    .failed {
-      background: #ffecec;
-      color: #b42318;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    button,
-    .btn {
-      border: none;
-      border-radius: 10px;
-      padding: 13px 20px;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-    }
-
-    .btn-primary {
-      background: #0757c9;
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #0646a3;
-    }
-
-    .btn-secondary {
-      background: #e8edf4;
-      color: #27364d;
-    }
-
-    .btn-whatsapp {
-      background: #19a957;
-      color: white;
-    }
-
-    button:disabled {
-      opacity: .6;
-      cursor: not-allowed;
-    }
-
-    footer {
-      background: #071a35;
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
-    }
-
-    footer p {
-      margin: 5px 0;
-      opacity: .85;
-    }
-
-    @media (max-width: 650px) {
-      .nav {
-        flex-direction: column;
-      }
-
-      .stepper {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .card {
-        padding: 18px;
-      }
-
-      .buttons button,
-      .buttons a {
-        width: 100%;
-      }
-
-      .summary-row {
-        flex-direction: column;
-        gap: 3px;
-      }
-
-      .summary-row strong {
-        text-align: left;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <div class="nav">
-
-    <div class="logo">
-      BONYO ELECTRONICS
+<div class="topbar">
+    <div class="topbar-inner">
+        <span>🇹🇿 Tanzania</span>
+        <span>📞 0637269368 | 📡 Halotel Bundles</span>
     </div>
+</div>
 
-    <div class="nav-links">
-      <a href="index.html">HOME</a>
-      <a href="halotel.html">BUNDLES</a>
-      <a href="history.html">ORDER STATUS</a>
-      <a
-        href="https://wa.me/255637269368"
-        target="_blank"
-      >
-        WHATSAPP
-      </a>
+<nav class="navbar">
+    <div class="nav-inner">
+        <div class="logo">
+            BONYO <span>ELECTRONICS</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="index.html#bundles">BUNDLES</a>
+            <a href="index.html#how">HOW IT WORKS</a>
+            <a href="history.html">ORDER STATUS</a>
+            <a href="https://wa.me/255637269368" target="_blank">WHATSAPP</a>
+        </div>
     </div>
-
-  </div>
-</header>
-
+</nav>
 
 <section class="hero">
+    <div class="hero-inner">
+        <h1>HALOTEL BUNDLES</h1>
 
-  <h1>HALOTEL BUNDLES</h1>
+        <p>
+            Nunua Halotel Internet Bundle kwa urahisi kupitia
+            BONYO ELECTRONICS.
+        </p>
 
-  <p>
-    Chagua bando lako la HALOTEL na lipia moja kwa moja
-    kupitia simu yako.
-  </p>
+        <div class="hero-buttons">
+            <a href="#order" class="btn btn-white">
+                🛒 ANZA KUAGIZA
+            </a>
 
+            <a href="history.html" class="btn btn-primary">
+                🔎 CHECK ORDER STATUS
+            </a>
+        </div>
+    </div>
 </section>
 
+<main class="container" id="order">
 
-<main class="container">
-
-  <!-- STEPPER -->
-
-  <div class="stepper">
-
-    <div
-      class="step active"
-      id="stepIndicator1"
-    >
-      <div class="step-number">1</div>
-      TAARIFA
+<div class="steps">
+    <div class="step">
+        <div class="step-number">1</div>
+        <strong>TAARIFA</strong>
+        <p>Weka namba zako</p>
     </div>
 
-    <div
-      class="step"
-      id="stepIndicator2"
-    >
-      <div class="step-number">2</div>
-      CHAGUA BANDO
+    <div class="step">
+        <div class="step-number">2</div>
+        <strong>BANDO</strong>
+        <p>Chagua bando</p>
     </div>
 
-    <div
-      class="step"
-      id="stepIndicator3"
-    >
-      <div class="step-number">3</div>
-      MALIPO
+    <div class="step">
+        <div class="step-number">3</div>
+        <strong>MALIPO</strong>
+        <p>Fanya malipo</p>
     </div>
 
-    <div
-      class="step"
-      id="stepIndicator4"
-    >
-      <div class="step-number">4</div>
-      HALI YA MALIPO
+    <div class="step">
+        <div class="step-number">4</div>
+        <strong>STATUS</strong>
+        <p>Thibitisha malipo</p>
+    </div>
+</div>
+
+
+<!-- STEP 1 -->
+
+<section id="step1" class="form-section active">
+
+<div class="card">
+
+    <div class="form-header">
+        <h2>TAARIFA ZA MTEJA</h2>
+        <span class="step-badge">STEP 1</span>
     </div>
 
-  </div>
-
-
-  <!-- STEP 1 -->
-
-  <section
-    class="card"
-    id="step1"
-  >
-
-    <h2>TAARIFA ZA MTEJA</h2>
-
-    <p class="subtitle">
-      Weka namba ya simu. Kwa kawaida namba hii ndiyo
-      itakayopokea bando.
+    <p style="margin-bottom:20px;color:#666;">
+        Weka namba unayotumia kufanya malipo na namba ya
+        Halotel utakayoingiziwa bando.
     </p>
 
-    <div
-      id="error1"
-      class="error"
-    ></div>
+    <div id="alert1" class="alert"></div>
 
-    <label for="customerPhone">
-      Namba ya simu *
-    </label>
+    <div class="form-group">
 
-    <input
-      type="tel"
-      id="customerPhone"
-      placeholder="Mfano: 0627269368"
-      inputmode="numeric"
-      autocomplete="tel"
-    >
+        <label for="customerPhone">
+            💳 Namba ya Malipo *
+        </label>
+
+        <input
+            type="tel"
+            id="customerPhone"
+            placeholder="Mfano: 0627269368"
+            inputmode="numeric"
+            autocomplete="tel"
+        >
+
+        <small class="help-text">
+            Ingiza namba unayotumia kufanya malipo.
+        </small>
+
+    </div>
 
 
     <div class="checkbox-box">
 
-      <input
-        type="checkbox"
-        id="sameNumber"
-        checked
-      >
+        <input
+            type="checkbox"
+            id="sameNumber"
+        >
 
-      <label for="sameNumber">
-        Namba hii ndiyo itakayopokea bando
-      </label>
-
-    </div>
-
-
-    <div
-      id="receiverBox"
-      class="hidden"
-    >
-
-      <label for="bundlePhone">
-        Namba ya HALOTEL itakayopokea bando *
-      </label>
-
-      <input
-        type="tel"
-        id="bundlePhone"
-        placeholder="Mfano: 0627269368"
-        inputmode="numeric"
-      >
+        <label for="sameNumber">
+            Namba ya malipo ndiyo hiyo hiyo ya kuungiwa bando
+        </label>
 
     </div>
 
 
-    <label for="additionalNotes">
-      Maelezo ya ziada (optional)
-    </label>
+    <div id="receiverBox" class="form-group">
 
-    <textarea
-      id="additionalNotes"
-      rows="3"
-      placeholder="Andika maelezo kama yapo..."
-    ></textarea>
+        <label for="bundlePhone">
+            📶 Namba ya Kuungiwa Bando *
+        </label>
+
+        <input
+            type="tel"
+            id="bundlePhone"
+            placeholder="Mfano: 0627269368"
+            inputmode="numeric"
+        >
+
+        <small class="help-text">
+            Ingiza namba ya Halotel unayotaka kuungiwa bando.
+        </small>
+
+    </div>
 
 
-    <div class="buttons">
+    <div class="form-group">
 
-      <span></span>
+        <label for="additionalNotes">
+            📝 Maelezo ya ziada (optional)
+        </label>
 
-      <button
+        <textarea
+            id="additionalNotes"
+            rows="3"
+            placeholder="Andika maelezo kama yapo..."
+        ></textarea>
+
+    </div>
+
+
+    <button
         type="button"
-        class="btn-primary"
+        class="btn btn-primary"
         onclick="continueToBundles()"
-      >
-        ENDELEA →
-      </button>
+    >
+        ENDELEA ➜
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- STEP 2 -->
+
+<section id="step2" class="form-section">
+
+<div class="card">
+
+    <div class="form-header">
+        <h2>CHAGUA BANDO</h2>
+        <span class="step-badge">STEP 2</span>
+    </div>
+
+    <div id="alert2" class="alert"></div>
+
+    <div id="bundleGrid" class="bundle-grid"></div>
+
+    <div class="action-buttons">
+
+        <button
+            type="button"
+            class="btn"
+            onclick="goToStep(1)"
+        >
+            ← RUDI
+        </button>
 
     </div>
 
-  </section>
+</div>
+
+</section>
 
 
-  <!-- STEP 2 -->
+<!-- STEP 3 -->
 
-  <section
-    class="card hidden"
-    id="step2"
-  >
+<section id="step3" class="form-section">
 
-    <h2>CHAGUA BANDO</h2>
+<div class="card">
 
-    <p class="subtitle">
-      Chagua bando unalotaka.
-    </p>
-
-    <div
-      id="bundles"
-      class="bundles"
-    ></div>
-
-
-    <div class="buttons">
-
-      <button
-        type="button"
-        class="btn-secondary"
-        onclick="showStep(1)"
-      >
-        ← RUDI
-      </button>
-
+    <div class="form-header">
+        <h2>FANYA MALIPO</h2>
+        <span class="step-badge">STEP 3</span>
     </div>
 
-  </section>
-
-
-  <!-- STEP 3 -->
-
-  <section
-    class="card hidden"
-    id="step3"
-  >
-
-    <h2>MALIPO</h2>
-
-    <p class="subtitle">
-      Kagua taarifa zako kisha bonyeza LIPA SASA.
-    </p>
-
-
-    <div
-      id="error3"
-      class="error"
-    ></div>
-
+    <div id="alert3" class="alert"></div>
 
     <div class="summary">
 
-      <div class="summary-row">
-        <span>Bando</span>
-        <strong id="summaryBundle">-</strong>
-      </div>
+        <div class="summary-row">
+            <span>📦 Bando</span>
+            <span id="summaryBundle">-</span>
+        </div>
 
-      <div class="summary-row">
-        <span>Muda</span>
-        <strong id="summaryValidity">-</strong>
-      </div>
+        <div class="summary-row">
+            <span>⏱️ Muda</span>
+            <span id="summaryValidity">-</span>
+        </div>
 
-      <div class="summary-row">
-        <span>Namba ya kupokea</span>
-        <strong id="summaryReceiver">-</strong>
-      </div>
+        <div class="summary-row">
+            <span>📶 Namba ya kuungiwa bando</span>
+            <span id="summaryReceiver">-</span>
+        </div>
 
-      <div class="summary-row">
-        <span>Namba ya mawasiliano</span>
-        <strong id="summaryCustomer">-</strong>
-      </div>
+        <div class="summary-row">
+            <span>💳 Namba ya malipo</span>
+            <span id="summaryCustomer">-</span>
+        </div>
 
-      <div class="summary-row">
-        <span>Kiasi cha kulipa</span>
-        <strong id="summaryAmount">-</strong>
-      </div>
+        <div class="summary-row">
+            <span>💰 Kiasi cha kulipa</span>
+            <span id="summaryAmount">-</span>
+        </div>
 
     </div>
 
 
-    <div class="payment-action">
+    <div class="payment-box">
 
-      <div class="payment-icon">
-        📱
-      </div>
+        <h3>💳 MALIPO</h3>
 
-      <h3>
-        LIPA KUPITIA SIMU YAKO
-      </h3>
+        <p>
+            Bonyeza kitufe cha malipo hapa chini ili kuanzisha
+            malipo kupitia BLMPay.
+        </p>
 
-      <p>
-        Bonyeza <strong>LIPA SASA</strong> na ombi la
-        malipo litatumwa kwenye simu yako.
-      </p>
+        <p>
+            <strong>Namba ya malipo:</strong>
+            <span id="paymentPhoneDisplay">-</span>
+        </p>
 
-      <div
-        class="pay-amount"
-        id="paymentAmount"
-      >
-        TSh 0
-      </div>
-
-      <p>
-        Fuata maelekezo yatakayoonekana kwenye simu yako
-        ili kukamilisha malipo.
-      </p>
+        <p>
+            <strong>Kiasi:</strong>
+            <span id="paymentAmountDisplay">-</span>
+        </p>
 
     </div>
 
 
     <div class="notice">
 
-      <strong>MUHIMU:</strong>
+        <strong>⚠️ Muhimu:</strong>
 
-      Hakuna haja ya kutuma pesa manually kwa namba ya
-      BONYO ELECTRONICS. Bonyeza
-      <strong>LIPA SASA</strong> tu.
+        <br>
+
+        Tumia namba uliyoandika kwenye
+        <strong>Namba ya Malipo</strong>
+        kufanya malipo.
+
+        <br><br>
+
+        Baada ya malipo kukamilika, mfumo utaangalia status
+        ya malipo moja kwa moja.
 
     </div>
 
 
-    <div class="buttons">
+    <div class="loading" id="paymentLoading">
+        ⏳ Inaandaa malipo...
+    </div>
 
-      <button
-        type="button"
-        class="btn-secondary"
-        onclick="showStep(2)"
-        id="backToBundles"
-      >
-        ← RUDI
-      </button>
 
-      <button
+    <button
         type="button"
-        class="btn-primary"
-        onclick="submitPayment()"
         id="payButton"
-      >
-        LIPA SASA
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- STEP 4 -->
-
-  <section
-    class="card hidden"
-    id="step4"
-  >
-
-    <div class="success">
-
-      <div
-        class="success-icon"
-        id="statusIcon"
-      >
-        ✓
-      </div>
-
-      <h2 id="finalTitle">
-        OMBI LA MALIPO LIMETUMWA
-      </h2>
-
-      <p
-        class="subtitle"
-        id="finalMessage"
-      >
-        Kamilisha malipo kwenye simu yako.
-      </p>
+        class="btn btn-primary"
+        style="width:100%;"
+        onclick="submitPayment()"
+    >
+        💳 ENDELEA NA MALIPO
+    </button>
 
 
-      <div
-        class="order-number"
-        id="finalOrderNumber"
-      >
-        BONYO-...
-      </div>
-
-
-      <div class="summary">
-
-        <div class="summary-row">
-          <span>Bando</span>
-          <strong id="finalBundle">-</strong>
-        </div>
-
-        <div class="summary-row">
-          <span>Muda</span>
-          <strong id="finalValidity">-</strong>
-        </div>
-
-        <div class="summary-row">
-          <span>Namba ya kupokea</span>
-          <strong id="finalReceiver">-</strong>
-        </div>
-
-        <div class="summary-row">
-          <span>Kiasi</span>
-          <strong id="finalAmount">-</strong>
-        </div>
-
-        <div class="summary-row">
-          <span>Payment Reference</span>
-          <strong id="finalReference">-</strong>
-        </div>
-
-      </div>
-
-
-      <div
-        class="pending"
-        id="paymentStatus"
-      >
-        PAYMENT PENDING
-      </div>
-
-
-      <div
-        class="notice"
-        style="margin-top:20px;"
-      >
-
-        <strong>Subiri kidogo.</strong>
-
-        Mfumo utaangalia hali ya malipo moja kwa moja.
-
-        Usifanye order nyingine wakati huu.
-
-      </div>
-
-
-      <div class="buttons">
-
-        <a
-          id="whatsappButton"
-          class="btn btn-whatsapp"
-          href="#"
-          target="_blank"
-        >
-          WHATSAPP
-        </a>
+    <div class="action-buttons">
 
         <button
-          type="button"
-          class="btn-secondary"
-          onclick="newOrder()"
+            type="button"
+            class="btn"
+            onclick="goToStep(2)"
         >
-          ORDER MPYA
+            ← BADILI BANDO
         </button>
-
-      </div>
 
     </div>
 
-  </section>
+</div>
+
+</section>
+
+
+<!-- STEP 4 -->
+
+<section id="step4" class="form-section">
+
+<div class="card">
+
+    <div class="form-header">
+        <h2>PAYMENT STATUS</h2>
+        <span class="step-badge">STEP 4</span>
+    </div>
+
+    <div id="statusBox" class="payment-status status-pending">
+
+        <div class="status-icon" id="statusIcon">
+            ⏳
+        </div>
+
+        <h2 id="statusTitle">
+            INASUBIRI MALIPO
+        </h2>
+
+        <p id="statusMessage">
+            Tafadhali kamilisha malipo kwenye namba yako ya malipo.
+        </p>
+
+        <div class="order-number">
+            Order Number:
+            <span id="finalOrderNumber">-</span>
+        </div>
+
+    </div>
+
+
+    <div class="summary">
+
+        <div class="summary-row">
+            <span>📦 Bando</span>
+            <span id="finalBundle">-</span>
+        </div>
+
+        <div class="summary-row">
+            <span>⏱️ Muda</span>
+            <span id="finalValidity">-</span>
+        </div>
+
+        <div class="summary-row">
+            <span>📶 Namba ya kuungiwa bando</span>
+            <span id="finalReceiver">-</span>
+        </div>
+
+        <div class="summary-row">
+            <span>💳 Namba ya malipo</span>
+            <span id="finalCustomer">-</span>
+        </div>
+
+        <div class="summary-row">
+            <span>💰 Kiasi</span>
+            <span id="finalAmount">-</span>
+        </div>
+
+        <div class="summary-row">
+            <span>🔖 Payment Reference</span>
+            <span id="finalPaymentReference">-</span>
+        </div>
+
+    </div>
+
+
+    <div id="finalActions" class="action-buttons"></div>
+
+</div>
+
+</section>
 
 </main>
 
 
-<footer>
+<footer class="footer">
 
-  <h3>BONYO ELECTRONICS</h3>
+    <strong>BONYO ELECTRONICS</strong>
 
-  <p>HALOTEL BUNDLES</p>
+    <p>
+        Halotel Bundles Tanzania
+    </p>
 
-  <p>WhatsApp: 0637269368</p>
+    <p>
+        📞 0637269368
+        |
+        💬 WhatsApp 0637269368
+    </p>
 
-  <p>© 2026 BONYO ELECTRONICS</p>
+    <p>
+        © 2026 BONYO ELECTRONICS
+    </p>
 
 </footer>
 
 
+<a
+    class="whatsapp-float"
+    href="https://wa.me/255637269368"
+    target="_blank"
+    title="WhatsApp BONYO ELECTRONICS"
+>
+    ☎
+</a>
+
+
 <script>
 
-  // ==================================================
-  // SUPABASE CONFIGURATION
-  // ==================================================
+/* ================================
+   SUPABASE CONFIGURATION
+================================ */
 
-  const SUPABASE_URL =
+const SUPABASE_URL =
     "https://bfqwetuhtldzlxcqzsrq.supabase.co";
 
-  const SUPABASE_ANON_KEY =
-    "sb_publishable_vs0-yAMJNwaMxEHiyn72ag_f7bdFo9c";
+const SUPABASE_ANON_KEY =
+    "sb_publishable_vs0-yAMJNwaMxH...";
 
 
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
+const CREATE_PAYMENT_URL =
+    SUPABASE_URL + "/functions/v1/create-payment";
+
+const CHECK_PAYMENT_URL =
+    SUPABASE_URL + "/functions/v1/check-payment";
 
 
-  const CREATE_PAYMENT_URL =
-    SUPABASE_URL +
-    "/functions/v1/create-payment";
+/* ================================
+   VARIABLES
+================================ */
 
-  const CHECK_PAYMENT_URL =
-    SUPABASE_URL +
-    "/functions/v1/check-payment";
+let selectedBundle = null;
 
+let currentOrderNumber = null;
 
-  // ==================================================
-  // STATE
-  // ==================================================
+let currentPaymentReference = null;
 
-  let selectedBundle = null;
-
-  let currentOrderNumber = null;
-
-  let currentPaymentReference = null;
-
-  let statusTimer = null;
+let statusTimer = null;
 
 
-  // ==================================================
-  // BUNDLES
-  // ==================================================
+/* ================================
+   BUNDLE DATA
+================================ */
 
-  const bundles = [
+const bundles = [
 
     {
-      gb: "2GB",
-      amount: 2500,
-      validity: "2 weeks"
+        gb:"2GB",
+        amount:2500,
+        validity:"2 weeks"
     },
 
     {
-      gb: "3GB",
-      amount: 3500,
-      validity: "2 weeks"
+        gb:"3GB",
+        amount:3500,
+        validity:"2 weeks"
     },
 
     {
-      gb: "4GB",
-      amount: 4500,
-      validity: "2 weeks"
+        gb:"4GB",
+        amount:4500,
+        validity:"2 weeks"
     },
 
     {
-      gb: "5GB",
-      amount: 5000,
-      validity: "2 weeks"
+        gb:"5GB",
+        amount:5000,
+        validity:"2 weeks"
     },
 
     {
-      gb: "6GB",
-      amount: 6000,
-      validity: "1 month"
+        gb:"6GB",
+        amount:6000,
+        validity:"1 month"
     },
 
     {
-      gb: "7GB",
-      amount: 7000,
-      validity: "1 month"
+        gb:"7GB",
+        amount:7000,
+        validity:"1 month"
     },
 
     {
-      gb: "8GB",
-      amount: 8000,
-      validity: "1 month"
+        gb:"8GB",
+        amount:8000,
+        validity:"1 month"
     },
 
     {
-      gb: "9GB",
-      amount: 9000,
-      validity: "1 month"
+        gb:"9GB",
+        amount:9000,
+        validity:"1 month"
     },
 
     {
-      gb: "10GB",
-      amount: 10000,
-      validity: "1 month"
+        gb:"10GB",
+        amount:10000,
+        validity:"1 month"
     },
 
     {
-      gb: "12GB",
-      amount: 12000,
-      validity: "1 month"
+        gb:"12GB",
+        amount:12000,
+        validity:"1 month"
     },
 
     {
-      gb: "13GB",
-      amount: 13000,
-      validity: "1 month"
+        gb:"13GB",
+        amount:13000,
+        validity:"1 month"
     },
 
     {
-      gb: "15GB",
-      amount: 15000,
-      validity: "1 month"
+        gb:"15GB",
+        amount:15000,
+        validity:"1 month"
     },
 
     {
-      gb: "20GB",
-      amount: 18000,
-      validity: "1 month"
+        gb:"20GB",
+        amount:18000,
+        validity:"1 month"
     },
 
     {
-      gb: "25GB",
-      amount: 23000,
-      validity: "1 month"
+        gb:"25GB",
+        amount:23000,
+        validity:"1 month"
     },
 
     {
-      gb: "30GB",
-      amount: 27000,
-      validity: "1 month"
+        gb:"30GB",
+        amount:27000,
+        validity:"1 month"
     }
 
-  ];
+];
 
 
-  // ==================================================
-  // HELPERS
-  // ==================================================
+/* ================================
+   PHONE FUNCTIONS
+================================ */
 
-  function cleanPhone(value) {
+function cleanPhone(value){
 
     return String(value || "")
-      .replace(/\D/g, "");
+        .replace(/\D/g,"");
 
-  }
+}
 
 
-  function normalizeTanzaniaPhone(value) {
+function normalizeTanzaniaPhone(value){
 
-    let phone =
-      cleanPhone(value);
+    let phone = cleanPhone(value);
 
-    if (phone.startsWith("0")) {
+    if(phone.startsWith("0")){
 
-      phone =
-        "255" +
-        phone.substring(1);
+        phone =
+            "255" +
+            phone.substring(1);
 
     }
 
     return phone;
 
-  }
+}
 
 
-  function isValidTanzaniaPhone(value) {
+function isValidTanzaniaPhone(value){
 
-    return /^255[67]\d{8}$/.test(
-      normalizeTanzaniaPhone(value)
-    );
+    return /^255[67]\d{8}$/
+        .test(
+            normalizeTanzaniaPhone(value)
+        );
 
-  }
-
-
-  function isValidHalotelNumber(value) {
-
-    return /^255(61|62|63)\d{7}$/.test(
-      normalizeTanzaniaPhone(value)
-    );
-
-  }
+}
 
 
-  function formatMoney(amount) {
+function isValidHalotelNumber(value){
+
+    return /^255(61|62|63)\d{7}$/
+        .test(
+            normalizeTanzaniaPhone(value)
+        );
+
+}
+
+
+/* ================================
+   FORMAT MONEY
+================================ */
+
+function formatMoney(amount){
 
     return "TSh " +
-      Number(amount).toLocaleString("en-TZ");
+        Number(amount || 0)
+        .toLocaleString("en-US");
 
-  }
+}
 
 
-  // ==================================================
-  // STEP DISPLAY
-  // ==================================================
+/* ================================
+   ALERT
+================================ */
 
-  function showStep(stepNumber) {
+function showAlert(id,message,type="error"){
 
-    for (
-      let i = 1;
-      i <= 4;
-      i++
-    ) {
+    const box =
+        document.getElementById(id);
 
-      document
-        .getElementById("step" + i)
-        .classList.toggle(
-          "hidden",
-          i !== stepNumber
+    box.className =
+        "alert show " + type;
+
+    box.textContent = message;
+
+}
+
+
+function hideAlert(id){
+
+    const box =
+        document.getElementById(id);
+
+    box.className =
+        "alert";
+
+    box.textContent = "";
+
+}
+
+
+/* ================================
+   STEP NAVIGATION
+================================ */
+
+function goToStep(step){
+
+    document
+        .querySelectorAll(".form-section")
+        .forEach(section => {
+
+            section.classList.remove("active");
+
+        });
+
+
+    const target =
+        document.getElementById(
+            "step" + step
         );
 
-      document
-        .getElementById("stepIndicator" + i)
-        .classList.toggle(
-          "active",
-          i === stepNumber
-        );
+
+    if(target){
+
+        target.classList.add("active");
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
 
     }
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
+}
+
+
+/* ================================
+   CHECKBOX
+================================ */
+
+document
+    .getElementById("sameNumber")
+    .addEventListener("change", function(){
+
+        const receiverBox =
+            document.getElementById("receiverBox");
+
+        const customerPhone =
+            document.getElementById("customerPhone");
+
+        const bundlePhone =
+            document.getElementById("bundlePhone");
+
+
+        if(this.checked){
+
+            receiverBox.classList.add("hidden");
+
+            bundlePhone.value =
+                customerPhone.value;
+
+        }else{
+
+            receiverBox.classList.remove("hidden");
+
+        }
+
     });
 
-  }
+
+/* ================================
+   KEEP RECEIVER UPDATED
+   WHEN CHECKED
+================================ */
+
+document
+    .getElementById("customerPhone")
+    .addEventListener("input", function(){
+
+        const sameNumber =
+            document.getElementById("sameNumber");
+
+        const bundlePhone =
+            document.getElementById("bundlePhone");
 
 
-  // ==================================================
-  // SAME NUMBER
-  // ==================================================
+        if(sameNumber.checked){
 
-  document
-    .getElementById("sameNumber")
-    .addEventListener(
-      "change",
-      function () {
+            bundlePhone.value =
+                this.value;
 
-        document
-          .getElementById("receiverBox")
-          .classList.toggle(
-            "hidden",
-            this.checked
-          );
+        }
 
-      }
-    );
+    });
 
 
-  // ==================================================
-  // STEP 1
-  // ==================================================
+/* ================================
+   STEP 1
+================================ */
 
-  function continueToBundles() {
+function continueToBundles(){
 
-    const error =
-      document.getElementById("error1");
-
-    error.style.display = "none";
+    hideAlert("alert1");
 
 
     const customer =
-      document
+        document
         .getElementById("customerPhone")
-        .value.trim();
+        .value;
 
 
     const sameNumber =
-      document
+        document
         .getElementById("sameNumber")
         .checked;
 
 
-    let receiver =
-      customer;
+    const bundlePhone =
+        document
+        .getElementById("bundlePhone")
+        .value;
 
 
-    if (!isValidTanzaniaPhone(customer)) {
+    if(!isValidTanzaniaPhone(customer)){
 
-      error.textContent =
-        "Weka namba sahihi ya Tanzania, mfano 0627269368.";
+        showAlert(
+            "alert1",
+            "Weka namba sahihi ya Tanzania unayotumia kufanya malipo, mfano 0627269368."
+        );
 
-      error.style.display = "block";
-
-      return;
+        return;
 
     }
 
 
-    if (sameNumber) {
+    if(sameNumber){
 
-      if (!isValidHalotelNumber(customer)) {
+        if(!isValidHalotelNumber(customer)){
 
-        error.textContent =
-          "Namba hii lazima iwe namba ya HALOTEL.";
+            showAlert(
+                "alert1",
+                "Namba ya malipo lazima iwe namba ya HALOTEL kama unataka kuitumia pia kuungiwa bando."
+            );
 
-        error.style.display = "block";
+            return;
 
-        return;
+        }
 
-      }
 
-    } else {
-
-      receiver =
         document
-          .getElementById("bundlePhone")
-          .value.trim();
+            .getElementById("bundlePhone")
+            .value = customer;
 
+    }else{
 
-      if (!isValidHalotelNumber(receiver)) {
+        if(!isValidHalotelNumber(bundlePhone)){
 
-        error.textContent =
-          "Weka namba sahihi ya HALOTEL ya kupokea bando.";
+            showAlert(
+                "alert1",
+                "Weka namba sahihi ya HALOTEL unayotaka kuungiwa bando."
+            );
 
-        error.style.display = "block";
+            return;
 
-        return;
-
-      }
+        }
 
     }
 
 
     renderBundles();
 
-    showStep(2);
+    goToStep(2);
 
-  }
-
-
-  // ==================================================
-  // RENDER BUNDLES
-  // ==================================================
-
-  function renderBundles() {
-
-    const container =
-      document.getElementById("bundles");
+}
 
 
-    container.innerHTML =
-      bundles.map(
-        (bundle, index) => `
+/* ================================
+   RENDER BUNDLES
+================================ */
 
-          <div
-            class="bundle"
-            onclick="selectBundle(${index})"
-          >
+function renderBundles(){
 
-            <div class="gb">
-              ${bundle.gb}
-            </div>
+    const grid =
+        document.getElementById("bundleGrid");
 
-            <div class="price">
-              ${formatMoney(bundle.amount)}
+    grid.innerHTML = "";
+
+
+    bundles.forEach((bundle,index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "bundle-card";
+
+
+        card.innerHTML = `
+
+            <h3>${bundle.gb}</h3>
+
+            <div class="amount">
+                ${formatMoney(bundle.amount)}
             </div>
 
             <div class="validity">
-              ${bundle.validity}
+                ⏱️ ${bundle.validity}
             </div>
 
-          </div>
+            <button
+                type="button"
+                onclick="selectBundle(${index})"
+            >
+                CHAGUA BANDO
+            </button>
 
-        `
-      ).join("");
-
-  }
+        `;
 
 
-  // ==================================================
-  // SELECT BUNDLE
-  // ==================================================
+        grid.appendChild(card);
 
-  function selectBundle(index) {
+    });
+
+}
+
+
+/* ================================
+   SELECT BUNDLE
+================================ */
+
+function selectBundle(index){
 
     selectedBundle =
-      bundles[index];
+        bundles[index];
+
+
+    document
+        .querySelectorAll(".bundle-card")
+        .forEach(card => {
+
+            card.classList.remove("selected");
+
+        });
+
+
+    const cards =
+        document.querySelectorAll(
+            ".bundle-card"
+        );
+
+
+    if(cards[index]){
+
+        cards[index]
+            .classList.add("selected");
+
+    }
+
 
     updatePaymentSummary();
 
-    showStep(3);
+    goToStep(3);
 
-  }
-
-
-  // ==================================================
-  // SUMMARY
-  // ==================================================
-
-  function updatePaymentSummary() {
-
-    if (!selectedBundle) {
-      return;
-    }
+}
 
 
-    const customer =
-      document
-        .getElementById("customerPhone")
-        .value.trim();
+/* ================================
+   PAYMENT SUMMARY
+================================ */
 
+function updatePaymentSummary(){
 
-    const sameNumber =
-      document
-        .getElementById("sameNumber")
-        .checked;
+    if(!selectedBundle){
 
-
-    const receiver =
-      sameNumber
-        ? customer
-        : document
-            .getElementById("bundlePhone")
-            .value.trim();
-
-
-    document.getElementById(
-      "summaryBundle"
-    ).textContent =
-      selectedBundle.gb;
-
-
-    document.getElementById(
-      "summaryValidity"
-    ).textContent =
-      selectedBundle.validity;
-
-
-    document.getElementById(
-      "summaryReceiver"
-    ).textContent =
-      receiver;
-
-
-    document.getElementById(
-      "summaryCustomer"
-    ).textContent =
-      customer;
-
-
-    document.getElementById(
-      "summaryAmount"
-    ).textContent =
-      formatMoney(
-        selectedBundle.amount
-      );
-
-
-    document.getElementById(
-      "paymentAmount"
-    ).textContent =
-      formatMoney(
-        selectedBundle.amount
-      );
-
-  }
-
-
-  // ==================================================
-  // CREATE PAYMENT
-  // ==================================================
-
-  async function submitPayment() {
-
-    const button =
-      document.getElementById("payButton");
-
-    const error =
-      document.getElementById("error3");
-
-
-    error.style.display = "none";
-
-
-    if (!selectedBundle) {
-
-      error.textContent =
-        "Tafadhali chagua bando.";
-
-      error.style.display = "block";
-
-      return;
+        return;
 
     }
 
 
     const customer =
-      document
+        document
         .getElementById("customerPhone")
-        .value.trim();
+        .value;
 
 
     const sameNumber =
-      document
+        document
         .getElementById("sameNumber")
         .checked;
 
 
-    const receiver =
-      sameNumber
-        ? customer
-        : document
+    let receiver =
+        document
+        .getElementById("bundlePhone")
+        .value;
+
+
+    if(sameNumber){
+
+        receiver = customer;
+
+    }
+
+
+    document
+        .getElementById("summaryBundle")
+        .textContent =
+        selectedBundle.gb;
+
+
+    document
+        .getElementById("summaryValidity")
+        .textContent =
+        selectedBundle.validity;
+
+
+    document
+        .getElementById("summaryReceiver")
+        .textContent =
+        receiver;
+
+
+    document
+        .getElementById("summaryCustomer")
+        .textContent =
+        customer;
+
+
+    document
+        .getElementById("summaryAmount")
+        .textContent =
+        formatMoney(
+            selectedBundle.amount
+        );
+
+
+    document
+        .getElementById("paymentPhoneDisplay")
+        .textContent =
+        customer;
+
+
+    document
+        .getElementById("paymentAmountDisplay")
+        .textContent =
+        formatMoney(
+            selectedBundle.amount
+        );
+
+}
+
+
+/* ================================
+   SUBMIT PAYMENT
+================================ */
+
+async function submitPayment(){
+
+    hideAlert("alert3");
+
+
+    if(!selectedBundle){
+
+        showAlert(
+            "alert3",
+            "Tafadhali chagua bando."
+        );
+
+        return;
+
+    }
+
+
+    const customer =
+        normalizeTanzaniaPhone(
+            document
+            .getElementById("customerPhone")
+            .value
+        );
+
+
+    const sameNumber =
+        document
+        .getElementById("sameNumber")
+        .checked;
+
+
+    let receiver =
+        normalizeTanzaniaPhone(
+            document
             .getElementById("bundlePhone")
-            .value.trim();
+            .value
+        );
+
+
+    if(sameNumber){
+
+        receiver = customer;
+
+    }
 
 
     const additionalNotes =
-      document
+        document
         .getElementById("additionalNotes")
-        .value.trim();
+        .value
+        .trim();
 
 
-    if (!isValidTanzaniaPhone(customer)) {
+    if(!isValidTanzaniaPhone(customer)){
 
-      error.textContent =
-        "Namba ya mawasiliano si sahihi.";
+        showAlert(
+            "alert3",
+            "Namba ya malipo si sahihi."
+        );
 
-      error.style.display = "block";
-
-      return;
+        return;
 
     }
 
 
-    if (!isValidHalotelNumber(receiver)) {
+    if(!isValidHalotelNumber(receiver)){
 
-      error.textContent =
-        "Namba ya kupokea bando si namba sahihi ya HALOTEL.";
+        showAlert(
+            "alert3",
+            "Namba ya kuungiwa bando si namba sahihi ya HALOTEL."
+        );
 
-      error.style.display = "block";
-
-      return;
+        return;
 
     }
 
 
-    button.disabled = true;
+    const payButton =
+        document
+        .getElementById("payButton");
 
-    button.textContent =
-      "INATUMA OMBI...";
+
+    const loading =
+        document
+        .getElementById("paymentLoading");
 
 
-    try {
+    payButton.disabled = true;
 
-      const response =
-        await fetch(
-          CREATE_PAYMENT_URL,
-          {
-            method: "POST",
+    loading.classList.add("show");
 
-            mode: "cors",
 
-            headers: {
+    try{
 
-              "Content-Type":
-                "application/json",
+        const response =
+            await fetch(
+                CREATE_PAYMENT_URL,
+                {
+                    method:"POST",
 
-              "Authorization":
-                "Bearer " +
-                SUPABASE_ANON_KEY
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
 
-            },
+                    body:JSON.stringify({
 
-            body: JSON.stringify({
+                        customer_phone:
+                            customer,
 
-              customer_phone:
-                customer,
+                        bundle_phone:
+                            receiver,
 
-              bundle_phone:
-                receiver,
+                        bundle:
+                            selectedBundle.gb,
 
-              bundle:
-                selectedBundle.gb,
+                        validity:
+                            selectedBundle.validity,
 
-              validity:
-                selectedBundle.validity,
+                        amount:
+                            selectedBundle.amount,
 
-              amount:
-                selectedBundle.amount,
+                        payment_name:
+                            customer,
 
-              payment_name:
-                customer,
+                        additional_notes:
+                            additionalNotes
 
-              additional_notes:
-                additionalNotes
+                    })
 
-            })
+                }
+            );
 
-          }
+
+        const result =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                result.error ||
+                result.message ||
+                "Payment creation failed."
+            );
+
+        }
+
+
+        currentOrderNumber =
+            result.order_number ||
+            null;
+
+
+        currentPaymentReference =
+            result.payment_reference ||
+            null;
+
+
+        showFinalOrder(
+            result,
+            customer,
+            receiver
         );
 
 
-      let result = null;
-
-      try {
-
-        result =
-          await response.json();
-
-      } catch {
-
-        result = null;
-
-      }
+        goToStep(4);
 
 
-      if (!response.ok) {
+        startPaymentPolling();
 
-        throw new Error(
-          result?.message ||
-          result?.error ||
-          `Server error (${response.status})`
+
+    }catch(error){
+
+        console.error(error);
+
+
+        showAlert(
+            "alert3",
+            error.message ||
+            "Imeshindikana kuanzisha malipo."
         );
 
-      }
+    }finally{
 
+        payButton.disabled = false;
 
-      if (
-        !result ||
-        result.success !== true
-      ) {
-
-        throw new Error(
-          result?.message ||
-          "Payment request failed."
-        );
-
-      }
-
-
-      currentOrderNumber =
-        result.order_number;
-
-
-      currentPaymentReference =
-        result.payment_reference;
-
-
-      showFinalOrder(result);
-
-
-    } catch (err) {
-
-      console.error(
-        "CREATE PAYMENT ERROR:",
-        err
-      );
-
-
-      if (
-        err.message ===
-        "Failed to fetch"
-      ) {
-
-        error.textContent =
-          "Imeshindikana kuwasiliana na payment server. Hakikisha internet ipo kisha jaribu tena.";
-
-      } else {
-
-        error.textContent =
-          err.message ||
-          "Imeshindikana kutuma ombi la malipo.";
-
-      }
-
-
-      error.style.display =
-        "block";
-
-    } finally {
-
-      button.disabled = false;
-
-      button.textContent =
-        "LIPA SASA";
+        loading.classList.remove("show");
 
     }
 
-  }
+}
 
 
-  // ==================================================
-  // SHOW FINAL ORDER
-  // ==================================================
+/* ================================
+   SHOW FINAL ORDER
+================================ */
 
-  function showFinalOrder(result) {
+function showFinalOrder(
+    result,
+    customer,
+    receiver
+){
 
-    const customer =
-      document
-        .getElementById("customerPhone")
-        .value.trim();
-
-
-    const sameNumber =
-      document
-        .getElementById("sameNumber")
-        .checked;
+    document
+        .getElementById("finalOrderNumber")
+        .textContent =
+        result.order_number || "-";
 
 
-    const receiver =
-      sameNumber
-        ? customer
-        : document
-            .getElementById("bundlePhone")
-            .value.trim();
+    document
+        .getElementById("finalBundle")
+        .textContent =
+        selectedBundle.gb;
 
 
-    document.getElementById(
-      "finalOrderNumber"
-    ).textContent =
-      result.order_number || "-";
+    document
+        .getElementById("finalValidity")
+        .textContent =
+        selectedBundle.validity;
 
 
-    document.getElementById(
-      "finalBundle"
-    ).textContent =
-      selectedBundle.gb;
+    document
+        .getElementById("finalReceiver")
+        .textContent =
+        receiver;
 
 
-    document.getElementById(
-      "finalValidity"
-    ).textContent =
-      selectedBundle.validity;
+    document
+        .getElementById("finalCustomer")
+        .textContent =
+        customer;
 
 
-    document.getElementById(
-      "finalReceiver"
-    ).textContent =
-      receiver;
+    document
+        .getElementById("finalAmount")
+        .textContent =
+        formatMoney(
+            selectedBundle.amount
+        );
 
 
-    document.getElementById(
-      "finalAmount"
-    ).textContent =
-      formatMoney(
-        selectedBundle.amount
-      );
+    document
+        .getElementById("finalPaymentReference")
+        .textContent =
+        result.payment_reference ||
+        "-";
 
 
-    document.getElementById(
-      "finalReference"
-    ).textContent =
-      result.payment_reference || "-";
-
-
-    document.getElementById(
-      "paymentStatus"
-    ).textContent =
-      "PAYMENT PENDING";
-
-
-    document.getElementById(
-      "paymentStatus"
-    ).className =
-      "pending";
-
-
-    document.getElementById(
-      "finalTitle"
-    ).textContent =
-      "OMBI LA MALIPO LIMETUMWA";
-
-
-    document.getElementById(
-      "finalMessage"
-    ).textContent =
-      "Angalia simu yako na kamilisha malipo. Mfumo uta-update status baada ya malipo kuthibitishwa.";
+    const finalActions =
+        document.getElementById(
+            "finalActions"
+        );
 
 
     const whatsappText =
-      `Habari BONYO ELECTRONICS.\n\n` +
-      `Nimeagiza HALOTEL bundle.\n\n` +
-      `Order Number: ${result.order_number || ""}\n` +
-      `Bando: ${selectedBundle.gb}\n` +
-      `Muda: ${selectedBundle.validity}\n` +
-      `Namba ya kupokea: ${receiver}\n` +
-      `Namba ya mawasiliano: ${customer}\n` +
-      `Kiasi: ${formatMoney(selectedBundle.amount)}\n` +
-      `Payment Reference: ${result.payment_reference || ""}`;
+
+        `Habari BONYO ELECTRONICS.\n\n` +
+
+        `Nimeagiza HALOTEL bundle.\n\n` +
+
+        `Order Number: ${
+            result.order_number || ""
+        }\n` +
+
+        `Bando: ${
+            selectedBundle.gb
+        }\n` +
+
+        `Muda: ${
+            selectedBundle.validity
+        }\n` +
+
+        `Namba ya kuungiwa bando: ${
+            receiver
+        }\n` +
+
+        `Namba ya malipo: ${
+            customer
+        }\n` +
+
+        `Kiasi: ${
+            formatMoney(
+                selectedBundle.amount
+            )
+        }\n` +
+
+        `Payment Reference: ${
+            result.payment_reference || ""
+        }`;
 
 
-    document.getElementById(
-      "whatsappButton"
-    ).href =
-      "https://wa.me/255637269368?text=" +
-      encodeURIComponent(
-        whatsappText
-      );
+    const whatsappUrl =
+        "https://wa.me/255637269368?text=" +
+        encodeURIComponent(
+            whatsappText
+        );
 
 
-    showStep(4);
+    finalActions.innerHTML = `
 
-    startOrderStatusCheck();
+        <a
+            class="btn btn-primary"
+            href="${whatsappUrl}"
+            target="_blank"
+        >
+            💬 TUMA ORDER WHATSAPP
+        </a>
 
-  }
+        <a
+            class="btn"
+            href="history.html"
+        >
+            🔎 CHECK ORDER STATUS
+        </a>
+
+    `;
 
 
-  // ==================================================
-  // CHECK ORDER STATUS
-  // ==================================================
+    updateStatusUI("pending");
 
-  function startOrderStatusCheck() {
+}
 
-    if (statusTimer) {
 
-      clearInterval(statusTimer);
+/* ================================
+   PAYMENT POLLING
+================================ */
+
+function startPaymentPolling(){
+
+    if(statusTimer){
+
+        clearInterval(statusTimer);
 
     }
+
+
+    checkPaymentStatus();
 
 
     statusTimer =
-      setInterval(
-        checkOrderStatus,
-        5000
-      );
+        setInterval(
+            checkPaymentStatus,
+            5000
+        );
+
+}
 
 
-    checkOrderStatus();
+/* ================================
+   CHECK PAYMENT
+================================ */
 
-  }
+async function checkPaymentStatus(){
 
+    if(!currentOrderNumber){
 
-  async function checkOrderStatus() {
+        return;
 
-    if (!currentOrderNumber) {
-      return;
     }
 
-    try {
 
-      const response =
-        await fetch(
-          CHECK_PAYMENT_URL,
-          {
-            method: "POST",
-            mode: "cors",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization":
-                "Bearer " +
-                SUPABASE_ANON_KEY
-            },
-            body: JSON.stringify({
-              order_number:
-                currentOrderNumber
-            })
-          }
+    try{
+
+        const response =
+            await fetch(
+                CHECK_PAYMENT_URL,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        order_number:
+                            currentOrderNumber
+
+                    })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if(!response.ok){
+
+            console.error(
+                "Payment check failed:",
+                result
+            );
+
+            return;
+
+        }
+
+
+        if(result.payment_reference){
+
+            currentPaymentReference =
+                result.payment_reference;
+
+
+            document
+                .getElementById(
+                    "finalPaymentReference"
+                )
+                .textContent =
+                result.payment_reference;
+
+        }
+
+
+        if(result.order_status){
+
+            updateStatusUI(
+                result.order_status
+            );
+
+        }
+
+
+        if(
+            result.order_status ===
+            "completed"
+        ){
+
+            stopPaymentPolling();
+
+        }
+
+
+        if(
+            result.order_status ===
+            "cancelled"
+        ){
+
+            stopPaymentPolling();
+
+        }
+
+
+    }catch(error){
+
+        console.error(
+            "Status check error:",
+            error
         );
 
-      let result = null;
+    }
 
-      try {
-        result = await response.json();
-      } catch {
-        result = null;
-      }
+}
 
-      if (!response.ok) {
-        console.log(
-          "Payment status HTTP error:",
-          response.status,
-          result
-        );
-        return;
-      }
 
-      if (!result || result.success !== true) {
-        console.log(
-          "Payment status check failed:",
-          result
-        );
-        return;
-      }
+/* ================================
+   STOP POLLING
+================================ */
 
-      const status =
-        String(
-          result.payment_status ||
-          result.order_status ||
-          ""
-        ).toLowerCase();
+function stopPaymentPolling(){
 
-      const statusElement =
-        document.getElementById(
-          "paymentStatus"
-        );
-
-      if (
-        status === "completed" ||
-        status === "success" ||
-        status === "successful" ||
-        status.includes("completed")
-      ) {
-
-        statusElement.textContent =
-          "PAYMENT CONFIRMED";
-
-        statusElement.className =
-          "confirmed";
-
-        document.getElementById(
-          "finalTitle"
-        ).textContent =
-          "MALIPO YAMETHIBITISHWA";
-
-        document.getElementById(
-          "finalMessage"
-        ).textContent =
-          "Malipo yako yamethibitishwa. Order yako imepokelewa na BONYO ELECTRONICS.";
-
-        document.getElementById(
-          "statusIcon"
-        ).textContent =
-          "✓";
+    if(statusTimer){
 
         clearInterval(statusTimer);
+
         statusTimer = null;
-
-      }
-
-      else if (
-        status === "failed" ||
-        status === "cancelled" ||
-        status === "canceled" ||
-        status === "expired" ||
-        status.includes("failed") ||
-        status.includes("cancel")
-      ) {
-
-        statusElement.textContent =
-          "PAYMENT FAILED";
-
-        statusElement.className =
-          "failed";
-
-        document.getElementById(
-          "finalTitle"
-        ).textContent =
-          "MALIPO HAYAKUKAMILIKA";
-
-        document.getElementById(
-          "finalMessage"
-        ).textContent =
-          "Malipo hayakukamilika. Tafadhali jaribu tena.";
-
-        document.getElementById(
-          "statusIcon"
-        ).textContent =
-          "!";
-
-        clearInterval(statusTimer);
-        statusTimer = null;
-
-      }
-
-      else {
-
-        statusElement.textContent =
-          "PAYMENT PENDING";
-
-        statusElement.className =
-          "pending";
-
-      }
-
-    } catch (err) {
-
-      console.log(
-        "Payment status check error:",
-        err
-      );
 
     }
 
-  }
+}
 
 
-  // ==================================================
-  // NEW ORDER
-  // ==================================================
+/* ================================
+   STATUS UI
+================================ */
 
-  function newOrder() {
+function updateStatusUI(status){
 
-    if (statusTimer) {
+    const box =
+        document.getElementById(
+            "statusBox"
+        );
 
-      clearInterval(statusTimer);
 
-      statusTimer = null;
+    const icon =
+        document.getElementById(
+            "statusIcon"
+        );
+
+
+    const title =
+        document.getElementById(
+            "statusTitle"
+        );
+
+
+    const message =
+        document.getElementById(
+            "statusMessage"
+        );
+
+
+    box.className =
+        "payment-status";
+
+
+    const normalized =
+        String(status || "")
+        .toLowerCase()
+        .trim();
+
+
+    if(
+        normalized === "completed" ||
+        normalized === "success" ||
+        normalized === "successful"
+    ){
+
+        box.classList.add(
+            "status-completed"
+        );
+
+
+        icon.textContent = "✅";
+
+        title.textContent =
+            "MALIPO YAMETHIBITISHWA";
+
+
+        message.textContent =
+            "Malipo yako yamepokelewa na kuthibitishwa. Asante kwa kutumia BONYO ELECTRONICS.";
+
+
+        return;
 
     }
+
+
+    if(
+        normalized === "cancelled" ||
+        normalized === "canceled" ||
+        normalized === "failed"
+    ){
+
+        box.classList.add(
+            "status-cancelled"
+        );
+
+
+        icon.textContent = "❌";
+
+        title.textContent =
+            "MALIPO HAYAKUKAMILIKA";
+
+
+        message.textContent =
+            "Malipo hayajakamilika. Tafadhali jaribu tena au wasiliana na BONYO ELECTRONICS.";
+
+
+        return;
+
+    }
+
+
+    box.classList.add(
+        "status-pending"
+    );
+
+
+    icon.textContent = "⏳";
+
+    title.textContent =
+        "INASUBIRI MALIPO";
+
+
+    message.textContent =
+        "Tafadhali kamilisha malipo kwenye namba yako ya malipo. Mfumo unaangalia status ya malipo.";
+
+}
+
+
+/* ================================
+   NEW ORDER
+================================ */
+
+function newOrder(){
+
+    stopPaymentPolling();
 
 
     selectedBundle = null;
@@ -1907,43 +2196,72 @@
     currentPaymentReference = null;
 
 
-    document.getElementById(
-      "customerPhone"
-    ).value = "";
+    document
+        .getElementById("customerPhone")
+        .value = "";
 
 
-    document.getElementById(
-      "bundlePhone"
-    ).value = "";
+    document
+        .getElementById("bundlePhone")
+        .value = "";
 
 
-    document.getElementById(
-      "additionalNotes"
-    ).value = "";
+    document
+        .getElementById("additionalNotes")
+        .value = "";
 
 
-    document.getElementById(
-      "sameNumber"
-    ).checked = true;
+    document
+        .getElementById("sameNumber")
+        .checked = false;
 
 
-    document.getElementById(
-      "receiverBox"
-    ).classList.add("hidden");
+    document
+        .getElementById("receiverBox")
+        .classList.remove("hidden");
 
 
-    showStep(1);
+    goToStep(1);
 
-  }
+}
 
 
-  // ==================================================
-  // START
-  // ==================================================
+/* ================================
+   INITIALIZE
+================================ */
 
-  renderBundles();
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-  showStep(1);
+        renderBundles();
+
+        /*
+         * IMPORTANT:
+         * Checkbox inaanza ikiwa OFF.
+         * Hivyo namba ya kuungiwa bando
+         * itaonekana moja kwa moja.
+         */
+
+        const sameNumber =
+            document.getElementById(
+                "sameNumber"
+            );
+
+
+        sameNumber.checked = false;
+
+
+        document
+            .getElementById(
+                "receiverBox"
+            )
+            .classList.remove(
+                "hidden"
+            );
+
+    }
+);
 
 </script>
 
