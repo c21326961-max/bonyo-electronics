@@ -1,1241 +1,689 @@
 ```html
 <!DOCTYPE html>
-<html lang="sw">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BONYO ELECTRONICS | Tanzania</title>
-
-<meta name="description"
-content="BONYO ELECTRONICS - Halotel bundles, electronics, WiFi, security systems and electrical services Tanzania.">
-
-<style>
-
-:root{
-    --orange:#f58220;
-    --orange-dark:#df6f0c;
-    --blue:#075985;
-    --blue-dark:#063b5c;
-    --navy:#102a43;
-    --light:#f6f8fb;
-    --white:#ffffff;
-    --text:#263746;
-    --muted:#6b7c8c;
-    --green:#16a34a;
-    --border:#e4e9ee;
-    --shadow:0 10px 30px rgba(16,42,67,.09);
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    color:var(--text);
-    background:var(--light);
-    line-height:1.6;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-.container{
-    width:min(1150px,92%);
-    margin:auto;
-}
-
-
-/* =========================
-   TOP BAR
-========================= */
-
-.topbar{
-    background:var(--navy);
-    color:white;
-    font-size:13px;
-}
-
-.topbar-inner{
-    min-height:38px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
-
-.topbar-left,
-.topbar-right{
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
-
-.topbar a:hover{
-    color:#ffd5a8;
-}
-
-
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar{
-    background:white;
-    border-bottom:1px solid var(--border);
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-.nav-inner{
-    min-height:76px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:25px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:23px;
-    font-weight:900;
-    letter-spacing:-.5px;
-}
-
-.logo-mark{
-    width:43px;
-    height:43px;
-    border-radius:12px;
-    background:linear-gradient(135deg,var(--orange),var(--blue));
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:19px;
-    font-weight:900;
-}
-
-.logo-text span{
-    color:var(--orange);
-}
-
-.logo-text small{
-    display:block;
-    font-size:9px;
-    letter-spacing:2px;
-    color:var(--muted);
-    margin-top:-4px;
-}
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:22px;
-    font-size:14px;
-    font-weight:800;
-}
-
-.nav-links a{
-    color:var(--navy);
-}
-
-.nav-links a:hover{
-    color:var(--orange);
-}
-
-.nav-buttons{
-    display:flex;
-    gap:9px;
-    align-items:center;
-}
-
-.nav-whatsapp{
-    color:var(--green);
-    font-weight:800;
-    font-size:14px;
-}
-
-.nav-buy{
-    background:var(--orange);
-    color:white;
-    padding:11px 17px;
-    border-radius:9px;
-    font-weight:900;
-}
-
-.nav-buy:hover{
-    background:var(--orange-dark);
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-    background:
-        radial-gradient(circle at 85% 20%,rgba(245,130,32,.22),transparent 30%),
-        linear-gradient(135deg,#062f4f 0%,#075985 60%,#0b6f9f 100%);
-    color:white;
-    overflow:hidden;
-}
-
-.hero-inner{
-    min-height:530px;
-    display:grid;
-    grid-template-columns:1.05fr .95fr;
-    align-items:center;
-    gap:45px;
-    padding:65px 0;
-}
-
-.hero-content{
-    max-width:650px;
-}
-
-.hero-label{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:rgba(255,255,255,.12);
-    border:1px solid rgba(255,255,255,.18);
-    padding:8px 13px;
-    border-radius:30px;
-    font-size:13px;
-    font-weight:800;
-    margin-bottom:18px;
-}
-
-.hero h1{
-    font-size:clamp(38px,5vw,64px);
-    line-height:1.04;
-    margin-bottom:18px;
-    letter-spacing:-2px;
-}
-
-.hero h1 span{
-    color:#ff9b43;
-}
-
-.hero-description{
-    color:#e4f1f8;
-    font-size:18px;
-    max-width:590px;
-    margin-bottom:28px;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    border:none;
-    border-radius:10px;
-    padding:14px 21px;
-    font-size:14px;
-    font-weight:900;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.btn-orange{
-    background:var(--orange);
-    color:white;
-}
-
-.btn-orange:hover{
-    background:var(--orange-dark);
-    transform:translateY(-2px);
-}
-
-.btn-light{
-    background:white;
-    color:var(--blue-dark);
-}
-
-.btn-light:hover{
-    transform:translateY(-2px);
-}
-
-.hero-note{
-    margin-top:20px;
-    font-size:13px;
-    color:#c9dce8;
-}
-
-
-/* HERO VISUAL */
-
-.hero-visual{
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.tech-card{
-    width:min(430px,100%);
-    background:rgba(255,255,255,.10);
-    border:1px solid rgba(255,255,255,.18);
-    backdrop-filter:blur(10px);
-    border-radius:25px;
-    padding:25px;
-    box-shadow:0 25px 60px rgba(0,0,0,.18);
-}
-
-.tech-screen{
-    background:white;
-    border-radius:17px;
-    padding:25px;
-    color:var(--navy);
-}
-
-.tech-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:22px;
-}
-
-.tech-title{
-    font-size:18px;
-    font-weight:900;
-}
-
-.live{
-    color:var(--green);
-    font-size:12px;
-    font-weight:900;
-}
-
-.signal{
-    height:145px;
-    border-radius:15px;
-    background:linear-gradient(135deg,#fff4e9,#edf7fc);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:18px;
-}
-
-.signal-icon{
-    font-size:75px;
-}
-
-.tech-bundles{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-}
-
-.tech-mini{
-    background:#f4f7fa;
-    padding:12px 8px;
-    border-radius:10px;
-    text-align:center;
-}
-
-.tech-mini strong{
-    display:block;
-    color:var(--blue);
-}
-
-.tech-mini span{
-    font-size:11px;
-    color:var(--muted);
-}
-
-
-/* =========================
-   QUICK STATS
-========================= */
-
-.stats{
-    margin-top:-35px;
-    position:relative;
-    z-index:5;
-}
-
-.stats-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    background:white;
-    border-radius:17px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-}
-
-.stat{
-    padding:23px 18px;
-    text-align:center;
-    border-right:1px solid var(--border);
-}
-
-.stat:last-child{
-    border-right:none;
-}
-
-.stat strong{
-    display:block;
-    color:var(--blue-dark);
-    font-size:23px;
-}
-
-.stat span{
-    color:var(--muted);
-    font-size:13px;
-}
-
-
-/* =========================
-   SECTION
-========================= */
-
-.section{
-    padding:80px 0;
-}
-
-.section-header{
-    max-width:700px;
-    margin:0 auto 40px;
-    text-align:center;
-}
-
-.section-label{
-    color:var(--orange-dark);
-    text-transform:uppercase;
-    font-size:12px;
-    font-weight:900;
-    letter-spacing:1.5px;
-    margin-bottom:7px;
-}
-
-.section-header h2{
-    color:var(--navy);
-    font-size:34px;
-    line-height:1.15;
-    margin-bottom:10px;
-}
-
-.section-header p{
-    color:var(--muted);
-}
-
-
-/* =========================
-   SERVICES
-========================= */
-
-.services{
-    background:white;
-}
-
-.services-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:17px;
-}
-
-.service{
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:24px 18px;
-    background:white;
-    transition:.2s;
-}
-
-.service:hover{
-    transform:translateY(-5px);
-    box-shadow:var(--shadow);
-    border-color:#ffd0a7;
-}
-
-.service-icon{
-    width:50px;
-    height:50px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#fff3e7;
-    border-radius:13px;
-    font-size:24px;
-    margin-bottom:15px;
-}
-
-.service h3{
-    color:var(--navy);
-    font-size:17px;
-    margin-bottom:7px;
-}
-
-.service p{
-    color:var(--muted);
-    font-size:13px;
-}
-
-
-/* =========================
-   BUNDLES
-========================= */
-
-.bundle-section{
-    background:var(--light);
-}
-
-.bundle-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:14px;
-}
-
-.bundle{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:19px 16px;
-    transition:.2s;
-    position:relative;
-}
-
-.bundle:hover{
-    transform:translateY(-4px);
-    box-shadow:var(--shadow);
-    border-color:#ffc68f;
-}
-
-.bundle.popular{
-    border:2px solid var(--orange);
-}
-
-.popular-label{
-    position:absolute;
-    top:-11px;
-    right:12px;
-    background:var(--orange);
-    color:white;
-    padding:4px 8px;
-    border-radius:20px;
-    font-size:9px;
-    font-weight:900;
-}
-
-.bundle h3{
-    color:var(--blue);
-    font-size:25px;
-    margin-bottom:3px;
-}
-
-.bundle-price{
-    color:var(--orange-dark);
-    font-size:18px;
-    font-weight:900;
-}
-
-.bundle-validity{
-    color:var(--muted);
-    font-size:12px;
-    margin-bottom:14px;
-}
-
-.bundle-btn{
-    display:block;
-    width:100%;
-    text-align:center;
-    background:var(--blue);
-    color:white;
-    padding:9px;
-    border-radius:8px;
-    font-size:12px;
-    font-weight:900;
-}
-
-.bundle-btn:hover{
-    background:var(--blue-dark);
-}
-
-.view-all{
-    text-align:center;
-    margin-top:30px;
-}
-
-
-/* =========================
-   HOW IT WORKS
-========================= */
-
-.how{
-    background:white;
-}
-
-.how-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-}
-
-.how-card{
-    position:relative;
-    padding:25px 20px;
-    text-align:center;
-}
-
-.how-number{
-    width:47px;
-    height:47px;
-    margin:0 auto 15px;
-    border-radius:50%;
-    background:var(--orange);
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:900;
-}
-
-.how-card h3{
-    color:var(--navy);
-    margin-bottom:7px;
-}
-
-.how-card p{
-    color:var(--muted);
-    font-size:13px;
-}
-
-
-/* =========================
-   WHY BONYO
-========================= */
-
-.why{
-    background:linear-gradient(135deg,#f8fafc,#edf5fa);
-}
-
-.why-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:45px;
-    align-items:center;
-}
-
-.why-image{
-    min-height:350px;
-    border-radius:24px;
-    background:
-        linear-gradient(rgba(7,88,133,.08),rgba(7,88,133,.08)),
-        linear-gradient(135deg,#fff,#e8f4fa);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:100px;
-    border:1px solid var(--border);
-}
-
-.check-list{
-    display:grid;
-    gap:15px;
-}
-
-.check-item{
-    display:flex;
-    gap:13px;
-    align-items:flex-start;
-}
-
-.check{
-    width:28px;
-    height:28px;
-    flex:0 0 28px;
-    border-radius:50%;
-    background:#e6f7ed;
-    color:var(--green);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:900;
-}
-
-.check-item strong{
-    display:block;
-    color:var(--navy);
-}
-
-.check-item p{
-    color:var(--muted);
-    font-size:13px;
-}
-
-
-/* =========================
-   ORDER CTA
-========================= */
-
-.cta{
-    padding:65px 0;
-    background:var(--blue-dark);
-    color:white;
-}
-
-.cta-inner{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:30px;
-}
-
-.cta h2{
-    font-size:32px;
-    line-height:1.2;
-    margin-bottom:8px;
-}
-
-.cta p{
-    color:#c9dce8;
-}
-
-.cta-buttons{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact{
-    background:white;
-}
-
-.contact-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.contact-card{
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:25px;
-    text-align:center;
-}
-
-.contact-icon{
-    font-size:30px;
-    margin-bottom:10px;
-}
-
-.contact-card h3{
-    color:var(--navy);
-    margin-bottom:5px;
-}
-
-.contact-card p{
-    color:var(--muted);
-    font-size:14px;
-}
-
-.contact-card a{
-    color:var(--blue);
-    font-weight:800;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer{
-    background:#071d2d;
-    color:#c9dce8;
-    padding:45px 0 20px;
-}
-
-.footer-grid{
-    display:grid;
-    grid-template-columns:1.4fr 1fr 1fr;
-    gap:40px;
-    margin-bottom:30px;
-}
-
-.footer-brand{
-    color:white;
-    font-size:21px;
-    font-weight:900;
-    margin-bottom:10px;
-}
-
-.footer-brand span{
-    color:#ff963f;
-}
-
-.footer h3{
-    color:white;
-    font-size:15px;
-    margin-bottom:12px;
-}
-
-.footer p,
-.footer a{
-    font-size:13px;
-}
-
-.footer-links{
-    display:grid;
-    gap:7px;
-}
-
-.footer-links a:hover{
-    color:#ff963f;
-}
-
-.copyright{
-    border-top:1px solid rgba(255,255,255,.1);
-    padding-top:18px;
-    text-align:center;
-    font-size:12px;
-}
-
-
-/* =========================
-   FLOATING WHATSAPP
-========================= */
-
-.whatsapp-float{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    width:58px;
-    height:58px;
-    background:#25D366;
-    color:white;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:27px;
-    box-shadow:0 8px 25px rgba(0,0,0,.22);
-    z-index:2000;
-}
-
-.whatsapp-float:hover{
-    transform:scale(1.06);
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:1050px){
-
-    .nav-links{
-        gap:13px;
-    }
-
-    .services-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .bundle-grid{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-}
-
-@media(max-width:850px){
-
-    .topbar-right{
-        display:none;
-    }
-
-    .nav-inner{
-        min-height:auto;
-        padding:14px 0;
-        flex-wrap:wrap;
-    }
-
-    .nav-links{
-        order:3;
-        width:100%;
-        justify-content:center;
-        padding-top:8px;
-        border-top:1px solid var(--border);
-    }
-
-    .hero-inner{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .hero-content{
-        margin:auto;
-    }
-
-    .hero-description{
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    .hero-buttons{
-        justify-content:center;
-    }
-
-    .hero-visual{
-        max-width:480px;
-        width:100%;
-        margin:auto;
-    }
-
-    .stats-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .stat:nth-child(2){
-        border-right:none;
-    }
-
-    .stat:nth-child(-n+2){
-        border-bottom:1px solid var(--border);
-    }
-
-    .how-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .why-grid{
-        grid-template-columns:1fr;
-    }
-
-    .why-image{
-        min-height:280px;
-    }
-
-    .cta-inner{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .cta-buttons{
-        justify-content:center;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .container{
-        width:92%;
-    }
-
-    .topbar-left{
-        width:100%;
-        justify-content:center;
-    }
-
-    .logo{
-        font-size:19px;
-    }
-
-    .nav-buttons{
-        width:100%;
-        justify-content:center;
-    }
-
-    .nav-links{
-        gap:9px;
-        font-size:11px;
-    }
-
-    .hero-inner{
-        padding:50px 0;
-    }
-
-    .hero h1{
-        font-size:40px;
-    }
-
-    .hero-description{
-        font-size:15px;
-    }
-
-    .tech-card{
-        padding:15px;
-    }
-
-    .stats{
-        margin-top:-20px;
-    }
-
-    .stats-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .section{
-        padding:60px 0;
-    }
-
-    .section-header h2{
-        font-size:28px;
-    }
-
-    .services-grid,
-    .bundle-grid,
-    .contact-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .how-grid{
-        grid-template-columns:1fr;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr;
-        gap:25px;
-    }
-
-}
-
-@media(max-width:420px){
-
-    .services-grid,
-    .bundle-grid,
-    .contact-grid{
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:35px;
-    }
-
-    .nav-links a:nth-child(4){
-        display:none;
-    }
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BONYO ELECTRONICS | Halotel Bundles Tanzania</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f5f7fb;
+            color:#172033;
+            line-height:1.6;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        /* HEADER */
+        header{
+            background:#071b3a;
+            color:white;
+            position:sticky;
+            top:0;
+            z-index:1000;
+            box-shadow:0 4px 15px rgba(0,0,0,.15);
+        }
+
+        .topbar{
+            background:#ff7a00;
+            padding:7px 5%;
+            font-size:14px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:10px;
+            flex-wrap:wrap;
+        }
+
+        .navbar{
+            min-height:72px;
+            padding:0 5%;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:20px;
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            color:white;
+            font-weight:bold;
+            font-size:20px;
+        }
+
+        .logo-box{
+            width:43px;
+            height:43px;
+            border-radius:12px;
+            background:#ff7a00;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:18px;
+            font-weight:900;
+        }
+
+        .nav-links{
+            display:flex;
+            align-items:center;
+            gap:25px;
+            list-style:none;
+        }
+
+        .nav-links a{
+            color:white;
+            font-weight:600;
+            font-size:14px;
+        }
+
+        .nav-links a:hover{
+            color:#ff9b3d;
+        }
+
+        .buy-nav{
+            background:#ff7a00;
+            padding:11px 18px;
+            border-radius:9px;
+        }
+
+        .buy-nav:hover{
+            color:white !important;
+            background:#e96c00;
+        }
+
+        /* HERO */
+        .hero{
+            background:
+                linear-gradient(135deg,#071b3a 0%,#0d315f 55%,#134b83 100%);
+            color:white;
+            padding:80px 5%;
+        }
+
+        .hero-content{
+            max-width:1150px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:1.3fr .7fr;
+            gap:45px;
+            align-items:center;
+        }
+
+        .hero h1{
+            font-size:clamp(38px,6vw,68px);
+            line-height:1.05;
+            margin-bottom:20px;
+        }
+
+        .hero h1 span{
+            color:#ff7a00;
+        }
+
+        .hero p{
+            font-size:18px;
+            max-width:650px;
+            color:#dbe6f5;
+            margin-bottom:30px;
+        }
+
+        .hero-buttons{
+            display:flex;
+            gap:14px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:14px 22px;
+            border-radius:10px;
+            font-weight:bold;
+            transition:.2s;
+        }
+
+        .btn-primary{
+            background:#ff7a00;
+            color:white;
+        }
+
+        .btn-primary:hover{
+            background:#e96c00;
+            transform:translateY(-2px);
+        }
+
+        .btn-secondary{
+            border:1px solid rgba(255,255,255,.5);
+            color:white;
+        }
+
+        .btn-secondary:hover{
+            background:white;
+            color:#071b3a;
+        }
+
+        .hero-card{
+            background:white;
+            color:#172033;
+            border-radius:22px;
+            padding:30px;
+            box-shadow:0 20px 50px rgba(0,0,0,.25);
+        }
+
+        .hero-card h3{
+            color:#071b3a;
+            margin-bottom:15px;
+        }
+
+        .hero-card-item{
+            display:flex;
+            justify-content:space-between;
+            padding:13px 0;
+            border-bottom:1px solid #e8edf5;
+        }
+
+        .hero-card-item:last-child{
+            border-bottom:none;
+        }
+
+        .hero-card strong{
+            color:#ff7a00;
+        }
+
+        /* STATS */
+        .stats{
+            padding:25px 5%;
+            background:white;
+        }
+
+        .stats-grid{
+            max-width:1150px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+        }
+
+        .stat{
+            padding:20px;
+            text-align:center;
+            border:1px solid #e7ebf2;
+            border-radius:15px;
+        }
+
+        .stat strong{
+            display:block;
+            color:#071b3a;
+            font-size:26px;
+        }
+
+        .stat span{
+            color:#697386;
+            font-size:14px;
+        }
+
+        /* GENERAL */
+        section{
+            padding:75px 5%;
+        }
+
+        .section-title{
+            text-align:center;
+            max-width:700px;
+            margin:0 auto 40px;
+        }
+
+        .section-title h2{
+            color:#071b3a;
+            font-size:34px;
+            margin-bottom:10px;
+        }
+
+        .section-title p{
+            color:#697386;
+        }
+
+        /* SERVICES */
+        .services-grid{
+            max-width:1150px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:20px;
+        }
+
+        .service{
+            background:white;
+            border-radius:18px;
+            padding:25px;
+            border:1px solid #e6eaf1;
+            transition:.2s;
+        }
+
+        .service:hover{
+            transform:translateY(-5px);
+            box-shadow:0 12px 30px rgba(7,27,58,.1);
+        }
+
+        .service-icon{
+            font-size:32px;
+            margin-bottom:12px;
+        }
+
+        .service h3{
+            color:#071b3a;
+            margin-bottom:8px;
+        }
+
+        .service p{
+            color:#697386;
+            font-size:14px;
+        }
+
+        /* BUNDLES */
+        .bundles-section{
+            background:#eef3f9;
+        }
+
+        .bundles-grid{
+            max-width:1150px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(5,1fr);
+            gap:18px;
+        }
+
+        .bundle-card{
+            background:white;
+            border-radius:18px;
+            padding:22px;
+            border:1px solid #e1e7ef;
+            display:flex;
+            flex-direction:column;
+            transition:.2s;
+        }
+
+        .bundle-card:hover{
+            transform:translateY(-5px);
+            box-shadow:0 12px 28px rgba(7,27,58,.12);
+        }
+
+        .bundle-card .gb{
+            font-size:29px;
+            font-weight:900;
+            color:#071b3a;
+        }
+
+        .bundle-card .validity{
+            color:#697386;
+            font-size:13px;
+            margin:3px 0 12px;
+        }
+
+        .bundle-card .price{
+            font-size:22px;
+            font-weight:900;
+            color:#ff7a00;
+            margin-bottom:17px;
+        }
+
+        .bundle-btn{
+            margin-top:auto;
+            text-align:center;
+            background:#071b3a;
+            color:white;
+            padding:11px;
+            border-radius:9px;
+            font-weight:bold;
+            font-size:14px;
+            transition:.2s;
+        }
+
+        .bundle-btn:hover{
+            background:#ff7a00;
+        }
+
+        /* HOW IT WORKS */
+        .steps{
+            max-width:1000px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:20px;
+        }
+
+        .step{
+            text-align:center;
+            padding:25px 15px;
+        }
+
+        .step-number{
+            width:50px;
+            height:50px;
+            margin:0 auto 15px;
+            border-radius:50%;
+            background:#ff7a00;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-weight:bold;
+            font-size:20px;
+        }
+
+        .step h3{
+            color:#071b3a;
+            margin-bottom:7px;
+        }
+
+        .step p{
+            color:#697386;
+            font-size:14px;
+        }
+
+        /* WHY BONYO */
+        .why{
+            background:white;
+        }
+
+        .why-grid{
+            max-width:1100px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:22px;
+        }
+
+        .why-card{
+            background:#f7f9fc;
+            border-radius:18px;
+            padding:28px;
+            border:1px solid #e5eaf2;
+        }
+
+        .why-card h3{
+            color:#071b3a;
+            margin-bottom:8px;
+        }
+
+        .why-card p{
+            color:#697386;
+            font-size:14px;
+        }
+
+        /* CTA */
+        .cta{
+            background:#071b3a;
+            color:white;
+            text-align:center;
+            padding:70px 5%;
+        }
+
+        .cta h2{
+            font-size:36px;
+            margin-bottom:12px;
+        }
+
+        .cta p{
+            color:#d5dfed;
+            margin-bottom:25px;
+        }
+
+        /* CONTACT */
+        .contact-grid{
+            max-width:1000px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:20px;
+        }
+
+        .contact-card{
+            background:white;
+            padding:25px;
+            border-radius:17px;
+            text-align:center;
+            border:1px solid #e3e8f0;
+        }
+
+        .contact-card h3{
+            color:#071b3a;
+            margin-bottom:8px;
+        }
+
+        .contact-card p{
+            color:#697386;
+        }
+
+        .contact-card a{
+            color:#ff7a00;
+            font-weight:bold;
+        }
+
+        /* FOOTER */
+        footer{
+            background:#041328;
+            color:#b9c7d9;
+            padding:35px 5%;
+            text-align:center;
+        }
+
+        footer strong{
+            color:white;
+        }
+
+        footer p{
+            margin:5px 0;
+            font-size:14px;
+        }
+
+        /* WHATSAPP */
+        .whatsapp{
+            position:fixed;
+            right:20px;
+            bottom:20px;
+            width:58px;
+            height:58px;
+            border-radius:50%;
+            background:#25D366;
+            color:white;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:27px;
+            box-shadow:0 8px 25px rgba(0,0,0,.25);
+            z-index:2000;
+        }
+
+        /* MOBILE */
+        @media(max-width:900px){
+
+            .hero-content{
+                grid-template-columns:1fr;
+            }
+
+            .services-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .bundles-grid{
+                grid-template-columns:repeat(3,1fr);
+            }
+
+            .steps{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .stats-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+        }
+
+        @media(max-width:650px){
+
+            .topbar{
+                justify-content:center;
+                text-align:center;
+            }
+
+            .navbar{
+                padding:12px 5%;
+            }
+
+            .nav-links{
+                display:none;
+            }
+
+            .hero{
+                padding:55px 5%;
+            }
+
+            .hero h1{
+                font-size:42px;
+            }
+
+            .hero p{
+                font-size:16px;
+            }
+
+            section{
+                padding:55px 5%;
+            }
+
+            .section-title h2{
+                font-size:29px;
+            }
+
+            .services-grid,
+            .bundles-grid,
+            .why-grid,
+            .contact-grid{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .steps{
+                grid-template-columns:1fr 1fr;
+            }
+        }
+
+        @media(max-width:430px){
+
+            .services-grid,
+            .bundles-grid,
+            .why-grid,
+            .contact-grid{
+                grid-template-columns:1fr;
+            }
+
+            .stats-grid{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .steps{
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     TOP BAR
-========================= -->
-
+<!-- TOP BAR -->
 <div class="topbar">
-
-    <div class="container topbar-inner">
-
-        <div class="topbar-left">
-            <span>🇹🇿 Tanzania</span>
-            <span>📡 Halotel Bundles</span>
-        </div>
-
-        <div class="topbar-right">
-            <a href="tel:0637269368">
-                📞 0637269368
-            </a>
-
-            <a href="mailto:c21326961@gmail.com">
-                ✉️ c21326961@gmail.com
-            </a>
-        </div>
-
-    </div>
-
+    <div>🇹🇿 Tanzania</div>
+    <div>📞 0637 269 368</div>
+    <div>📶 HALOTEL BUNDLES</div>
 </div>
 
-
-<!-- =========================
-     NAVIGATION
-========================= -->
-
-<nav class="navbar">
-
-    <div class="container nav-inner">
+<!-- HEADER -->
+<header>
+    <nav class="navbar">
 
         <a href="index.html" class="logo">
-
-            <div class="logo-mark">
-                BE
-            </div>
-
-            <div class="logo-text">
-                BONYO <span>ELECTRONICS</span>
-                <small>TANZANIA</small>
-            </div>
-
+            <div class="logo-box">BE</div>
+            <span>BONYO ELECTRONICS</span>
         </a>
 
+        <ul class="nav-links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#services">SERVICES</a></li>
+            <li><a href="#bundles">BUNDLES</a></li>
+            <li><a href="#how">HOW IT WORKS</a></li>
+            <li><a href="history.html">ORDER STATUS</a></li>
+            <li>
+                <a href="halotel.html" class="buy-nav">BUY BUNDLE</a>
+            </li>
+        </ul>
 
-        <div class="nav-links">
+    </nav>
+</header>
 
-            <a href="#home">HOME</a>
-
-            <a href="#services">SERVICES</a>
-
-            <a href="#bundles">BUNDLES</a>
-
-            <a href="#how">HOW IT WORKS</a>
-
-            <a href="history.html">ORDER STATUS</a>
-
-        </div>
-
-
-        <div class="nav-buttons">
-
-            <a
-                class="nav-whatsapp"
-                href="https://wa.me/255637269368"
-                target="_blank"
-            >
-                💬 WhatsApp
-            </a>
-
-            <a
-                class="nav-buy"
-                href="halotel.html"
-            >
-                BUY BUNDLE
-            </a>
-
-        </div>
-
-    </div>
-
-</nav>
-
-
-<!-- =========================
-     HERO
-========================= -->
-
+<!-- HERO -->
 <section class="hero" id="home">
 
-    <div class="container hero-inner">
+    <div class="hero-content">
 
-        <div class="hero-content">
+        <div>
 
-            <div class="hero-label">
-                🇹🇿 BONYO ELECTRONICS • TANZANIA
+            <div style="color:#ff9b3d;font-weight:bold;margin-bottom:12px;">
+                ⚡ FAST • SIMPLE • RELIABLE
             </div>
 
             <h1>
-                Reliable
-                <span>Technology</span>
-                For Everyone.
+                HALOTEL<br>
+                <span>INTERNET BUNDLES</span>
             </h1>
 
-            <p class="hero-description">
-                Nunua Halotel Internet Bundles kwa urahisi,
-                pamoja na huduma za electronics, WiFi,
-                security na electrical solutions kutoka
-                BONYO ELECTRONICS.
+            <p>
+                Nunua Halotel internet bundles kwa urahisi kupitia
+                BONYO ELECTRONICS. Chagua bando lako, lipa na ufuatilie
+                order yako kwa urahisi.
             </p>
 
             <div class="hero-buttons">
-
-                <a
-                    href="halotel.html"
-                    class="btn btn-orange"
-                >
-                    📡 BUY HALOTEL BUNDLE
+                <a href="#bundles" class="btn btn-primary">
+                    📶 VIEW BUNDLES
                 </a>
 
-                <a
-                    href="history.html"
-                    class="btn btn-light"
-                >
-                    🔎 CHECK ORDER STATUS
+                <a href="history.html" class="btn btn-secondary">
+                    🔎 CHECK ORDER
                 </a>
-
-            </div>
-
-            <div class="hero-note">
-                ✓ Easy ordering &nbsp; • &nbsp;
-                ✓ Secure payment &nbsp; • &nbsp;
-                ✓ Order tracking
             </div>
 
         </div>
 
+        <div class="hero-card">
 
-        <div class="hero-visual">
+            <h3>🔥 Popular Halotel Bundles</h3>
 
-            <div class="tech-card">
+            <div class="hero-card-item">
+                <span>2GB</span>
+                <strong>TSh 2,500</strong>
+            </div>
 
-                <div class="tech-screen">
+            <div class="hero-card-item">
+                <span>5GB</span>
+                <strong>TSh 5,000</strong>
+            </div>
 
-                    <div class="tech-top">
+            <div class="hero-card-item">
+                <span>10GB</span>
+                <strong>TSh 10,000</strong>
+            </div>
 
-                        <div class="tech-title">
-                            BONYO ELECTRONICS
-                        </div>
-
-                        <div class="live">
-                            ● ONLINE
-                        </div>
-
-                    </div>
-
-
-                    <div class="signal">
-
-                        <div class="signal-icon">
-                            📡
-                        </div>
-
-                    </div>
-
-
-                    <div class="tech-bundles">
-
-                        <div class="tech-mini">
-                            <strong>2GB</strong>
-                            <span>TSh 2,500</span>
-                        </div>
-
-                        <div class="tech-mini">
-                            <strong>5GB</strong>
-                            <span>TSh 5,000</span>
-                        </div>
-
-                        <div class="tech-mini">
-                            <strong>10GB</strong>
-                            <span>TSh 10,000</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
+            <div class="hero-card-item">
+                <span>30GB</span>
+                <strong>TSh 27,000</strong>
             </div>
 
         </div>
@@ -1244,962 +692,448 @@ a{
 
 </section>
 
-
-<!-- =========================
-     STATS
-========================= -->
-
+<!-- STATS -->
 <section class="stats">
 
-    <div class="container stats-grid">
+    <div class="stats-grid">
 
         <div class="stat">
-            <strong>15+</strong>
-            <span>Halotel Bundles</span>
+            <strong>2GB+</strong>
+            <span>Starting Bundle</span>
+        </div>
+
+        <div class="stat">
+            <strong>30GB</strong>
+            <span>Largest Bundle</span>
         </div>
 
         <div class="stat">
             <strong>24/7</strong>
-            <span>Customer Support</span>
-        </div>
-
-        <div class="stat">
-            <strong>FAST</strong>
-            <span>Payment Verification</span>
+            <span>Order Access</span>
         </div>
 
         <div class="stat">
             <strong>TZ</strong>
-            <span>Serving Tanzania</span>
+            <span>Across Tanzania</span>
         </div>
 
     </div>
 
 </section>
 
+<!-- SERVICES -->
+<section id="services">
 
-<!-- =========================
-     SERVICES
-========================= -->
+    <div class="section-title">
 
-<section class="section services" id="services">
+        <h2>Our Services</h2>
 
-    <div class="container">
+        <p>
+            BONYO ELECTRONICS inakusaidia kupata huduma mbalimbali
+            za electronics na internet solutions.
+        </p>
 
-        <div class="section-header">
+    </div>
 
-            <div class="section-label">
-                What We Do
-            </div>
+    <div class="services-grid">
 
-            <h2>
-                Our Services
-            </h2>
-
+        <div class="service">
+            <div class="service-icon">📶</div>
+            <h3>Halotel Bundles</h3>
             <p>
-                Huduma mbalimbali za teknolojia kutoka
-                BONYO ELECTRONICS.
+                Nunua Halotel internet bundles kwa urahisi na haraka.
             </p>
-
         </div>
 
+        <div class="service">
+            <div class="service-icon">💻</div>
+            <h3>Computers</h3>
+            <p>
+                Laptops, desktop computers na vifaa mbalimbali vya computer.
+            </p>
+        </div>
 
-        <div class="services-grid">
+        <div class="service">
+            <div class="service-icon">📱</div>
+            <h3>Phones</h3>
+            <p>
+                Simu na electronic devices kwa matumizi mbalimbali.
+            </p>
+        </div>
 
-            <div class="service">
-
-                <div class="service-icon">📡</div>
-
-                <h3>Halotel Bundles</h3>
-
-                <p>
-                    Nunua Halotel internet bundles
-                    kwa urahisi na ufuatilie order yako.
-                </p>
-
-            </div>
-
-
-            <div class="service">
-
-                <div class="service-icon">💻</div>
-
-                <h3>Electronics</h3>
-
-                <p>
-                    Computers, laptops, phones
-                    na vifaa mbalimbali vya electronics.
-                </p>
-
-            </div>
-
-
-            <div class="service">
-
-                <div class="service-icon">📶</div>
-
-                <h3>WiFi & Internet</h3>
-
-                <p>
-                    WiFi, internet solutions na
-                    vifaa vya connectivity.
-                </p>
-
-            </div>
-
-
-            <div class="service">
-
-                <div class="service-icon">📹</div>
-
-                <h3>Security Systems</h3>
-
-                <p>
-                    CCTV, alarm systems na
-                    security solutions.
-                </p>
-
-            </div>
-
-
-            <div class="service">
-
-                <div class="service-icon">⚡</div>
-
-                <h3>Electrical</h3>
-
-                <p>
-                    Electrical wiring, inspection
-                    na technical services.
-                </p>
-
-            </div>
-
+        <div class="service">
+            <div class="service-icon">🔐</div>
+            <h3>Security Systems</h3>
+            <p>
+                CCTV, alarm systems, electric fence na security solutions.
+            </p>
         </div>
 
     </div>
 
 </section>
 
+<!-- BUNDLES -->
+<section class="bundles-section" id="bundles">
 
-<!-- =========================
-     BUNDLES
-========================= -->
+    <div class="section-title">
 
-<section class="section bundle-section" id="bundles">
+        <h2>Halotel Internet Bundles</h2>
 
-    <div class="container">
+        <p>
+            Chagua bando lako hapa chini.
+            Ukibonyeza <strong>BUY NOW</strong>, bando ulilochagua
+            litafuatana moja kwa moja kwenda kwenye ukurasa wa malipo.
+        </p>
 
-        <div class="section-header">
+    </div>
 
-            <div class="section-label">
-                Halotel Internet
-            </div>
+    <div class="bundles-grid">
 
-            <h2>
-                Choose Your Bundle
-            </h2>
+        <!-- 2GB -->
+        <div class="bundle-card">
+            <div class="gb">2GB</div>
+            <div class="validity">⏱️ Wiki 2</div>
+            <div class="price">TSh 2,500</div>
 
-            <p>
-                Chagua bando lako na bonyeza BUY NOW
-                kuanza order.
-            </p>
-
-        </div>
-
-
-        <div class="bundle-grid">
-
-
-            <div class="bundle">
-
-                <h3>2GB</h3>
-
-                <div class="bundle-price">
-                    TSh 2,500
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 2 weeks
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>3GB</h3>
-
-                <div class="bundle-price">
-                    TSh 3,500
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 2 weeks
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>4GB</h3>
-
-                <div class="bundle-price">
-                    TSh 4,500
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 2 weeks
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>5GB</h3>
-
-                <div class="bundle-price">
-                    TSh 5,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 2 weeks
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle popular">
-
-                <div class="popular-label">
-                    POPULAR
-                </div>
-
-                <h3>6GB</h3>
-
-                <div class="bundle-price">
-                    TSh 6,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>7GB</h3>
-
-                <div class="bundle-price">
-                    TSh 7,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>8GB</h3>
-
-                <div class="bundle-price">
-                    TSh 8,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>9GB</h3>
-
-                <div class="bundle-price">
-                    TSh 9,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>10GB</h3>
-
-                <div class="bundle-price">
-                    TSh 10,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>12GB</h3>
-
-                <div class="bundle-price">
-                    TSh 12,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>13GB</h3>
-
-                <div class="bundle-price">
-                    TSh 13,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>15GB</h3>
-
-                <div class="bundle-price">
-                    TSh 15,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>20GB</h3>
-
-                <div class="bundle-price">
-                    TSh 18,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>25GB</h3>
-
-                <div class="bundle-price">
-                    TSh 23,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-
-            <div class="bundle">
-
-                <h3>30GB</h3>
-
-                <div class="bundle-price">
-                    TSh 27,000
-                </div>
-
-                <div class="bundle-validity">
-                    ⏱️ 1 month
-                </div>
-
-                <a href="halotel.html" class="bundle-btn">
-                    BUY NOW
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <div class="view-all">
-
-            <a
-                href="halotel.html"
-                class="btn btn-orange"
-            >
-                🛒 VIEW & BUY ALL BUNDLES
+            <a href="halotel.html?bundle=2GB" class="bundle-btn">
+                BUY NOW
             </a>
+        </div>
 
+        <!-- 3GB -->
+        <div class="bundle-card">
+            <div class="gb">3GB</div>
+            <div class="validity">⏱️ Wiki 2</div>
+            <div class="price">TSh 3,500</div>
+
+            <a href="halotel.html?bundle=3GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 4GB -->
+        <div class="bundle-card">
+            <div class="gb">4GB</div>
+            <div class="validity">⏱️ Wiki 2</div>
+            <div class="price">TSh 4,500</div>
+
+            <a href="halotel.html?bundle=4GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 5GB -->
+        <div class="bundle-card">
+            <div class="gb">5GB</div>
+            <div class="validity">⏱️ Wiki 2</div>
+            <div class="price">TSh 5,000</div>
+
+            <a href="halotel.html?bundle=5GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 6GB -->
+        <div class="bundle-card">
+            <div class="gb">6GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 6,000</div>
+
+            <a href="halotel.html?bundle=6GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 7GB -->
+        <div class="bundle-card">
+            <div class="gb">7GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 7,000</div>
+
+            <a href="halotel.html?bundle=7GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 8GB -->
+        <div class="bundle-card">
+            <div class="gb">8GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 8,000</div>
+
+            <a href="halotel.html?bundle=8GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 9GB -->
+        <div class="bundle-card">
+            <div class="gb">9GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 9,000</div>
+
+            <a href="halotel.html?bundle=9GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 10GB -->
+        <div class="bundle-card">
+            <div class="gb">10GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 10,000</div>
+
+            <a href="halotel.html?bundle=10GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 12GB -->
+        <div class="bundle-card">
+            <div class="gb">12GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 12,000</div>
+
+            <a href="halotel.html?bundle=12GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 13GB -->
+        <div class="bundle-card">
+            <div class="gb">13GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 13,000</div>
+
+            <a href="halotel.html?bundle=13GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 15GB -->
+        <div class="bundle-card">
+            <div class="gb">15GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 15,000</div>
+
+            <a href="halotel.html?bundle=15GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 20GB -->
+        <div class="bundle-card">
+            <div class="gb">20GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 18,000</div>
+
+            <a href="halotel.html?bundle=20GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 25GB -->
+        <div class="bundle-card">
+            <div class="gb">25GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 23,000</div>
+
+            <a href="halotel.html?bundle=25GB" class="bundle-btn">
+                BUY NOW
+            </a>
+        </div>
+
+        <!-- 30GB -->
+        <div class="bundle-card">
+            <div class="gb">30GB</div>
+            <div class="validity">⏱️ Mwezi 1</div>
+            <div class="price">TSh 27,000</div>
+
+            <a href="halotel.html?bundle=30GB" class="bundle-btn">
+                BUY NOW
+            </a>
         </div>
 
     </div>
 
 </section>
 
+<!-- HOW IT WORKS -->
+<section id="how">
 
-<!-- =========================
-     HOW IT WORKS
-========================= -->
+    <div class="section-title">
 
-<section class="section how" id="how">
+        <h2>How It Works</h2>
 
-    <div class="container">
+        <p>
+            Mchakato ni rahisi kutoka kuchagua bando mpaka kulipia.
+        </p>
 
-        <div class="section-header">
+    </div>
 
-            <div class="section-label">
-                Simple Process
-            </div>
+    <div class="steps">
 
-            <h2>
-                How It Works
-            </h2>
-
+        <div class="step">
+            <div class="step-number">1</div>
+            <h3>Chagua Bando</h3>
             <p>
-                Kuagiza bando kupitia BONYO ELECTRONICS
-                ni rahisi.
+                Chagua Halotel bundle unayotaka.
             </p>
-
         </div>
 
+        <div class="step">
+            <div class="step-number">2</div>
+            <h3>Weka Namba</h3>
+            <p>
+                Weka namba ya malipo na namba ya kuungiwa bando.
+            </p>
+        </div>
 
-        <div class="how-grid">
+        <div class="step">
+            <div class="step-number">3</div>
+            <h3>Lipa</h3>
+            <p>
+                Fuata hatua za malipo zinazoonekana kwenye simu yako.
+            </p>
+        </div>
 
-            <div class="how-card">
-
-                <div class="how-number">
-                    01
-                </div>
-
-                <h3>
-                    Choose Bundle
-                </h3>
-
-                <p>
-                    Chagua Halotel bundle
-                    unayohitaji.
-                </p>
-
-            </div>
-
-
-            <div class="how-card">
-
-                <div class="how-number">
-                    02
-                </div>
-
-                <h3>
-                    Enter Number
-                </h3>
-
-                <p>
-                    Weka namba ya malipo na
-                    namba ya kuungiwa bando.
-                </p>
-
-            </div>
-
-
-            <div class="how-card">
-
-                <div class="how-number">
-                    03
-                </div>
-
-                <h3>
-                    Make Payment
-                </h3>
-
-                <p>
-                    Fanya malipo kwa kutumia
-                    namba uliyoingiza.
-                </p>
-
-            </div>
-
-
-            <div class="how-card">
-
-                <div class="how-number">
-                    04
-                </div>
-
-                <h3>
-                    Get Confirmation
-                </h3>
-
-                <p>
-                    Mfumo uta-confirm malipo
-                    na kukupa order status.
-                </p>
-
-            </div>
-
+        <div class="step">
+            <div class="step-number">4</div>
+            <h3>Subiri Confirmation</h3>
+            <p>
+                Order yako itathibitishwa na utaweza kuifuatilia.
+            </p>
         </div>
 
     </div>
 
 </section>
 
+<!-- WHY BONYO -->
+<section class="why">
 
-<!-- =========================
-     WHY BONYO
-========================= -->
+    <div class="section-title">
 
-<section class="section why">
+        <h2>Why BONYO ELECTRONICS?</h2>
 
-    <div class="container why-grid">
+        <p>
+            Tunajenga huduma rahisi, salama na inayomrahisishia mteja.
+        </p>
 
-        <div class="why-image">
-            ⚙️
+    </div>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+            <h3>⚡ Fast Process</h3>
+            <p>
+                Chagua bando na uanze mchakato wa malipo kwa hatua chache.
+            </p>
         </div>
 
-
-        <div>
-
-            <div class="section-label">
-                Why Choose Us
-            </div>
-
-            <h2 style="
-                font-size:34px;
-                color:var(--navy);
-                line-height:1.2;
-                margin-bottom:15px;
-            ">
-                Technology & Service You Can Trust
-            </h2>
-
-            <p style="
-                color:var(--muted);
-                margin-bottom:25px;
-            ">
-                Tunalenga kutoa huduma rahisi,
-                zinazoeleweka na zenye mfumo mzuri
-                wa kufuatilia order.
+        <div class="why-card">
+            <h3>🔒 Secure Payment</h3>
+            <p>
+                Malipo yanafanyika kupitia mfumo wa payment gateway.
             </p>
+        </div>
 
-
-            <div class="check-list">
-
-                <div class="check-item">
-
-                    <div class="check">✓</div>
-
-                    <div>
-
-                        <strong>
-                            Easy Ordering
-                        </strong>
-
-                        <p>
-                            Mchakato rahisi wa kuagiza
-                            Halotel bundles.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="check-item">
-
-                    <div class="check">✓</div>
-
-                    <div>
-
-                        <strong>
-                            Secure Payment
-                        </strong>
-
-                        <p>
-                            Malipo yanathibitishwa
-                            kabla ya order kukamilishwa.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="check-item">
-
-                    <div class="check">✓</div>
-
-                    <div>
-
-                        <strong>
-                            Order Tracking
-                        </strong>
-
-                        <p>
-                            Angalia status ya order yako
-                            wakati wowote.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="check-item">
-
-                    <div class="check">✓</div>
-
-                    <div>
-
-                        <strong>
-                            Customer Support
-                        </strong>
-
-                        <p>
-                            Wasiliana nasi kupitia
-                            WhatsApp au simu.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div class="why-card">
+            <h3>📱 Easy Tracking</h3>
+            <p>
+                Tumia Order Status kuona maendeleo ya order yako.
+            </p>
         </div>
 
     </div>
 
 </section>
 
-
-<!-- =========================
-     CTA
-========================= -->
-
+<!-- CTA -->
 <section class="cta">
 
-    <div class="container cta-inner">
+    <h2>Ready to Buy Halotel Bundle?</h2>
 
-        <div>
+    <p>
+        Chagua bando lako sasa na anza mchakato wa malipo.
+    </p>
 
-            <h2>
-                Ready to Buy Your Halotel Bundle?
-            </h2>
+    <a href="#bundles" class="btn btn-primary">
+        📶 CHOOSE YOUR BUNDLE
+    </a>
 
+</section>
+
+<!-- CONTACT -->
+<section>
+
+    <div class="section-title">
+
+        <h2>Contact BONYO ELECTRONICS</h2>
+
+        <p>
+            Kwa msaada au mawasiliano, wasiliana nasi.
+        </p>
+
+    </div>
+
+    <div class="contact-grid">
+
+        <div class="contact-card">
+            <h3>📞 Phone</h3>
             <p>
-                Chagua bando lako na anza order sasa.
+                <a href="tel:0637269368">
+                    0637 269 368
+                </a>
             </p>
-
         </div>
 
+        <div class="contact-card">
+            <h3>💬 WhatsApp</h3>
+            <p>
+                <a href="https://wa.me/255637269368">
+                    Chat on WhatsApp
+                </a>
+            </p>
+        </div>
 
-        <div class="cta-buttons">
-
-            <a
-                href="halotel.html"
-                class="btn btn-orange"
-            >
-                📡 BUY BUNDLE NOW
-            </a>
-
-            <a
-                href="https://wa.me/255637269368"
-                target="_blank"
-                class="btn btn-light"
-            >
-                💬 CHAT ON WHATSAPP
-            </a>
-
+        <div class="contact-card">
+            <h3>📍 Location</h3>
+            <p>
+                Keko Mwanga, Dar es Salaam
+            </p>
         </div>
 
     </div>
 
 </section>
 
-
-<!-- =========================
-     CONTACT
-========================= -->
-
-<section class="section contact" id="contact">
-
-    <div class="container">
-
-        <div class="section-header">
-
-            <div class="section-label">
-                Contact Us
-            </div>
-
-            <h2>
-                BONYO ELECTRONICS
-            </h2>
-
-            <p>
-                Tupo tayari kukuhudumia.
-            </p>
-
-        </div>
-
-
-        <div class="contact-grid">
-
-
-            <div class="contact-card">
-
-                <div class="contact-icon">
-                    📞
-                </div>
-
-                <h3>
-                    Phone
-                </h3>
-
-                <p>
-                    <a href="tel:0637269368">
-                        0637269368
-                    </a>
-                </p>
-
-            </div>
-
-
-            <div class="contact-card">
-
-                <div class="contact-icon">
-                    💬
-                </div>
-
-                <h3>
-                    WhatsApp
-                </h3>
-
-                <p>
-                    <a
-                        href="https://wa.me/255637269368"
-                        target="_blank"
-                    >
-                        Chat With Us
-                    </a>
-                </p>
-
-            </div>
-
-
-            <div class="contact-card">
-
-                <div class="contact-icon">
-                    ✉️
-                </div>
-
-                <h3>
-                    Email
-                </h3>
-
-                <p>
-                    <a href="mailto:c21326961@gmail.com">
-                        c21326961@gmail.com
-                    </a>
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer class="footer">
-
-    <div class="container">
-
-        <div class="footer-grid">
-
-            <div>
-
-                <div class="footer-brand">
-                    BONYO <span>ELECTRONICS</span>
-                </div>
-
-                <p>
-                    Technology, electronics and
-                    Halotel internet solutions
-                    for Tanzania.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Quick Links
-                </h3>
-
-                <div class="footer-links">
-
-                    <a href="#home">
-                        Home
-                    </a>
-
-                    <a href="#services">
-                        Services
-                    </a>
-
-                    <a href="#bundles">
-                        Bundles
-                    </a>
-
-                    <a href="history.html">
-                        Order Status
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Contact
-                </h3>
-
-                <div class="footer-links">
-
-                    <a href="tel:0637269368">
-                        📞 0637269368
-                    </a>
-
-                    <a href="mailto:c21326961@gmail.com">
-                        ✉️ c21326961@gmail.com
-                    </a>
-
-                    <a
-                        href="https://wa.me/255637269368"
-                        target="_blank"
-                    >
-                        💬 WhatsApp
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="copyright">
-
-            © 2026 BONYO ELECTRONICS.
-            All Rights Reserved.
-
-        </div>
-
-    </div>
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026 <strong>BONYO ELECTRONICS</strong>
+    </p>
+
+    <p>
+        Halotel Internet Bundles • Tanzania
+    </p>
+
+    <p>
+        All Rights Reserved.
+    </p>
 
 </footer>
 
-
-<!-- =========================
-     FLOATING WHATSAPP
-========================= -->
-
+<!-- WHATSAPP -->
 <a
     href="https://wa.me/255637269368"
+    class="whatsapp"
     target="_blank"
-    class="whatsapp-float"
-    title="WhatsApp BONYO ELECTRONICS"
->
+    aria-label="WhatsApp">
     💬
 </a>
-
 
 </body>
 </html>
