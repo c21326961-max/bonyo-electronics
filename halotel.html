@@ -161,11 +161,13 @@
       width: 18px;
       height: 18px;
       margin: 0;
+      flex-shrink: 0;
     }
 
     .check-row label {
       margin: 0;
       font-weight: normal;
+      line-height: 1.4;
     }
 
     .payment-box {
@@ -184,6 +186,7 @@
 
     .payment-box p {
       line-height: 1.7;
+      margin-bottom: 6px;
     }
 
     .pay-btn {
@@ -264,6 +267,7 @@
     }
 
     @media(max-width:600px) {
+
       .header-inner {
         flex-direction: column;
         align-items: stretch;
@@ -285,32 +289,47 @@
       .title h1 {
         font-size: 25px;
       }
+
     }
   </style>
 </head>
 
 <body>
 
+
 <header>
+
   <div class="header-inner">
 
     <div class="logo">
       BONYO <span>ELECTRONICS</span>
     </div>
 
-    <a href="index.html#bundles" class="back">
+    <a
+      href="index.html#bundles"
+      class="back"
+    >
       ← Rudi Home
     </a>
 
   </div>
+
 </header>
 
 
 <main>
 
+
   <div class="title">
-    <h1>Kamilisha Oda Yako</h1>
-    <p>Jaza taarifa zako hapa chini kisha bonyeza PAY NOW.</p>
+
+    <h1>
+      Kamilisha Oda Yako
+    </h1>
+
+    <p>
+      Jaza taarifa zako hapa chini kisha bonyeza PAY NOW.
+    </p>
+
   </div>
 
 
@@ -321,16 +340,27 @@
     <div class="bundle-top">
 
       <div>
-        <div class="bundle-name" id="bundleName">
+
+        <div
+          class="bundle-name"
+          id="bundleName"
+        >
           Loading...
         </div>
 
-        <div class="validity" id="bundleValidity">
+        <div
+          class="validity"
+          id="bundleValidity"
+        >
           -
         </div>
+
       </div>
 
-      <div class="price" id="bundlePrice">
+      <div
+        class="price"
+        id="bundlePrice"
+      >
         -
       </div>
 
@@ -348,6 +378,8 @@
     </div>
 
 
+    <!-- PAYMENT PHONE -->
+
     <label for="customerPhone">
       Namba ya Simu ya Kufanyia Malipo
     </label>
@@ -360,6 +392,8 @@
     >
 
 
+    <!-- SAME NUMBER -->
+
     <div class="check-row">
 
       <input
@@ -368,11 +402,14 @@
       >
 
       <label for="sameNumber">
-        Namba ya malipo ni sawa na namba itakayopokea bando
+        Namba ya malipo ni sawa na namba
+        itakayopokea bando
       </label>
 
     </div>
 
+
+    <!-- BUNDLE RECEIVING PHONE -->
 
     <div id="bundlePhoneBox">
 
@@ -389,26 +426,7 @@
     </div>
 
 
-    <label for="paymentName">
-      Transaction Name / Jina la Malipo
-    </label>
-
-    <input
-      type="text"
-      id="paymentName"
-      placeholder="Weka jina la malipo"
-    >
-
-
-    <label for="paymentTime">
-      Muda wa Malipo
-    </label>
-
-    <input
-      type="datetime-local"
-      id="paymentTime"
-    >
-
+    <!-- ADDITIONAL NOTES -->
 
     <label for="additionalNotes">
       Maelezo ya Ziada
@@ -427,12 +445,14 @@
 
     <div class="payment-box">
 
-      <h3>💳 PAY NOW</h3>
+      <h3>
+        💳 PAY NOW
+      </h3>
 
       <p>
         Baada ya kubonyeza <b>PAY NOW</b>,
-        mfumo utaanzisha ombi la malipo kwenye simu
-        uliyoingiza hapo juu.
+        mfumo utaanzisha ombi la malipo kwenye
+        simu uliyoingiza.
       </p>
 
       <p>
@@ -443,7 +463,7 @@
     </div>
 
 
-    <!-- PAY BUTTON -->
+    <!-- PAY -->
 
     <button
       class="pay-btn"
@@ -454,11 +474,15 @@
     </button>
 
 
+    <!-- MESSAGE -->
+
     <div
       id="message"
       class="message"
     ></div>
 
+
+    <!-- ORDER SUMMARY -->
 
     <div
       id="orderSummary"
@@ -466,13 +490,17 @@
     ></div>
 
 
+    <!-- NEW ORDER -->
+
     <div
       id="newOrder"
       class="new-order"
     >
+
       <a href="index.html#bundles">
         ← Fanya Oda Nyingine
       </a>
+
     </div>
 
   </div>
@@ -488,7 +516,7 @@
 <script>
 
 /* =====================================================
-   SUPABASE
+   SUPABASE CONFIGURATION
    ===================================================== */
 
 const SUPABASE_URL =
@@ -499,10 +527,12 @@ const SUPABASE_ANON_KEY =
 
 
 const CREATE_PAYMENT_URL =
-  SUPABASE_URL + "/functions/v1/create-payment";
+  SUPABASE_URL +
+  "/functions/v1/create-payment";
 
 const CHECK_PAYMENT_URL =
-  SUPABASE_URL + "/functions/v1/check-payment";
+  SUPABASE_URL +
+  "/functions/v1/check-payment";
 
 
 /* =====================================================
@@ -605,109 +635,150 @@ const bundles = {
 
 
 /* =====================================================
-   GET BUNDLE FROM HOME
+   GET SELECTED BUNDLE
    ===================================================== */
 
 const params =
-  new URLSearchParams(window.location.search);
+  new URLSearchParams(
+    window.location.search
+  );
 
 const bundleKey =
-  String(params.get("bundle") || "")
-    .toUpperCase()
-    .trim();
+  String(
+    params.get("bundle") || ""
+  )
+  .toUpperCase()
+  .trim();
+
 
 const selectedBundle =
   bundles[bundleKey];
 
 
 /* =====================================================
-   DISPLAY SELECTED BUNDLE
+   DISPLAY BUNDLE
    ===================================================== */
 
 if (!selectedBundle) {
 
-  document.getElementById("bundleName").textContent =
+  document.getElementById(
+    "bundleName"
+  ).textContent =
     "Hakuna Bando";
 
-  document.getElementById("bundleValidity").textContent =
+  document.getElementById(
+    "bundleValidity"
+  ).textContent =
     "Rudi Home uchague bando.";
 
-  document.getElementById("bundlePrice").textContent =
+  document.getElementById(
+    "bundlePrice"
+  ).textContent =
     "";
 
-  document.getElementById("continueBtn").disabled =
+  document.getElementById(
+    "continueBtn"
+  ).disabled =
     true;
 
 } else {
 
-  document.getElementById("bundleName").textContent =
+  document.getElementById(
+    "bundleName"
+  ).textContent =
     selectedBundle.gb;
 
-  document.getElementById("bundleValidity").textContent =
-    "Muda: " + selectedBundle.validity;
+  document.getElementById(
+    "bundleValidity"
+  ).textContent =
+    "Muda: " +
+    selectedBundle.validity;
 
-  document.getElementById("bundlePrice").textContent =
+  document.getElementById(
+    "bundlePrice"
+  ).textContent =
     "TSh " +
-    selectedBundle.amount.toLocaleString("en-US");
+    selectedBundle.amount
+      .toLocaleString("en-US");
 
 }
 
 
 /* =====================================================
-   SAME NUMBER
+   SAME NUMBER CHECKBOX
    ===================================================== */
 
 document
   .getElementById("sameNumber")
-  .addEventListener("change", function() {
+  .addEventListener(
+    "change",
+    function() {
 
-    const box =
-      document.getElementById("bundlePhoneBox");
+      const box =
+        document.getElementById(
+          "bundlePhoneBox"
+        );
 
-    const bundlePhone =
-      document.getElementById("bundlePhone");
+      const bundlePhone =
+        document.getElementById(
+          "bundlePhone"
+        );
 
-    const customerPhone =
-      document.getElementById("customerPhone");
+      const customerPhone =
+        document.getElementById(
+          "customerPhone"
+        );
 
 
-    if (this.checked) {
+      if (this.checked) {
 
-      box.style.display = "none";
+        box.style.display =
+          "none";
 
-      bundlePhone.value =
-        customerPhone.value;
+        bundlePhone.value =
+          customerPhone.value;
 
-    } else {
+      } else {
 
-      box.style.display = "block";
+        box.style.display =
+          "block";
 
-      bundlePhone.value = "";
+        bundlePhone.value =
+          "";
+
+      }
 
     }
-
-  });
+  );
 
 
 /* =====================================================
-   KEEP BUNDLE PHONE UPDATED
+   KEEP SAME NUMBER UPDATED
    ===================================================== */
 
 document
   .getElementById("customerPhone")
-  .addEventListener("input", function() {
+  .addEventListener(
+    "input",
+    function() {
 
-    const sameNumber =
-      document.getElementById("sameNumber").checked;
+      const sameNumber =
+        document.getElementById(
+          "sameNumber"
+        ).checked;
 
-    if (sameNumber) {
 
-      document.getElementById("bundlePhone").value =
-        this.value;
+      if (sameNumber) {
+
+        document.getElementById(
+          "bundlePhone"
+        ).value =
+          this.value;
+
+      }
 
     }
-
-  });
+  );
 
 
 /* =====================================================
@@ -729,14 +800,18 @@ async function submitPayment() {
 
   const customerPhone =
     document
-      .getElementById("customerPhone")
+      .getElementById(
+        "customerPhone"
+      )
       .value
       .trim();
 
 
   const sameNumber =
     document
-      .getElementById("sameNumber")
+      .getElementById(
+        "sameNumber"
+      )
       .checked;
 
 
@@ -744,29 +819,26 @@ async function submitPayment() {
     sameNumber
       ? customerPhone
       : document
-          .getElementById("bundlePhone")
+          .getElementById(
+            "bundlePhone"
+          )
           .value
           .trim();
 
 
-  const paymentName =
-    document
-      .getElementById("paymentName")
-      .value
-      .trim();
-
-
-  const paymentTime =
-    document
-      .getElementById("paymentTime")
-      .value;
-
-
   const additionalNotes =
     document
-      .getElementById("additionalNotes")
+      .getElementById(
+        "additionalNotes"
+      )
       .value
       .trim();
+
+
+  /* AUTOMATIC PAYMENT TIME */
+
+  const paymentTime =
+    new Date().toISOString();
 
 
   /* VALIDATION */
@@ -793,32 +865,14 @@ async function submitPayment() {
   }
 
 
-  if (!paymentName) {
-
-    showMessage(
-      "Tafadhali weka Transaction Name / Jina la Malipo.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if (!paymentTime) {
-
-    showMessage(
-      "Tafadhali weka muda wa malipo.",
-      "error"
-    );
-
-    return;
-  }
-
-
   const continueBtn =
-    document.getElementById("continueBtn");
+    document.getElementById(
+      "continueBtn"
+    );
 
-  continueBtn.disabled = true;
+
+  continueBtn.disabled =
+    true;
 
   continueBtn.textContent =
     "INAANZISHA MALIPO...";
@@ -836,14 +890,21 @@ async function submitPayment() {
       await fetch(
         CREATE_PAYMENT_URL,
         {
+
           method: "POST",
 
           headers: {
-            "Content-Type": "application/json",
+
+            "Content-Type":
+              "application/json",
+
             "Authorization":
-              "Bearer " + SUPABASE_ANON_KEY,
+              "Bearer " +
+              SUPABASE_ANON_KEY,
+
             "apikey":
               SUPABASE_ANON_KEY
+
           },
 
           body: JSON.stringify({
@@ -864,7 +925,7 @@ async function submitPayment() {
               selectedBundle.amount,
 
             payment_name:
-              paymentName,
+              customerPhone,
 
             payment_time:
               paymentTime,
@@ -928,12 +989,15 @@ async function submitPayment() {
     );
 
 
-    startPaymentCheck(orderNumber);
+    startPaymentCheck(
+      orderNumber
+    );
 
 
   } catch (error) {
 
     console.error(error);
+
 
     showMessage(
       error.message ||
@@ -942,7 +1006,8 @@ async function submitPayment() {
     );
 
 
-    continueBtn.disabled = false;
+    continueBtn.disabled =
+      false;
 
     continueBtn.textContent =
       "💳 PAY NOW";
@@ -956,147 +1021,188 @@ async function submitPayment() {
    CHECK PAYMENT STATUS
    ===================================================== */
 
-let paymentTimer = null;
+let paymentTimer =
+  null;
 
 
-function startPaymentCheck(orderNumber) {
+function startPaymentCheck(
+  orderNumber
+) {
 
   if (paymentTimer) {
 
-    clearInterval(paymentTimer);
+    clearInterval(
+      paymentTimer
+    );
 
   }
 
 
-  let checking = false;
+  let checking =
+    false;
 
 
   paymentTimer =
-    setInterval(async function() {
+    setInterval(
+      async function() {
 
-      if (checking) return;
-
-      checking = true;
-
-
-      try {
-
-        const response =
-          await fetch(
-            CHECK_PAYMENT_URL,
-            {
-              method: "POST",
-
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization":
-                  "Bearer " + SUPABASE_ANON_KEY,
-                "apikey":
-                  SUPABASE_ANON_KEY
-              },
-
-              body: JSON.stringify({
-                order_number:
-                  orderNumber
-              })
-
-            }
-          );
-
-
-        const data =
-          await response.json();
-
-
-        if (!response.ok) {
-
-          checking = false;
-
+        if (checking)
           return;
 
-        }
+
+        checking =
+          true;
 
 
-        const status =
-          String(
-            data.status ||
-            data.order_status ||
-            ""
-          )
-          .toLowerCase();
+        try {
 
+          const response =
+            await fetch(
+              CHECK_PAYMENT_URL,
+              {
 
-        /* COMPLETED */
+                method: "POST",
 
-        if (
-          status === "completed" ||
-          status === "success" ||
-          status === "successful"
-        ) {
+                headers: {
 
-          clearInterval(paymentTimer);
+                  "Content-Type":
+                    "application/json",
 
+                  "Authorization":
+                    "Bearer " +
+                    SUPABASE_ANON_KEY,
 
-          showMessage(
-            "🎉 MALIPO YAMEKAMILIKA! Oda yako imepokelewa na inashughulikiwa.",
-            "success"
-          );
+                  "apikey":
+                    SUPABASE_ANON_KEY
 
+                },
 
-          document.getElementById(
-            "continueBtn"
-          ).style.display = "none";
+                body: JSON.stringify({
 
+                  order_number:
+                    orderNumber
 
-          document.getElementById(
-            "newOrder"
-          ).style.display = "block";
+                })
 
-        }
-
-
-        /* FAILED */
-
-        else if (
-          status === "cancelled" ||
-          status === "failed"
-        ) {
-
-          clearInterval(paymentTimer);
-
-
-          showMessage(
-            "Malipo hayajakamilika au yamekataliwa. Tafadhali jaribu tena.",
-            "error"
-          );
-
-
-          const btn =
-            document.getElementById(
-              "continueBtn"
+              }
             );
 
-          btn.disabled = false;
 
-          btn.textContent =
-            "JARIBU TENA";
+          const data =
+            await response.json();
+
+
+          if (!response.ok) {
+
+            checking =
+              false;
+
+            return;
+
+          }
+
+
+          const status =
+            String(
+              data.status ||
+              data.order_status ||
+              ""
+            )
+            .toLowerCase();
+
+
+          /* COMPLETED */
+
+          if (
+
+            status === "completed" ||
+
+            status === "success" ||
+
+            status === "successful"
+
+          ) {
+
+            clearInterval(
+              paymentTimer
+            );
+
+
+            showMessage(
+              "🎉 MALIPO YAMEKAMILIKA! Oda yako imepokelewa na inashughulikiwa.",
+              "success"
+            );
+
+
+            document.getElementById(
+              "continueBtn"
+            ).style.display =
+              "none";
+
+
+            document.getElementById(
+              "newOrder"
+            ).style.display =
+              "block";
+
+          }
+
+
+          /* FAILED */
+
+          else if (
+
+            status === "cancelled" ||
+
+            status === "failed"
+
+          ) {
+
+            clearInterval(
+              paymentTimer
+            );
+
+
+            showMessage(
+              "Malipo hayajakamilika au yamekataliwa. Tafadhali jaribu tena.",
+              "error"
+            );
+
+
+            const btn =
+              document.getElementById(
+                "continueBtn"
+              );
+
+
+            btn.disabled =
+              false;
+
+
+            btn.textContent =
+              "JARIBU TENA";
+
+          }
+
+        }
+
+        catch (error) {
+
+          console.error(
+            "Payment check error:",
+            error
+          );
 
         }
 
 
-      } catch (error) {
-
-        console.error(
-          "Payment check error:",
-          error
-        );
-
-      }
+        checking =
+          false;
 
 
-      checking = false;
-
-    }, 5000);
+      },
+      5000
+    );
 
 }
 
@@ -1105,13 +1211,21 @@ function startPaymentCheck(orderNumber) {
    MESSAGE
    ===================================================== */
 
-function showMessage(text, type) {
+function showMessage(
+  text,
+  type
+) {
 
   const box =
-    document.getElementById("message");
+    document.getElementById(
+      "message"
+    );
+
 
   box.className =
-    "message " + type;
+    "message " +
+    type;
+
 
   box.innerHTML =
     text;
@@ -1124,10 +1238,15 @@ function showMessage(text, type) {
    ===================================================== */
 
 function showOrderSummary(
+
   orderNumber,
+
   paymentReference,
+
   customerPhone,
+
   bundlePhone
+
 ) {
 
   const summary =
@@ -1144,18 +1263,23 @@ function showOrderSummary(
 
     <b>Order Number:</b>
     ${escapeHtml(orderNumber)}
+
     <br>
 
     <b>Bando:</b>
     ${escapeHtml(selectedBundle.gb)}
+
     <br>
 
     <b>Kiasi:</b>
-    TSh ${selectedBundle.amount.toLocaleString("en-US")}
+    TSh
+    ${selectedBundle.amount.toLocaleString("en-US")}
+
     <br>
 
     <b>Namba ya Malipo:</b>
     ${escapeHtml(customerPhone)}
+
     <br>
 
     <b>Namba ya Kupokea Bando:</b>
@@ -1163,9 +1287,11 @@ function showOrderSummary(
 
     ${
       paymentReference
-        ? `<br>
-           <b>Payment Reference:</b>
-           ${escapeHtml(paymentReference)}`
+        ? `
+          <br>
+          <b>Payment Reference:</b>
+          ${escapeHtml(paymentReference)}
+        `
         : ""
     }
 
@@ -1175,17 +1301,39 @@ function showOrderSummary(
 
 
 /* =====================================================
-   SECURITY
+   HTML ESCAPE
    ===================================================== */
 
-function escapeHtml(value) {
+function escapeHtml(
+  value
+) {
 
   return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
